@@ -1,0 +1,74 @@
+{
+  "beauty": {
+    "beta": 0.25,
+    "base_overall": 0.0482,
+    "pc_overall": 0.049,
+    "base_tail": 0.00718132854578097,
+    "pc_tail": 0.007899461400359067,
+    "base_tail_ci": [
+      0.0043,
+      0.0103
+    ],
+    "pc_tail_ci": [
+      0.0048,
+      0.0115
+    ],
+    "base_overall_ci": [
+      0.0424,
+      0.0542
+    ],
+    "pc_overall_ci": [
+      0.043,
+      0.0546
+    ],
+    "boot_frac_tail_improves": 0.724
+  },
+  "sports": {
+    "beta": 0.5,
+    "base_overall": 0.025,
+    "pc_overall": 0.026,
+    "base_tail": 0.003171247357293869,
+    "pc_tail": 0.005990133897110641,
+    "base_tail_ci": [
+      0.0014,
+      0.0056
+    ],
+    "pc_tail_ci": [
+      0.0033,
+      0.0089
+    ],
+    "base_overall_ci": [
+      0.021,
+      0.0292
+    ],
+    "pc_overall_ci": [
+      0.0216,
+      0.0308
+    ],
+    "boot_frac_tail_improves": 1.0
+  },
+  "toys": {
+    "beta": 0.5,
+    "base_overall": 0.051,
+    "pc_overall": 0.0516,
+    "base_tail": 0.02456140350877193,
+    "pc_tail": 0.03349282296650718,
+    "base_tail_ci": [
+      0.0196,
+      0.0301
+    ],
+    "pc_tail_ci": [
+      0.027,
+      0.0404
+    ],
+    "base_overall_ci": [
+      0.0456,
+      0.0578
+    ],
+    "pc_overall_ci": [
+      0.0456,
+      0.0584
+    ],
+    "boot_frac_tail_improves": 1.0
+  }
+}

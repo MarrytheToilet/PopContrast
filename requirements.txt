@@ -1,0 +1,18 @@
+# Core (tested with Python 3.10, CUDA 12.x)
+torch>=2.6
+transformers>=4.57
+accelerate>=1.12
+sentence-transformers>=3.3
+peft>=0.19
+gin-config==0.5.0
+numpy
+scipy
+scikit-learn
+pandas
+polars
+pyarrow
+matplotlib
+tqdm
+einops
+safetensors
+# Optional: wandb (training logging; disabled by default in our commands)

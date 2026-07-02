@@ -1,0 +1,39 @@
+# ---- third-party (clone separately; see README "Setup") ----
+genrec/
+
+# ---- data / model artifacts (large, regenerable) ----
+dataset/
+*/dataset/
+results/*.pt
+results/*.npz
+logs/
+*.ckpt
+*.safetensors
+
+# ---- python ----
+__pycache__/
+*.pyc
+*.egg-info/
+.ipynb_checkpoints/
+
+# ---- latex build ----
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.log
+paper/*.out
+paper/*.fls
+paper/*.fdb_latexmk
+paper/*.synctex.gz
+paper/cc.txt
+paper/compile_check.txt
+
+# ---- double-blind safety: internal notes & the under-review manuscript ----
+# Remove these lines AFTER the review period if you want them public.
+paper/
+reports/
+IDEA.md
+
+# ---- misc ----
+.claude/
+.DS_Store

@@ -1,0 +1,53 @@
+{
+  "beauty": {
+    "items": 12101,
+    "L": 3,
+    "spearman_pop_density": 0.028320732459104627,
+    "codebook_gini_per_pos": [
+      0.33942939136724776,
+      0.24773978956684464,
+      0.1168582729348247
+    ],
+    "spearman_density_marginal": 0.05265888288847696,
+    "spearman_pop_marginal": 0.7159210779271058,
+    "partial_pop_marginal_given_density": 0.7122024735249046,
+    "n_colliding_items": 964,
+    "logpop_colliding_mean": 2.273135896513479,
+    "logpop_noncolliding_mean": 2.2062509485040316,
+    "spearman_pop_iscolliding": 0.021570953360205283
+  },
+  "sports": {
+    "items": 18357,
+    "L": 3,
+    "spearman_pop_density": 0.04675377790304134,
+    "codebook_gini_per_pos": [
+      0.3547097156398104,
+      0.1987369855504712,
+      0.08334929284469139
+    ],
+    "spearman_density_marginal": 0.09301707212927939,
+    "spearman_pop_marginal": 0.7003015812381229,
+    "partial_pop_marginal_given_density": 0.6973637935963324,
+    "n_colliding_items": 2371,
+    "logpop_colliding_mean": 2.2706811144967056,
+    "logpop_noncolliding_mean": 2.1794478586415744,
+    "spearman_pop_iscolliding": 0.03703073146493301
+  },
+  "toys": {
+    "items": 11924,
+    "L": 3,
+    "spearman_pop_density": 0.10909791971164423,
+    "codebook_gini_per_pos": [
+      0.33397520232304595,
+      0.2644430989764443,
+      0.13562851182489097
+    ],
+    "spearman_density_marginal": 0.015216936186746787,
+    "spearman_pop_marginal": 0.6930277655564299,
+    "partial_pop_marginal_given_density": 0.6905579780203936,
+    "n_colliding_items": 559,
+    "logpop_colliding_mean": 2.2057291946080784,
+    "logpop_noncolliding_mean": 2.157201127451289,
+    "spearman_pop_iscolliding": 0.017499465565932706
+  }
+}
