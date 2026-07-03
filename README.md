@@ -21,7 +21,17 @@ We test every plausible location of popularity bias on a **frozen** TIGER model:
 | **RQ-VAE tokenizer** | code density vs. popularity, within-code entropy, collision bias, partial correlations | ❌ Code assignment is popularity-neutral (ρ ≤ 0.11); controlling for it leaves the popularity–marginal link unchanged (0.71 → 0.71) |
 | **Decoder marginal** | `m̂(i) = (1/M) Σₖ log p_θ(i \| uₖ)` vs. item popularity | ✅ **Spearman ρ ≈ 0.70 on all three datasets** — measurable, and (below) directly correctable |
 
+<p align="center">
+  <img src="results/figures/fig4_marginal_vs_popularity.png" width="88%" alt="Model marginal vs. item popularity"/>
+</p>
+<p align="center"><em>The surviving locus: the model's own marginal log-preference tracks item popularity at ρ ≈ 0.70 on every dataset — a measurable, directly correctable quantity.</em></p>
+
 ## ⚙️ The Method: PopContrast
+
+<p align="center">
+  <img src="assets/framework.png" width="98%" alt="PopContrast framework: diagnosis and decode-time correction"/>
+</p>
+<p align="center"><em>(1) vanilla SID generative recommendation skews to the head; (2) the ruling-out diagnosis leaves the decoder marginal; (3) PopContrast estimates it once offline and subtracts it inside unchanged trie-beam decoding.</em></p>
 
 Re-score each candidate at decode time by subtracting the model's **own** marginal preference:
 
@@ -40,11 +50,31 @@ s_β(i | u) = log p_θ(i | u) − β · m̄(i),      m̄ = standardized m̂
 | Near-free points on the frontier | held or improved on **all three** datasets | **+10% / +144% / +36%** | **+7% / +47% / +17%** |
 | Uniform pre-registered **β = 0.75** (no tuning) | −5% / +2% / −3% | **+50% / +144% / +45%** | +28% / +47% / +25% |
 
+<p align="center">
+  <img src="results/figures/fig1_pareto_trajectory.png" width="92%" alt="Accuracy–coverage frontier: PopContrast vs. naive discount"/>
+</p>
+<p align="center"><em>Sweeping β traces a coverage–recall frontier that dominates the naive log-popularity discount: PopContrast (pink) buys coverage at little or no recall cost, where the naive baseline collapses.</em></p>
+
+A larger, sparser fourth split (**Amazon Clothing**, ~23k items) is included as an additional replication: coverage rises steadily (+26–62%) with tail recall held flat — the correction never *hurts* the tail even where the head signal is weakest.
+
 - **Genuine diversification**: coverage *and* entropy rise monotonically, Gini falls; exposure Lorenz curves move toward the diagonal; the top-popularity quintile's share of top-10 slots shrinks from 78–83% toward 57–75% while every lower quintile opens up.
-- **Beats every decode-time alternative**: naive log-popularity discount (degenerates at strength), rank discount, Steck-style calibrated quota, group-coarsened marginals, ε-exploration (inflates coverage while *losing* tail recall — coverage alone is gameable), and D³-style external-SASRec fusion (hurts every axis when the external model is weak).
+
+<p align="center">
+  <img src="results/figures/fig9_quintile_heatmap.png" width="92%" alt="Recall change by popularity quintile"/>
+  <img src="results/figures/fig10_exposure_stream.png" width="92%" alt="Exposure share by popularity quintile as β grows"/>
+</p>
+<p align="center"><em>Top: recall lifts across every non-head quintile (q1 = rarest); previously-unreachable q1 items go 0 → &gt;0. Bottom: as β grows, exposure share flows out of the dominant head quintile (q5) into the tail.</em></p>
+
+- **Mechanism, not noise**: the correction demotes head items and promotes tail items monotonically in popularity — exactly the rank-shift a marginal subtraction predicts.
+
+<p align="center">
+  <img src="results/figures/fig8_rankshift_mechanism.png" width="66%" alt="Per-item rank shift vs. popularity"/>
+</p>
+
+- **Beats every decode-time alternative**: naive log-popularity discount (degenerates at strength), rank discount, Steck-style calibrated quota, group-coarsened marginals, ε-exploration (inflates coverage while *losing* tail recall — coverage alone is gameable), **MMR intra-list diversification** (raises coverage but leaves tail recall flat — PopContrast is *not* just diversifying), a **null-context / CAD-style prior** (correlates with the averaged marginal at ρ ≈ 0.92 but is a weaker estimator — averaging over real histories matters), and D³-style external-SASRec fusion (hurts every axis when the external model is weak).
 - **Statistically grounded**: paired bootstrap — tail gains hold in 100%/100%/99.4% of resamples at the working points; overall changes are noise-level (that is what "near-free" means).
 
-Figures live in [`results/figures/`](results/figures) — accuracy–coverage trajectories, exposure streams, quintile heatmaps, rank-shift mechanism, marginal-vs-popularity densities.
+All figures (accuracy–coverage trajectories, exposure streams, quintile heatmaps, rank-shift mechanism, Lorenz curves, marginal-vs-popularity densities) live in [`results/figures/`](results/figures) and are regenerated by [`experiments/make_figures.py`](experiments/make_figures.py).
 
 ---
 
@@ -59,7 +89,7 @@ popcontrast/            # library: data/popularity/trie tables, exact scoring, h
   model_utils.py        #   TIGER checkpoint loading
 experiments/            # runnable scripts (see table below)
 results/                # JSON results + figures (large .pt caches are git-ignored)
-assets/                 # overview figure
+assets/                 # overview + framework figures
 ```
 
 | Script (`experiments/`) | What it does |
@@ -75,6 +105,8 @@ assets/                 # overview figure
 | `eval_beam_corrected.py` | corrected decoding **inside** the beam vs. exact re-ranking |
 | `eval_validation_beta.py` | validation-based β selection protocol |
 | `extra_baselines.py` | rank discount, ε-exploration, calibrated-quota baselines |
+| `eval_mmr_baseline.py` | MMR intra-list diversification (is it *just* diversifying?) |
+| `eval_nullcontext_baseline.py` | null-context / CAD-style prior vs. the history-averaged marginal |
 | `eval_d3_comparison.py` | external-SASRec fusion (D³-style) head-to-head |
 | `enrich_analysis.py` | popularity-quintile breakdown, group-coarsened priors, rank-shift data |
 | `make_figures.py` | renders all figures (300 dpi PNG) |
@@ -128,6 +160,8 @@ python -m experiments.diagnose_marginal_popularity   # it's the marginal
 BC_SPLIT=beauty python -m experiments.eval_beam_corrected
 python -m experiments.eval_validation_beta
 python -m experiments.extra_baselines
+python -m experiments.eval_mmr_baseline              # MMR diversification baseline
+python -m experiments.eval_nullcontext_baseline      # null-context / CAD-style prior
 python -m experiments.eval_d3_comparison             # needs a trained SASRec (genrec)
 
 # 5. figures  ->  results/figures/*.png

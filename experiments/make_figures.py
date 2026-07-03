@@ -168,28 +168,32 @@ def fig3_lorenz(fd):
 
 
 def fig4_marginal_pop(fd):
-    """The core diagnostic, DATA-driven: model marginal vs item popularity (hexbin)."""
+    """Marginal vs popularity hexbin, compact 1x3 for a single column."""
     from scipy.stats import spearmanr
     from matplotlib.colors import LinearSegmentedColormap
     cmap = LinearSegmentedColormap.from_list("pinkblue", [BLUE_GLOW, BLUE_SOFT, PINK, "#B83A6B"])
     splits = list(fd)
-    fig, axes = plt.subplots(1, len(splits), figsize=(4.6*len(splits), 4.4), squeeze=False)
-    for ax, sp in zip(axes[0], splits):
-        d = fd[sp]; lp = d["log_pop"]; mg = d["marginal"]
-        hb = ax.hexbin(lp, mg, gridsize=34, cmap=cmap, mincnt=1, linewidths=0.15, edgecolors=BG)
-        # trend line
-        z = np.polyfit(lp, mg, 1); xs = np.linspace(lp.min(), lp.max(), 50)
-        ax.plot(xs, np.polyval(z, xs), color=INK, lw=2, ls=(0, (4, 2)), alpha=.8)
-        rho, _ = spearmanr(mg, lp)
-        ax.text(0.05, 0.93, f"ρ = {rho:.2f}", transform=ax.transAxes, fontsize=15,
-                fontweight="bold", color="#B83A6B",
-                bbox=dict(boxstyle="round,pad=0.3", fc="white", ec=PINK_SOFT))
-        ax.set_xlabel("log item popularity")
-        ax.set_ylabel("model marginal score")
-        ax.set_title(sp.capitalize(), color=INK)
-    fig.tight_layout()
-    fig.savefig(os.path.join(FIG, "fig4_marginal_vs_popularity.png"), bbox_inches="tight")
-    plt.close(fig)
+    with plt.rc_context({"font.size": 19, "axes.titlesize": 22, "axes.labelsize": 19,
+                         "xtick.labelsize": 15, "ytick.labelsize": 15}):
+        fig, axes = plt.subplots(1, len(splits), figsize=(10.4, 3.7), squeeze=False)
+        for k_ax, (ax, sp) in enumerate(zip(axes[0], splits)):
+            d = fd[sp]; lp = d["log_pop"]; mg = d["marginal"]
+            ax.hexbin(lp, mg, gridsize=30, cmap=cmap, mincnt=1, linewidths=0.15, edgecolors=BG)
+            z = np.polyfit(lp, mg, 1); xs = np.linspace(lp.min(), lp.max(), 50)
+            ax.plot(xs, np.polyval(z, xs), color=INK, lw=2.4, ls=(0, (4, 2)), alpha=.85)
+            rho, _ = spearmanr(mg, lp)
+            ax.text(0.05, 0.90, f"ρ = {rho:.2f}", transform=ax.transAxes, fontsize=17,
+                    fontweight="bold", color="#B83A6B",
+                    bbox=dict(boxstyle="round,pad=0.3", fc="white", ec=PINK_SOFT))
+            from matplotlib.ticker import MaxNLocator
+            ax.xaxis.set_major_locator(MaxNLocator(4)); ax.yaxis.set_major_locator(MaxNLocator(4))
+            ax.set_xlabel("log item popularity")
+            if k_ax == 0:
+                ax.set_ylabel("marginal score")
+            ax.set_title(sp.capitalize(), color=INK)
+        fig.tight_layout()
+        fig.savefig(os.path.join(FIG, "fig4_marginal_vs_popularity.png"), bbox_inches="tight")
+        plt.close(fig)
 
 
 def fig5_head_tail_slope(panels):
