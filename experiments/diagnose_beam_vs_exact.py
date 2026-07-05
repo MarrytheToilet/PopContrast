@@ -23,7 +23,7 @@ from popcontrast.model_utils import load_tiger
 from popcontrast.oracle import encode_history, _item_tokens_tensor
 from popcontrast.decoding import trie_beam_search
 
-RES = "/home/hanyu/research/PopSteer/results"
+from popcontrast import RESULTS_DIR as RES
 DEVICE = "cuda"
 N_DIAG = int(os.environ.get("DIAG_N", 2000))
 SEED = 0

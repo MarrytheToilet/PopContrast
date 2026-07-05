@@ -16,7 +16,7 @@ import numpy as np
 import torch
 from popcontrast.data_utils import build_dataset, compute_popularity, build_sem_id_tables
 
-RES = "/home/hanyu/research/PopSteer/results"
+from popcontrast import RESULTS_DIR as RES
 out = {}
 
 for SPLIT in ["beauty", "sports", "toys"]:

@@ -1,17 +1,14 @@
-"""Overnight experiment driver for PopContrast (run from genrec/ root).
+"""Main experiment driver for PopContrast (run from genrec/ root).
 
 Strategy: the expensive step is scoring the full catalog per user. Since every
 prior/beta/floor/adaptive variant is just POST-HOC arithmetic on those baseline
 log-probs, we score each eval user ONCE, cache (N_users, N_items) on GPU, then
 sweep ALL method configs instantly via vectorized topk.
 
-Outputs (absolute paths under PopSteer/results and PopSteer/reports):
-  results/cache_scores.pt        cached baseline scores + targets + segs (reusable)
-  results/main_panel.json        baseline / model-PMI / naive / floored / adaptive panels
-  results/oracle_recovery.json   exact-oracle vs small-beam tail-recovery diagnostic
-  reports/NIGHT_SUMMARY.md       written separately after review
-
-Robust: each block in try/except, results saved incrementally.
+Outputs (under results/):
+  cache_scores_<split>.pt    cached full-catalog scores + targets + segs + marginal
+                             (reused by every downstream analysis)
+  main_panel_<split>.json    baseline / model-PMI / naive / floored / adaptive panels
 """
 from __future__ import annotations
 import json, math, os, traceback
@@ -23,13 +20,13 @@ from popcontrast.model_utils import load_tiger
 from popcontrast.oracle import encode_history, score_all_items, _item_tokens_tensor
 from popcontrast.decoding import trie_beam_search
 
-RES = "/home/hanyu/research/PopSteer/results"
+from popcontrast import RESULTS_DIR as RES
 os.makedirs(RES, exist_ok=True)
 DEVICE = "cuda"
-SPLIT = os.environ.get("NIGHT_SPLIT", "beauty")
+SPLIT = os.environ.get("PC_SPLIT", "beauty")
 CKPT = f"out/tiger/amazon/{SPLIT}/best_model.pt"
-N_EVAL = int(os.environ.get("NIGHT_N_EVAL", 5000))
-MARGINAL_M = int(os.environ.get("NIGHT_MARGINAL_M", 512))
+N_EVAL = int(os.environ.get("PC_N_EVAL", 5000))
+MARGINAL_M = int(os.environ.get("PC_MARGINAL_M", 512))
 SEED = 0
 
 

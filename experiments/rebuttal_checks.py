@@ -16,7 +16,7 @@ from popcontrast.model_utils import load_tiger, decoder_blocks
 from popcontrast.hidden_states import collect_hidden
 from popcontrast.oracle import encode_history, score_all_items, _item_tokens_tensor
 
-RES = "/home/hanyu/research/PopSteer/results"
+from popcontrast import RESULTS_DIR as RES
 DEVICE = "cuda"
 SPLIT = "beauty"
 LAYER = 3

@@ -7,7 +7,7 @@ the EXACT corrected top-10 (full-catalog scores from cache). Report per (B, beta
   overlap@10 (beam-corrected vs exact-corrected), R@10, tail R@10, Cov@10,
   and needed-candidate coverage: fraction of exact-corrected top-10 present in the
   raw beam's candidate set (the quantity Prop 5.2 conditions on).
-Output: results/beam_corrected.json
+Output: results/beam_corrected_<split>.json
 """
 from __future__ import annotations
 import json, os
@@ -18,7 +18,7 @@ from popcontrast.model_utils import load_tiger
 from popcontrast.oracle import encode_history
 from popcontrast.decoding import trie_beam_search
 
-RES = "/home/hanyu/research/PopSteer/results"
+from popcontrast import RESULTS_DIR as RES
 DEVICE = "cuda"
 SPLIT = os.environ.get("BC_SPLIT", "beauty")
 N = int(os.environ.get("BC_N", 1000))
@@ -84,6 +84,6 @@ for b in BETAS:
         "R10": float(hit.mean()), "tailR10": float(hit[tail_user].mean()),
         "cov10": float(len(np.unique(et)) / I)}
 
-with open(os.path.join(RES, "beam_corrected.json"), "w") as f:
+with open(os.path.join(RES, f"beam_corrected_{SPLIT}.json"), "w") as f:
     json.dump(out, f, indent=2)
 print(json.dumps(out["results"], indent=2), flush=True)

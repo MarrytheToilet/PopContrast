@@ -14,7 +14,7 @@ import numpy as np
 import torch
 from popcontrast.data_utils import build_dataset, compute_popularity
 
-RES = "/home/hanyu/research/PopSteer/results"
+from popcontrast import RESULTS_DIR as RES
 LAMS = [0.9, 0.7]
 TOPC = 200
 

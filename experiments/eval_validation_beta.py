@@ -12,7 +12,7 @@ from popcontrast.data_utils import build_dataset, compute_popularity, build_sem_
 from popcontrast.model_utils import load_tiger
 from popcontrast.oracle import encode_history, score_all_items, _item_tokens_tensor
 
-RES = "/home/hanyu/research/PopSteer/results"
+from popcontrast import RESULTS_DIR as RES
 DEVICE = "cuda"
 N = int(os.environ.get("VB_N", 2000))
 BETAS = [0.0, 0.25, 0.5, 0.75, 1.0]

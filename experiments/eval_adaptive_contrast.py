@@ -22,7 +22,7 @@ from popcontrast.data_utils import build_dataset, compute_popularity, build_sem_
 from popcontrast.model_utils import load_tiger
 from popcontrast.oracle import encode_history, score_all_items_perstep, _item_tokens_tensor
 
-RES = "/home/hanyu/research/PopSteer/results"
+from popcontrast import RESULTS_DIR as RES
 DEVICE = "cuda"
 SPLITS = os.environ.get("ADA_SPLITS", "beauty,sports,toys").split(",")
 N_EVAL = int(os.environ.get("ADA_N", 3000))

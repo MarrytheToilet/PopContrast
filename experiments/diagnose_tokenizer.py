@@ -21,7 +21,7 @@ import torch
 from scipy.stats import spearmanr
 from popcontrast.data_utils import build_dataset, compute_popularity, build_sem_id_tables
 
-RES = "/home/hanyu/research/PopSteer/results"
+from popcontrast import RESULTS_DIR as RES
 SPLITS = os.environ.get("TOK_SPLITS", "beauty,sports,toys").split(",")
 
 

@@ -1,14 +1,11 @@
-"""Publication figures for PopContrast — soft pink/blue palette, non-stale designs.
+"""Publication figures for PopContrast — soft pink/blue palette.
 
-Renders to results/figures/*.png (PNG only):
-  fig1_pareto_trajectory  : accuracy-vs-coverage PHASE-SPACE PATH as beta sweeps
-                            (model rises up-right = free diversification; naive collapses).
-  fig2_diversification    : coverage & entropy vs beta as an OPENING FAN
-                            (model diversifies; naive degenerates).
-  fig3_diagnostic_triad   : the "not representation / not search / IS distribution"
-                            ruling-out schematic (conceptual, hand-laid).
+Renders results/figures/*.png (300 dpi) from the JSON results and figdata npz files;
+missing figdata_<split>.npz are rebuilt from cache_scores_<split>.pt automatically
+(prepare_figdata; needs torch + dataset, otherwise skipped gracefully).
 
-Reads whatever results/main_panel_<split>.json exist. Run anywhere (no GPU).
+Uses the paper's three main splits by default; set FIG_SPLITS=beauty,clothing,...
+to change. Figure-only runs on existing results work anywhere (no GPU).
 """
 from __future__ import annotations
 import json, os, glob
@@ -19,7 +16,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
 from matplotlib import font_manager
 
-RES = "/home/hanyu/research/PopSteer/results"
+from popcontrast import RESULTS_DIR as RES
 FIG = os.path.join(RES, "figures")
 os.makedirs(FIG, exist_ok=True)
 
@@ -42,11 +39,17 @@ plt.rcParams.update({
 })
 
 
+# Paper figures use the three main splits; Clothing is an appendix replication.
+# Override with e.g. FIG_SPLITS=beauty,clothing,sports,toys to include it.
+FIG_SPLITS = os.environ.get("FIG_SPLITS", "beauty,sports,toys").split(",")
+
+
 def load_panels():
     panels = {}
     for p in sorted(glob.glob(os.path.join(RES, "main_panel_*.json"))):
         split = os.path.basename(p)[len("main_panel_"):-len(".json")]
-        panels[split] = json.load(open(p))
+        if split in FIG_SPLITS:
+            panels[split] = json.load(open(p))
     return panels
 
 
@@ -127,11 +130,51 @@ def fig2_diversification(panels):
     plt.close(fig)
 
 
+def prepare_figdata(beta=1.0):
+    """Regenerate any missing figdata_<split>.npz from cache_scores_<split>.pt.
+
+    Per split: per-item log-popularity, model marginal, top-10 exposure counts at
+    baseline and at model-PMI beta, and the tail mask. Needs torch + the dataset
+    (run from genrec/ root); skipped gracefully when unavailable so that
+    figure-only runs on existing figdata still work anywhere.
+    """
+    caches = sorted(glob.glob(os.path.join(RES, "cache_scores_*.pt")))
+    missing = [p for p in caches
+               if not os.path.exists(os.path.join(
+                   RES, f"figdata_{os.path.basename(p)[len('cache_scores_'):-len('.pt')]}.npz"))]
+    if not missing:
+        return
+    try:
+        import torch
+        from popcontrast.data_utils import build_dataset, compute_popularity
+    except ImportError as e:
+        print(f"[figdata] {len(missing)} split(s) missing but deps unavailable ({e}); skipping")
+        return
+    for cache_path in missing:
+        split = os.path.basename(cache_path)[len("cache_scores_"):-len(".pt")]
+        print(f"[figdata] building figdata_{split}.npz from cache", flush=True)
+        cache = torch.load(cache_path)
+        scores = cache["scores"]                 # (N, I) cpu
+        marginal = cache["marginal"]             # (I,)
+        ds = build_dataset(split=split, train_test_split="train")
+        pop = compute_popularity(ds)
+        I = scores.shape[1]
+        prior = (marginal - marginal.mean()) / marginal.std().clamp_min(1e-6)
+        base_top = scores.topk(10, dim=1).indices.reshape(-1)
+        beta_top = (scores - beta * prior[None, :]).topk(10, dim=1).indices.reshape(-1)
+        np.savez(os.path.join(RES, f"figdata_{split}.npz"),
+                 log_pop=np.log1p(pop.counts[:I]), marginal=marginal.numpy(),
+                 cnt_base=np.bincount(base_top.numpy(), minlength=I),
+                 cnt_beta=np.bincount(beta_top.numpy(), minlength=I),
+                 tail_mask=(pop.bucket[:I] == "tail"), beta=beta)
+
+
 def load_figdata():
     fd = {}
     for p in sorted(glob.glob(os.path.join(RES, "figdata_*.npz"))):
         split = os.path.basename(p)[len("figdata_"):-len(".npz")]
-        fd[split] = np.load(p)
+        if split in FIG_SPLITS:
+            fd[split] = np.load(p)
     return fd
 
 
@@ -291,74 +334,6 @@ def fig8_rankshift(path=os.path.join(RES, "rankshift_beauty.npz")):
     plt.close(fig)
 
 
-def fig9_quintiles(path=os.path.join(RES, "enrich_analysis.json")):
-    """Recall@10 by popularity quintile (q0 least → q4 most popular) as β grows —
-    a redistribution ladder, finer than the head/tail split."""
-    if not os.path.exists(path):
-        return
-    D = json.load(open(path))
-    splits = [s for s in ("beauty", "sports", "toys") if s in D]
-    betas = ["0.0", "0.5", "1.0"]
-    shades = [MUTE, PINK_SOFT, PINK]
-    fig, axes = plt.subplots(1, len(splits), figsize=(4.6*len(splits), 4.4), squeeze=False)
-    for ax, sp in zip(axes[0], splits):
-        Q = D[sp]["quintile_recall"]
-        x = np.arange(5)
-        for b, col in zip(betas, shades):
-            key = b if b in Q else str(float(b))
-            ys = Q[key]["by_quintile"]
-            ax.plot(x, ys, "-o", color=col, lw=2.4, ms=6, mec="white", mew=1.2,
-                    label=fr"$\beta$={float(b):g}")
-        ax.set_yscale("log")
-        ax.set_xticks(x); ax.set_xticklabels(["q1\n(least pop.)", "q2", "q3", "q4", "q5\n(most pop.)"], fontsize=9)
-        ax.set_ylabel("Recall@10 (log scale)")
-        ax.set_title(sp.capitalize(), color=INK)
-    axes[0][0].legend(loc="upper left", frameon=False, fontsize=10)
-    fig.suptitle("Recall by popularity quintile: gains concentrate on the least-popular items "
-                 "while the top quintile degrades gracefully", fontsize=13.5, fontweight="bold", y=1.03)
-    fig.tight_layout()
-    fig.savefig(os.path.join(FIG, "fig9_quintile_ladder.png"), bbox_inches="tight")
-    plt.close(fig)
-
-
-PINK_RAMP = ["#FBE6EE", "#F6C6D8", "#EE9DBD", "#E06C97", "#B83A6B"]  # q1(light)→q5(dark)
-BLUE_RAMP = ["#EAF3FB", "#CFE2F3", "#A9CBE8", "#7FAED9", "#5B93C9"]  # q1(light)→q5(soft blue)
-
-
-def fig10_exposure_stream(path=os.path.join(RES, "exposure_shares.json")):
-    """Stacked-area exposure stream, 1x3 sized for a single column."""
-    if not os.path.exists(path):
-        return
-    D = json.load(open(path))
-    splits = list(D)
-    with plt.rc_context({"font.size": 20, "axes.titlesize": 23, "axes.labelsize": 21,
-                         "xtick.labelsize": 18, "ytick.labelsize": 18}):
-        fig, axes = plt.subplots(1, len(splits), figsize=(10.4, 3.3), squeeze=False, sharey=True)
-        for k_ax, (ax, sp) in enumerate(zip(axes[0], splits)):
-            bs = D[sp]["betas"]; sh = np.array(D[sp]["shares"])
-            order = [4, 3, 2, 1, 0]
-            ys = sh[:, order].T
-            ax.stackplot(bs, ys, colors=[BLUE_RAMP[q] for q in order],
-                         edgecolor=BG, linewidth=1.4)
-            cum = np.cumsum(ys, axis=0)
-            for k, q in enumerate(order):
-                y_mid = (cum[k, -1] + (cum[k-1, -1] if k else 0)) / 2
-                if ys[k, -1] > 0.05:
-                    ax.text(bs[-1]*0.98, y_mid, f"q{q+1}", ha="right", va="center",
-                            fontsize=17, fontweight="bold",
-                            color=("white" if q == 4 else INK))
-            ax.set_xlim(bs[0], bs[-1]); ax.set_ylim(0, 1)
-            ax.set_xticks([0, 1, 2]); ax.set_yticks([0, 0.5, 1.0])
-            ax.set_xlabel(r"$\beta$")
-            if k_ax == 0:
-                ax.set_ylabel("exposure share")
-            ax.set_title(sp.capitalize(), color=INK)
-            ax.grid(False)
-        fig.tight_layout()
-        fig.savefig(os.path.join(FIG, "fig10_exposure_stream.png"), bbox_inches="tight")
-        plt.close(fig)
-
-
 def fig9b_quintile_heatmap(path=os.path.join(RES, "enrich_analysis.json")):
     """Diverging heatmap of %-change Recall@10 per (quintile x beta), 1x3 single-column."""
     if not os.path.exists(path):
@@ -475,6 +450,7 @@ def fig6_d3(path=os.path.join(RES, "d3_comparison.json")):
 
 
 if __name__ == "__main__":
+    prepare_figdata()
     panels = load_panels(); fd = load_figdata()
     print(f"datasets: {list(panels)}")
     fig1_pareto(panels)

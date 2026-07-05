@@ -24,7 +24,7 @@ from popcontrast.model_utils import load_tiger
 from popcontrast.oracle import encode_history, score_all_items, _item_tokens_tensor
 from genrec.models.sasrec import SASRec
 
-RES = "/home/hanyu/research/PopSteer/results"
+from popcontrast import RESULTS_DIR as RES
 DEVICE = "cuda"
 SPLITS = os.environ.get("D3_SPLITS", "beauty").split(",")
 N_EVAL = int(os.environ.get("D3_N", 3000))

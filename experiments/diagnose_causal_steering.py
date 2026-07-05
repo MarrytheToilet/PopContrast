@@ -17,7 +17,7 @@ from popcontrast.model_utils import load_tiger, num_decoder_layers
 from popcontrast.hidden_states import collect_hidden, pop_intervention_hooks
 from popcontrast.oracle import encode_history, score_all_items, _item_tokens_tensor
 
-RES = "/home/hanyu/research/PopSteer/results"
+from popcontrast import RESULTS_DIR as RES
 DEVICE = "cuda"
 SPLIT = os.environ.get("CAUSAL_SPLIT", "beauty")
 LAYER = int(os.environ.get("CAUSAL_LAYER", 3))
