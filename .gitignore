@@ -76,3 +76,6 @@ htmlcov/
 
 # Exported vector figures are regenerated; README previews remain tracked
 /results/figures/**/*.pdf
+
+# Compact per-user analysis archive is synchronized separately from source code
+/results/core_analysis/

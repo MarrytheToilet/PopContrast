@@ -152,6 +152,31 @@ Use `--print-command` to inspect the exact module and arguments, `--model-root` 
 
 See [benchmark commands and controls](experiments/benchmark/README.md) for baseline tuning, full-cohort evaluation, width sweeps, estimator sampling, and audits.
 
+## Local analysis archive
+
+The optional `results/core_analysis/` directory contains losslessly compressed
+Top-10 predictions, anonymous evaluation indices, catalog popularity statistics,
+history-group summaries, and available item-prior vectors. It is distributed
+separately from Git and excludes weights, training data, embeddings and full score
+matrices. Existing method grids can be analyzed on a CPU without the server.
+
+```bash
+python scripts/core_results.py verify results/core_analysis
+python scripts/package_core_results.py
+```
+
+The second command builds `reports/core_results/PopContrast_core_results.zip`,
+including the retained metrics, plotting inputs and scripts, and the current
+manuscript if present. It verifies all compact predictions against saved metrics
+and paired intervals, rebuilds figures and summaries in an isolated directory,
+and checks the archive's file hashes. The ZIP has its own instructions and only
+needs NumPy, SciPy and Matplotlib for analysis and figures. Fresh inference and
+new prior estimation still require the original model and data.
+
+`scripts/core_results.py export` accepts an explicit JSON plan of prediction
+files, a source root and a dataset-bundle directory. It reads existing results
+without running or modifying a model; see `--help` for its arguments.
+
 ## Tests
 
 After installing the model dependencies and `genrec`, run `make test`. The CPU suite checks cache/direct-score equivalence, stable ties, batched search, SID gradients and adapter reloads, history samplers, and geometric-reference identities.
