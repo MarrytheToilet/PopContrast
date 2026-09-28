@@ -1,235 +1,159 @@
-# Subtract the Marginal 🩺
+# Subtract the Marginal
 
 **Training-Free Popularity Debiasing for Semantic-ID Generative Recommendation**
 
-<p align="center">
-  <img src="assets/pr.png" width="92%" alt="PopContrast overview"/>
-</p>
+<p align="center"><img src="assets/pr.png" width="92%" alt="PopContrast overview"/></p>
 
-> Semantic-ID generative recommenders (TIGER-style) over-recommend popular items and collapse long-tail coverage. We ask **where** that bias actually lives — and it is *not* where the activation-steering playbook says it should be. A ruling-out diagnosis leaves one measurable, directly correctable locus: the **decoder's learned marginal item distribution**. **PopContrast** subtracts it at decode time: no retraining, no external model, unchanged trie-beam decoding.
+PopContrast improves long-tail discovery by subtracting a frozen recommender's own cross-user marginal log-preference from candidate scores. It requires no retraining or auxiliary recommender. Diagnostics on TIGER motivate this measurable correction; matched decoding experiments extend the evaluation to larger language models, conventional scorers, longer semantic IDs, and multiple training seeds.
 
----
+## Method
 
-## 🔎 The Story: a Ruling-Out Diagnosis
+<p align="center"><img src="results/figures/www2027/framework_refined.png" width="98%" alt="Offline marginal estimation and complete-item score correction"/></p>
 
-We test every plausible location of popularity bias on a **frozen** TIGER model:
+For item `i` and user history `u`, estimate and standardize the mean log-score over training histories, then correct completed candidates:
 
-| Candidate locus | Test | Verdict |
-|---|---|---|
-| **Linear representation** | probes (AUC ≈ 0.70) + ~20 steering configs (CAA / probe / PCA × subtract / ablate / clamp) + closed-form **LEACE** erasure + a symmetric ±v causal test | ❌ **Probeable ≠ steerable.** Tail recall never improves; the probed direction moves output popularity by ~1% of the head–tail gap |
-| **Beam-search pruning** | trie-beam (B=20) vs. exhaustive full-catalog ranking | ❌ Identical Recall@10, 91% top-10 overlap — search is not where the tail is lost (in this regime) |
-| **RQ-VAE tokenizer** | code density vs. popularity, within-code entropy, collision bias, partial correlations | ❌ Code assignment is popularity-neutral (ρ ≤ 0.11); controlling for it leaves the popularity–marginal link unchanged (0.71 → 0.71) |
-| **Decoder marginal** | `m̂(i) = (1/M) Σₖ log p_θ(i \| uₖ)` vs. item popularity | ✅ **Spearman ρ ≈ 0.70 on all three datasets** — measurable, and (below) directly correctable |
-
-<p align="center">
-  <img src="results/figures/fig4_marginal_vs_popularity.png" width="88%" alt="Model marginal vs. item popularity"/>
-</p>
-<p align="center"><em>The surviving locus: the model's own marginal log-preference tracks item popularity at ρ ≈ 0.70 on every dataset — a measurable, directly correctable quantity.</em></p>
-
-## ⚙️ The Method: PopContrast
-
-<p align="center">
-  <img src="assets/framework.png" width="98%" alt="PopContrast framework: diagnosis and decode-time correction"/>
-</p>
-<p align="center"><em>(1) vanilla SID generative recommendation skews to the head; (2) the ruling-out diagnosis leaves the decoder marginal; (3) PopContrast estimates it once offline and subtracts it inside unchanged trie-beam decoding.</em></p>
-
-Re-score each candidate at decode time by subtracting the model's **own** marginal preference:
-
-```
-s_β(i | u) = log p_θ(i | u) − β · m̄(i),      m̄ = standardized m̂
+```text
+m(i) = mean_h log p(i | h)
+z(i) = (m(i) - mean_items(m)) / std_items(m)
+s_beta(i | u) = log p(i | u) - beta * z(i)
 ```
 
-- **β′ = β/σ_m interpolates** from raw likelihood (β=0) to popularity-neutral **PMI ranking** (β = σ_m ≈ 2.4); any user-independent score component cancels exactly.
-- **Exact inside trie-beam decoding**: with fixed-length semantic IDs the penalty attaches at complete-item leaves — no prefix approximation, serving cost unchanged. Measured: at β=0.75, a standard B=20 beam already carries 87–91% of the exact-corrected top-10; B=100 carries ~100%.
-- **Self-contained**: `m̂` is one offline pass (M=512 histories, minutes on one RTX 3090; stable from M=32) — no fine-tuning, no external recommender.
+The geometric reference differs from the arithmetic marginal in ordinary PMI. Full score centering cancels user-independent score components; validation chooses partial correction when shared popular relevance should be retained. Within a beam's completed candidates, correction is exact. Recovering the full-catalog corrected top-10 additionally requires those items to survive candidate generation.
 
-## 📊 Key Results (Amazon Beauty / Sports / Toys, frozen TIGER, 5000 test users)
+Online work is one lookup and scalar correction per candidate. In the recorded paired TIGER timing study, mean request latency is 12.309 ms raw and 12.335 ms corrected at beam width 20; the measured mean overhead is 0.027 ms.
 
-| Operating point | Overall R@10 | Tail R@10 | Coverage@10 |
-|---|---|---|---|
-| Near-free points on the frontier | held or improved on **all three** datasets | **+10% / +144% / +36%** | **+7% / +47% / +17%** |
-| Uniform pre-registered **β = 0.75** (no tuning) | −5% / +2% / −3% | **+50% / +144% / +45%** | +28% / +47% / +25% |
+## Results
+
+The original 5,000-user full-catalog sweeps contain descriptive operating points with non-decreasing overall Recall@10:
+
+| Dataset | Strength | Tail Recall@10 change | Coverage@10 change |
+|---|---:|---:|---:|
+| Beauty | 0.25 | +10% | +7% |
+| Sports | 0.75 | +144% | +47% |
+| Toys | 0.50 | +36% | +17% |
+
+These points describe the test sweep. The matched beam comparisons independently select strengths on validation users, maximizing tail recall under a 5% relative overall-recall budget, with raw ranking always available.
+
+<p align="center"><img src="results/figures/www2027/pareto_single_column.png" width="65%" alt="Full-catalog accuracy–coverage trajectories"/></p>
+
+The expanded benchmark includes **33 completed dataset–checkpoint settings across eight datasets and six backbone specifications**. It includes TIGER; Qwen2.5-1.5B and Qwen2.5-3B-Instruct with LoRA; SmolLM2-360M with LoRA; SASRec with next-item cross-entropy; and HSTU without time bias. These are observed settings, not a full architecture-by-dataset cross product.
+
+- Qwen2.5-3B on Beauty: tail recall **+35.4%**, coverage **+27.9%**, and overall recall −0.12 percentage points under actual width-20 decoding.
+- Matched TIGER seeds 0/1/2: positive tail-recall changes on both Beauty and Clothing. User-bootstrap intervals and training-seed variation are reported separately.
+- Clothing's 39,387-user analysis preserves the frozen models and validation choices, with tail hits increasing in each of three seeds.
+- Longer-ID controls and a 495,063-item Books experiment characterize search and scale. Books is a one-epoch study; its weak candidate availability is retained in the complete results.
+
+<p align="center"><img src="results/figures/www2027/model_seed_evidence.png" width="94%" alt="All four language-model settings and matched training seeds"/></p>
+
+All matched baseline families use the same users, candidate pools, and validation selection rule. Geometric, arithmetic, and null-context model references are compared alongside empirical counts, MMR, and auxiliary SASRec fusion.
+
+<p align="center"><img src="results/figures/www2027/matched_tradeoffs.png" width="94%" alt="Matched baseline parameter paths"/></p>
+
+The original exposure and popularity-quintile analyses remain available:
 
 <p align="center">
-  <img src="results/figures/fig1_pareto_trajectory.png" width="92%" alt="Accuracy–coverage frontier: PopContrast vs. naive discount"/>
-</p>
-<p align="center"><em>Sweeping β traces a coverage–recall frontier that dominates the naive log-popularity discount: PopContrast (pink) buys coverage at little or no recall cost, where the naive baseline collapses.</em></p>
-
-A larger, sparser fourth split (**Amazon Clothing**, ~23k items) is included as an additional replication: coverage rises steadily (+26–62%) with tail recall held flat — the correction never *hurts* the tail even where the head signal is weakest.
-
-- **Genuine diversification**: coverage *and* entropy rise monotonically, Gini falls; exposure Lorenz curves move toward the diagonal; the top-popularity quintile's share of top-10 slots shrinks from 78–83% toward 57–75% while every lower quintile opens up.
-
-<p align="center">
-  <img src="results/figures/fig9_quintile_heatmap.png" width="92%" alt="Recall change by popularity quintile"/>
-  <img src="results/figures/fig10_exposure_stream.png" width="92%" alt="Exposure share by popularity quintile as β grows"/>
-</p>
-<p align="center"><em>Top: recall lifts across every non-head quintile (q1 = rarest); previously-unreachable q1 items go 0 → &gt;0. Bottom: as β grows, exposure share flows out of the dominant head quintile (q5) into the tail.</em></p>
-
-- **Mechanism, not noise**: the correction demotes head items and promotes tail items monotonically in popularity — exactly the rank-shift a marginal subtraction predicts.
-
-<p align="center">
-  <img src="results/figures/fig8_rankshift_mechanism.png" width="66%" alt="Per-item rank shift vs. popularity"/>
+<img src="results/figures/fig9_quintile_heatmap.png" width="92%" alt="Recall changes by popularity quintile"/>
+<img src="results/figures/fig10_exposure_stream.png" width="92%" alt="Exposure shares by popularity quintile"/>
 </p>
 
-- **Beats every decode-time alternative**: naive log-popularity discount (degenerates at strength), rank discount, Steck-style calibrated quota, group-coarsened marginals, ε-exploration (inflates coverage while *losing* tail recall — coverage alone is gameable), **MMR intra-list diversification** (raises coverage but leaves tail recall flat — PopContrast is *not* just diversifying), a **null-context / CAD-style prior** (correlates with the averaged marginal at ρ ≈ 0.92 but is a weaker estimator — averaging over real histories matters), and D³-style external-SASRec fusion (hurts every axis when the external model is weak).
-- **Statistically grounded**: paired bootstrap — tail gains hold in 100%/100%/99.4% of resamples at the working points; overall changes are noise-level (that is what "near-free" means).
+## Repository
 
-All figures live in [`results/figures/`](results/figures) and are regenerated by [`experiments/make_figures.py`](experiments/make_figures.py).
-
----
-
-## 🗂 Repository Layout
-
-```
-popcontrast/            # library: data/popularity/trie tables, exact scoring, hooks, trie-beam
-  data_utils.py         #   dataset wrapper, head/tail buckets, SID↔token tables + trie
-  oracle.py             #   exact full-catalog scoring + segmented metrics (+ per-step variant)
-  hidden_states.py      #   residual-stream capture & steering/ablation hooks (the negative result)
-  decoding.py           #   trie-constrained beam search with per-item leaf penalties
-  model_utils.py        #   TIGER checkpoint loading
-experiments/            # runnable scripts (documented step by step below)
-results/                # JSON results + figures (large .pt/.npz caches are git-ignored)
-assets/                 # overview + framework figures
+```text
+popcontrast/              Shared scoring, data, trie decoding, and representation hooks
+experiments/              Original full-catalog experiments and diagnostics
+experiments/benchmark/    Training, paired beam evaluation, controls, and numerical audits
+experiments/figures/      Shared publication plots, tables, and pink/blue style
+scripts/check_results.py  Source and metric verification
+assets/plot_data/         Small aggregate inputs for diagnostic figures
+results/                 Original numerical results and figures
+results/benchmark/       Frozen primary records, configurations, and compact summaries
 ```
 
-All experiment scripts read and write `results/` at the repo root (override with the
-`POPCONTRAST_RESULTS` environment variable).
+Generated reports, training outputs, datasets, model weights, prediction caches, Python caches, and local manuscript files are ignored. The original and expanded evaluation settings remain distinguishable in the result records.
 
-## 🚀 Setup
+## Rebuild figures and verify results
+
+The stored summaries and aggregate figure inputs support plotting without a GPU or model weights:
 
 ```bash
-# 1. environment
-conda create -n popcontrast python=3.10 && conda activate popcontrast
+pip install numpy scipy matplotlib
+make summaries
+make figures
+make check
+```
+
+`make summaries` reconstructs all five operating rules for each primary setting, matched baseline rows, and Clothing cohort comparisons. `make check` verifies 1,155 metric values, selected strengths, paired intervals, distinct checkpoints, and source hashes. Plot scripts retain the recorded points and do not choose settings on test performance.
+
+## Training setup
+
+```bash
+conda create -n popcontrast python=3.10
+conda activate popcontrast
 pip install -r requirements.txt
-
-# 2. third-party backbone library (cloned inside the repo root, git-ignored)
 git clone https://github.com/phonism/genrec.git
-cd genrec && pip install -e . --no-deps && cd ..
-
-# 3. content encoder for the RQ-VAE tokenizer
-hf download sentence-transformers/sentence-t5-xl --local-dir <MODELS>/sentence-t5-xl
+pip install -e ./genrec --no-deps
 ```
 
-Amazon-2014 5-core data is downloaded automatically on first run (SNAP mirrors).
-
-<details>
-<summary><b>One-line patch for LC-Rec (LoRA backbone only — not needed for TIGER)</b></summary>
-
-genrec's `lcrec_trainer.py` enables gradient checkpointing after PEFT wrapping, which breaks LoRA backward. After `get_peft_model(...)`, add:
-
-```python
-if hasattr(model.model, "enable_input_require_grads"):
-    model.model.enable_input_require_grads()
-```
-</details>
-
-## 🏃 Reproduce
-
-All commands run **from the `genrec/` directory** with `PYTHONPATH=<repo>:<repo>/genrec`.
-Reference hardware: a single RTX 3090 (24 GB). TIGER trains in hours per split; every
-analysis below runs in minutes once the per-split score cache exists.
-
-The pipeline has one expensive artifact — the **per-split score cache** — and everything
-else is fast arithmetic on top of it:
-
-```
-Step 1  train RQ-VAE + TIGER  ──►  out/tiger/amazon/<split>/best_model.pt
-Step 2  eval_popcontrast      ──►  results/cache_scores_<split>.pt   (the hub: exact
-                                   full-catalog scores for 5000 users + the marginal)
-                              ──►  results/main_panel_<split>.json   (headline tables)
-Step 3  diagnosis             ──►  four rulings (uses model and/or cache)
-Step 4  robustness/baselines  ──►  one JSON per question (mostly cache-only, CPU)
-Step 5  make_figures          ──►  results/figures/*.png
-```
-
-### Step 1 — Train the backbone (per split: `beauty` / `sports` / `toys` / `clothing`)
+TIGER, SASRec, and HSTU reuse implementations from `genrec`. The LLM path uses the adapters and scoring implementation in `experiments/benchmark/lcrec.py`. Original-category RQ-VAE tokenization uses sentence-T5-xl item embeddings. Download model files into `models/`, which is ignored.
 
 ```bash
+hf download sentence-transformers/sentence-t5-xl --local-dir models/sentence-t5-xl
+hf download Qwen/Qwen2.5-1.5B --local-dir models/Qwen2.5-1.5B
+hf download Qwen/Qwen2.5-3B-Instruct --local-dir models/Qwen2.5-3B-Instruct
+hf download HuggingFaceTB/SmolLM2-360M --local-dir models/SmolLM2-360M
+```
+
+### Original full-catalog study
+
+Run the original `genrec` training recipe from its directory, using an absolute path for the content encoder:
+
+```bash
+cd genrec
 python genrec/trainers/rqvae_trainer.py config/tiger/amazon/rqvae.gin --split beauty \
-    --gin "MODEL_HUB_SENTENCE_T5_XL='<MODELS>/sentence-t5-xl'" --gin "train.wandb_logging=False"
+  --gin "MODEL_HUB_SENTENCE_T5_XL='<ABSOLUTE_MODEL_DIR>/sentence-t5-xl'" --gin "train.wandb_logging=False"
 python genrec/trainers/tiger_trainer.py config/tiger/amazon/tiger.gin --split beauty \
-    --gin "MODEL_HUB_SENTENCE_T5_XL='<MODELS>/sentence-t5-xl'" --gin "train.wandb_logging=False"
+  --gin "MODEL_HUB_SENTENCE_T5_XL='<ABSOLUTE_MODEL_DIR>/sentence-t5-xl'" --gin "train.wandb_logging=False"
+PYTHONPATH=..:. PC_SPLIT=beauty python -m experiments.eval_popcontrast
 ```
 
-### Step 2 — Main results (builds the score cache everything else reuses)
+Repeat for Sports, Toys, and Clothing. Exact score caches feed the original diagnostics and full-catalog controls:
+
+| Module under `experiments` | Purpose |
+|---|---|
+| `diagnose_probe_steering`, `ablate_steering_operators`, `diagnose_causal_steering` | Linear probes and representation interventions |
+| `diagnose_erasure_estimation` | LEACE and marginal-history-count sensitivity |
+| `diagnose_beam_vs_exact` | Raw beam versus exhaustive ranking |
+| `diagnose_marginal_popularity`, `diagnose_tokenizer` | Marginal coupling and tokenizer statistics |
+| `eval_validation_beta` | Validation-selected correction strength |
+| `extra_baselines`, `enrich_analysis` | Quotas, exploration, group priors, quintiles, and rank changes |
+
+The diagnostics are scoped to the tested interventions; they identify a useful correction target without proving a unique causal origin of popularity bias.
+
+### Expanded benchmark
+
+From the repository root, export the original datasets after building their original score caches, and prepare the additional datasets:
 
 ```bash
-PC_SPLIT=beauty python -m experiments.eval_popcontrast     # repeat per split
+PYTHONPATH=.:genrec python -m experiments.benchmark.export_data
+python -m experiments.benchmark.prepare_extended --datasets ml1m games2023 arts2023 books2023
+python -m experiments.benchmark.run --list
 ```
 
-Scores the full catalog exactly for 5000 test users, estimates the marginal `m̂` over
-M=512 training histories, then sweeps baseline / **PopContrast** / naive discount /
-floored / adaptive-β panels vectorized on the cached scores.
-**Outputs:** `results/cache_scores_<split>.pt` (~250 MB, git-ignored) and
-`results/main_panel_<split>.json` (Tables 1–2 of the paper). Knobs: `PC_N_EVAL`, `PC_MARGINAL_M`.
-
-### Step 3 — The diagnosis (four rulings)
-
-**Ruling 1: not a steerable linear direction** (needs GPU; independent of the cache)
+Run a recorded setting with an explicitly chosen GPU:
 
 ```bash
-python -m experiments.diagnose_probe_steering       # probe AUC per (layer, step) + CAA injection sweep
-python -m experiments.ablate_steering_operators     # {CAA, probe, PCA} × {subtract, ablate, clamp} grid
-python -m experiments.diagnose_causal_steering      # symmetric ±v test -> results/causal_steering.json
-python -m experiments.rebuttal_checks               # LEACE erasure (+ marginal M-sensitivity)
-                                                    #   -> results/rebuttal_checks.json
+python -m experiments.benchmark.run --run beauty_s1_l3_fast/evaluation --stage train --device 0
+python -m experiments.benchmark.run --run beauty_s1_l3_fast/evaluation --stage evaluate --device 0
+python -m experiments.benchmark.run --run lcrec_qwen3b_beauty_s1_compact/evaluation_fp32 --stage train --device 0
+python -m experiments.benchmark.run --run lcrec_qwen3b_beauty_s1_compact/evaluation_fp32 --stage evaluate --device 0
 ```
 
-Popularity is linearly decodable (AUC ≈ 0.70) yet no linear intervention lifts tail
-recall, and ±v moves output popularity by ~1% of the head–tail gap: probeable ≠ steerable.
+Use `--print-command` to inspect the exact module and arguments, `--model-root` for local base models, and `--output-root` for new training outputs. Conventional scorers train and evaluate in one `--stage train` command. The runner retains recorded training budgets; Qwen1.5B's four-epoch run keeps its original six-epoch learning-rate schedule. It does not overwrite frozen result records.
 
-**Ruling 2: not beam-search pruning** (uses the cache as the exact oracle)
+See [benchmark commands and controls](experiments/benchmark/README.md) for baseline tuning, full-cohort evaluation, width sweeps, estimator sampling, and audits.
 
-```bash
-python -m experiments.diagnose_beam_vs_exact        # -> results/oracle_recovery.json
-```
+## Tests
 
-Width-20 trie-beam matches exhaustive full-catalog ranking (identical R@10, 91% top-10
-overlap) — the tail is not lost in the search.
+After installing the model dependencies and `genrec`, run `make test`. The CPU suite checks cache/direct-score equivalence, stable ties, batched search, SID gradients and adapter reloads, history samplers, and geometric-reference identities.
 
-**Ruling 3: not the tokenizer**
-
-```bash
-TOK_SPLITS=beauty,sports,toys python -m experiments.diagnose_tokenizer
-#   -> results/tokenizer_diag.json + tokdata_<split>.npz
-```
-
-RQ-VAE code assignment is popularity-neutral (ρ ≤ 0.11); controlling for code density
-leaves the popularity–marginal link unchanged (0.71 → 0.71).
-
-**Ruling 4 (the positive one): it's the decoder marginal**
-
-```bash
-python -m experiments.diagnose_marginal_popularity  # Spearman(m̂, popularity) + PMI beta sweep
-```
-
-### Step 4 — Robustness & baselines (each answers one reviewer-style question)
-
-| Command | Question it answers | Output |
-|---|---|---|
-| `BC_SPLIT=beauty python -m experiments.eval_beam_corrected` | Does the correction survive *inside* real trie-beam decoding (are promoted tail items even in the beam)? | `beam_corrected_<split>.json` |
-| `python -m experiments.eval_validation_beta` | Can β be selected on validation without touching the test set? | `validation_beta.json` |
-| `python -m experiments.extra_baselines` | Rank discount / ε-exploration / Steck-style calibrated quota — are simpler tricks enough? | `extra_baselines.json` |
-| `python -m experiments.eval_mmr_baseline` | Is PopContrast just intra-list diversification (MMR)? | `mmr_baseline.json` |
-| `python -m experiments.eval_nullcontext_baseline` | Is a one-shot null-context prior (CAD-style) as good as averaging over real histories? | `nullcontext_baseline.json` |
-| `python -m experiments.eval_d3_comparison` | Does external-model fusion (D³-style, needs a trained SASRec) beat a self-contained correction? | `d3_comparison.json` |
-| `python -m experiments.eval_adaptive_contrast` | Does a per-token adaptive gate beat static β? (No — the paper's reported negative result) | `adaptive_contrast.json` |
-| `python -m experiments.enrich_analysis` | Quintile-level breakdown, group-coarsened priors, rank-shift mechanism data (CPU, cache-only) | `enrich_analysis.json` + `rankshift_beauty.npz` |
-
-### Step 5 — Figures
-
-```bash
-python -m experiments.make_figures                  # -> results/figures/*.png (300 dpi)
-```
-
-Renders every figure from the JSON results; per-item figure data (`figdata_<split>.npz`)
-is rebuilt automatically from the score cache when missing. Defaults to the paper's three
-main splits; set `FIG_SPLITS=beauty,clothing,sports,toys` to include the replication split.
-
-## 📖 Citation
-
-The paper is under double-blind review; a citation entry will be added upon publication.
-
-## 🙏 Acknowledgements
-
-Backbone training builds on [phonism/genrec](https://github.com/phonism/genrec) (TIGER / LC-Rec reproductions) and the [TIGER](https://arxiv.org/abs/2305.05065) recipe with `sentence-t5-xl` item encodings.
+Backbone implementations build on [phonism/genrec](https://github.com/phonism/genrec) and the [TIGER recipe](https://arxiv.org/abs/2305.05065).

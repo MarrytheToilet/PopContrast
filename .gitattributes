@@ -1,0 +1,14 @@
+# Stable text bytes for source-hash verification across platforms.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.pdf binary
+*.npz binary
+*.npy binary
+*.otf binary
+*.ttf binary
+*.pt binary
+*.safetensors binary
+*.zip binary
+*.gz binary
