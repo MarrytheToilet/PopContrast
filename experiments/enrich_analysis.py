@@ -1,7 +1,7 @@
 """Cache-based enrichment analyses (CPU; run from genrec/ root).
 
 1) Popularity-QUINTILE recall breakdown under beta sweep (finer than head/tail).
-2) GROUP-wise decode-time baselines (reviewer request): coarsened corrections that
+2) GROUP-wise decode-time baselines (group-level control): coarsened corrections that
    subtract the *group mean* prior (model-marginal or log-count) per popularity
    quintile -> tests whether per-item granularity of the marginal matters.
 3) RANK-SHIFT mechanism data: per-item mean rank change (beta=0.75 vs baseline)

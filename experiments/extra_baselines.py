@@ -1,4 +1,4 @@
-"""Additional decode-time baselines (reviewer request), all post-hoc on cached scores.
+"""Additional decode-time baselines (group-level control), all post-hoc on cached scores.
 Run from genrec/ root (CPU).
 
   rank-disc    : subtract z(popularity-rank percentile)          [nonparametric prior]

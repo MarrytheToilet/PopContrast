@@ -15,9 +15,11 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
 from matplotlib import font_manager
+from pathlib import Path
 
 from popcontrast import RESULTS_DIR as RES
 FIG = os.path.join(RES, "figures")
+PLOT_DATA = Path(__file__).resolve().parents[1] / "assets/plot_data"
 os.makedirs(FIG, exist_ok=True)
 
 # ---- soft palette (light pink + light blue) ----
@@ -60,46 +62,6 @@ def _series(panel, prior_key, metric):
     return betas, ys
 
 
-def fig1_pareto(panels):
-    """Accuracy-coverage trajectories, compact 1x3 for a single column."""
-    splits = list(panels)
-    from matplotlib.ticker import MaxNLocator
-    with plt.rc_context({"font.size": 19, "axes.titlesize": 22, "axes.labelsize": 19,
-                         "xtick.labelsize": 15, "ytick.labelsize": 15, "legend.fontsize": 16}):
-        fig, axes = plt.subplots(1, len(splits), figsize=(10.6, 3.8), squeeze=False)
-        for k_ax, (ax, sp) in enumerate(zip(axes[0], splits)):
-            P = panels[sp]; base = P["baseline"]
-            def path(prior):
-                d = P[prior]; ks = sorted(d, key=float)
-                xs = [base["R10"]] + [d[k]["R10"] for k in ks]
-                ys = [base["cov10"]] + [d[k]["cov10"] for k in ks]
-                bs = [0.0] + [float(k) for k in ks]
-                return np.array(xs), np.array(ys), bs
-            ax.axvline(base["R10"], color=MUTE, lw=1, ls=(0, (2, 3)), alpha=.5)
-            ax.axhline(base["cov10"], color=MUTE, lw=1, ls=(0, (2, 3)), alpha=.5)
-            for prior, col, lab in [("model_pmi", PINK, "PopContrast"),
-                                    ("naive", BLUE, "naive discount")]:
-                xs, ys, bs = path(prior)
-                ax.plot(xs, ys, "-", color=col, lw=3.0, alpha=.95, zorder=3,
-                        solid_capstyle="round", label=lab)
-                ax.scatter(xs, ys, s=52, color=col, edgecolor="white", lw=1.3, zorder=4)
-                if prior == "model_pmi":
-                    for b, xi, yi in zip(bs, xs, ys):
-                        if b in (1.0, 2.0):
-                            ax.annotate(f"β={b:g}", (xi, yi), textcoords="offset points",
-                                        xytext=(6, 5), fontsize=14, color=col, fontweight="bold")
-            ax.scatter([base["R10"]], [base["cov10"]], s=130, marker="*",
-                       color=GOLD, edgecolor="white", lw=1.3, zorder=5)
-            ax.xaxis.set_major_locator(MaxNLocator(3))
-            ax.yaxis.set_major_locator(MaxNLocator(4))
-            ax.set_xlabel("overall R@10")
-            if k_ax == 0:
-                ax.set_ylabel("Coverage@10")
-                ax.legend(loc="upper left", frameon=False, handlelength=1.4)
-            ax.set_title(sp.capitalize(), color=INK)
-        fig.tight_layout()
-        fig.savefig(os.path.join(FIG, "fig1_pareto_trajectory.png"), bbox_inches="tight")
-        plt.close(fig)
 
 
 def fig2_diversification(panels):
@@ -141,7 +103,9 @@ def prepare_figdata(beta=1.0):
     caches = sorted(glob.glob(os.path.join(RES, "cache_scores_*.pt")))
     missing = [p for p in caches
                if not os.path.exists(os.path.join(
-                   RES, f"figdata_{os.path.basename(p)[len('cache_scores_'):-len('.pt')]}.npz"))]
+                   RES, f"figdata_{os.path.basename(p)[len('cache_scores_'):-len('.pt')]}.npz"))
+               and not (PLOT_DATA / f"figdata_{os.path.basename(p)[len('cache_scores_'):-len('.pt')]}.npz").exists()
+               and os.path.basename(p)[len('cache_scores_'):-len('.pt')] in FIG_SPLITS]
     if not missing:
         return
     try:
@@ -171,7 +135,7 @@ def prepare_figdata(beta=1.0):
 
 def load_figdata():
     fd = {}
-    for p in sorted(glob.glob(os.path.join(RES, "figdata_*.npz"))):
+    for p in sorted(glob.glob(str(PLOT_DATA / "figdata_*.npz"))) + sorted(glob.glob(os.path.join(RES, "figdata_*.npz"))):
         split = os.path.basename(p)[len("figdata_"):-len(".npz")]
         if split in FIG_SPLITS:
             fd[split] = np.load(p)
@@ -239,66 +203,12 @@ def fig4_marginal_pop(fd):
         plt.close(fig)
 
 
-def fig5_head_tail_slope(panels):
-    """Slopegraph: head vs tail Recall@10 redistribution as β increases."""
-    splits = list(panels)
-    fig, axes = plt.subplots(1, len(splits), figsize=(4.2*len(splits), 4.6), squeeze=False)
-    for ax, sp in zip(axes[0], splits):
-        P = panels[sp]; d = P["model_pmi"]; base = P["baseline"]
-        ks = sorted(d, key=float); betas = [0.0] + [float(k) for k in ks]
-        heads = [base["headR10"]] + [d[k]["headR10"] for k in ks]
-        tails = [base["tailR10"]] + [d[k]["tailR10"] for k in ks]
-        bmax = max(betas)
-        for b, h, t in zip(betas, heads, tails):
-            shade = 0.25 + 0.6 * (b / bmax)
-            col = PINK if b > 0 else MUTE
-            ax.plot([0, 1], [h, t], "-", color=col, alpha=shade, lw=2.2,
-                    zorder=3 if b > 0 else 2)
-            ax.scatter([0, 1], [h, t], s=30, color=col, alpha=shade, zorder=4, ec="white", lw=1)
-            if b in (0.0, bmax):
-                ax.annotate(f"β={b:g}", (1, t), textcoords="offset points", xytext=(8, 0),
-                            fontsize=9.5, color=col, va="center")
-        ax.set_xlim(-0.25, 1.4); ax.set_xticks([0, 1]); ax.set_xticklabels(["head", "tail"])
-        ax.set_ylabel("Recall@10")
-        ax.set_title(sp.capitalize(), color=INK)
-        ax.grid(axis="x", visible=False)
-    fig.suptitle("Recall redistribution: head ↓ tail ↑ as β increases (darker = stronger β)",
-                 fontsize=15, fontweight="bold", y=1.02)
-    fig.tight_layout()
-    fig.savefig(os.path.join(FIG, "fig5_head_tail_slope.png"), bbox_inches="tight")
-    plt.close(fig)
 
 
-def fig7_tokenizer(split="beauty"):
-    """Bias BYPASSES the tokenizer: code-density ⊥ popularity, but marginal ↔ popularity."""
-    from scipy.stats import spearmanr
-    from matplotlib.colors import LinearSegmentedColormap
-    p = os.path.join(RES, f"tokdata_{split}.npz")
-    if not os.path.exists(p):
-        return
-    d = np.load(p); lp, dens, mg = d["logpop"], d["density"], d["marginal"]
-    cmap = LinearSegmentedColormap.from_list("pinkblue", [BLUE_GLOW, BLUE_SOFT, PINK, "#B83A6B"])
-    fig, (a1, a2) = plt.subplots(1, 2, figsize=(9.6, 4.4))
-    for ax, y, ylab, title in [(a1, dens, "code density (tokenizer)", "Tokenizer: code density"),
-                               (a2, mg, "model marginal (decoder)", "Decoder: marginal")]:
-        ax.hexbin(lp, y, gridsize=34, cmap=cmap, mincnt=1, linewidths=0.15, edgecolors=BG)
-        z = np.polyfit(lp, y, 1); xs = np.linspace(lp.min(), lp.max(), 40)
-        ax.plot(xs, np.polyval(z, xs), color=INK, lw=2, ls=(0, (4, 2)), alpha=.8)
-        rho, _ = spearmanr(lp, y)
-        col = MUTE if abs(rho) < 0.2 else "#B83A6B"
-        ax.text(0.05, 0.92, f"ρ = {rho:.2f}", transform=ax.transAxes, fontsize=14,
-                fontweight="bold", color=col,
-                bbox=dict(boxstyle="round,pad=0.3", fc="white", ec=PINK_SOFT))
-        ax.set_xlabel("log item popularity"); ax.set_ylabel(ylab); ax.set_title(title, color=INK)
-    fig.suptitle(f"Popularity bias BYPASSES the tokenizer ({split.capitalize()}): "
-                 "code assignment ⊥ popularity, but the decoder marginal tracks it",
-                 fontsize=13.5, fontweight="bold", y=1.02)
-    fig.tight_layout()
-    fig.savefig(os.path.join(FIG, "fig7_tokenizer_bypass.png"), bbox_inches="tight")
-    plt.close(fig)
 
 
-def fig8_rankshift(path=os.path.join(RES, "rankshift_beauty.npz")):
+def fig8_rankshift(path=None):
+    path = path or (Path(RES) / "rankshift_beauty.npz" if (Path(RES) / "rankshift_beauty.npz").exists() else PLOT_DATA / "rankshift_beauty.npz")
     """Mechanism view: per-item mean rank change under PopContrast (β=0.75) vs
     popularity. Positive Δrank = demoted. Shows the correction acts as a smooth,
     popularity-proportional re-ranking — not an indiscriminate shuffle."""
@@ -386,85 +296,51 @@ def fig9b_quintile_heatmap(path=os.path.join(RES, "enrich_analysis.json")):
         plt.close(fig)
 
 
-def fig2b_delta_board(panels):
-    """Diverging Δ-board (replaces the dual-axis chart): signed %Δ vs baseline for
-    each metric at the near-free operating point. Pink = up, blue = down."""
-    ops = {"beauty": "0.25", "sports": "0.5", "toys": "0.5"}
-    metrics = [("tailR10", "Tail R@10"), ("cov10", "Coverage@10"), ("ent", "Entropy"),
-               ("R10", "Overall R@10"), ("headR10", "Head R@10"), ("gini", "Gini (↓ better)")]
-    splits = [s for s in ops if s in panels]
-    fig, axes = plt.subplots(1, len(splits), figsize=(4.4*len(splits), 3.7), squeeze=False)
-    for ax, sp in zip(axes[0], splits):
-        P = panels[sp]; base = P["baseline"]; cur = P["model_pmi"][ops[sp]]
-        vals = [100*(cur[k]-base[k])/base[k] for k, _ in metrics]
-        y = np.arange(len(metrics))[::-1]
-        cols = [PINK if v >= 0 else BLUE for v in vals]
-        ax.barh(y, vals, height=0.62, color=cols, edgecolor="white", linewidth=1.2)
-        ax.axvline(0, color=INK, lw=1.2)
-        for yi, v in zip(y, vals):
-            ax.text(v + (2.5 if v >= 0 else -2.5), yi, f"{v:+.0f}%",
-                    va="center", ha="left" if v >= 0 else "right", fontsize=9.5, color=INK)
-        ax.set_yticks(y); ax.set_yticklabels([n for _, n in metrics], fontsize=9.5)
-        ax.set_xlabel("% change vs. baseline")
-        ax.set_title(f"{sp.capitalize()}  (β={ops[sp]})", color=INK)
-        lim = max(25, max(abs(v) for v in vals) * 1.3)
-        ax.set_xlim(-lim, lim)
-        ax.grid(axis="y", visible=False)
-    fig.suptitle("Near-free operating points: what moves, by how much",
-                 fontsize=13.5, fontweight="bold", y=1.04)
-    fig.tight_layout()
-    fig.savefig(os.path.join(FIG, "fig2_delta_board.png"), bbox_inches="tight")
-    plt.close(fig)
 
 
-def fig6_d3(path=os.path.join(RES, "d3_comparison.json")):
-    """Method comparison in (tail Recall@10, Coverage@10) space — ours up-right, D3 down-left."""
-    if not os.path.exists(path):
-        return
-    D = json.load(open(path)); splits = [s for s in D if not s.startswith("_")]
-    style = {"baseline": (GOLD, "*", "baseline (TIGER)"),
-             "ours_b0.75": (PINK, "o", "PopContrast (ours, no ext. model)"),
-             "d3_a0.7": (BLUE, "s", "D³ (TIGER+SASRec fusion)"),
-             "d3+ours": ("#9B6FB0", "D", "D³ + ours")}
-    fig, axes = plt.subplots(1, len(splits), figsize=(4.6*len(splits), 4.5), squeeze=False)
-    for ax, sp in zip(axes[0], splits):
-        P = D[sp]
-        for key, (col, mk, lab) in style.items():
-            if key not in P:
-                continue
-            ax.scatter(P[key]["tailR10"], P[key]["cov10"], s=170, marker=mk, color=col,
-                       edgecolor="white", lw=1.6, zorder=4, label=lab if sp == splits[0] else None)
-        # baseline reference cross
-        b = P["baseline"]
-        ax.axvline(b["tailR10"], color=MUTE, lw=1, ls=(0, (2, 3)), alpha=.4)
-        ax.axhline(b["cov10"], color=MUTE, lw=1, ls=(0, (2, 3)), alpha=.4)
-        ax.set_xlabel("tail Recall@10  (→ better)")
-        ax.set_ylabel("Coverage@10  (↑ better)")
-        ax.set_title(sp.capitalize(), color=INK)
-    axes[0][0].legend(loc="upper left", frameon=False, fontsize=9.5)
-    fig.suptitle("Ours vs D³: only PopContrast moves up-right (more tail + coverage), "
-                 "and needs no external model", fontsize=14.5, fontweight="bold", y=1.02)
-    fig.tight_layout()
-    fig.savefig(os.path.join(FIG, "fig6_vs_d3.png"), bbox_inches="tight")
-    plt.close(fig)
+
+
+def fig10_exposure_stream():
+    """Exposure shares by training-popularity quintile from frozen counts."""
+    data = json.loads((Path(RES) / 'exposure_shares.json').read_text())
+    splits = [s for s in FIG_SPLITS if s in data]
+    with plt.rc_context({'font.size': 15, 'axes.labelsize': 15,
+                         'axes.titlesize': 18, 'xtick.labelsize': 13,
+                         'ytick.labelsize': 13}):
+        fig, axes = plt.subplots(1, len(splits), figsize=(10.5, 3.05), sharey=True)
+        colors = [BLUE, '#8CB6DD', '#B6D0EA', '#D6E5F3', BLUE_GLOW]
+        for ax, split in zip(np.atleast_1d(axes), splits):
+            beta = data[split]['betas']
+            shares = np.asarray(data[split]['shares'])
+            assert shares.shape == (len(beta), 5)
+            assert np.allclose(shares.sum(1), 1)
+            ax.stackplot(beta, *shares[:, ::-1].T, colors=colors,
+                         edgecolor='white', linewidth=.8)
+            cumulative = np.cumsum(shares[-1, ::-1])
+            centers = cumulative - shares[-1, ::-1] / 2
+            for q, y in zip(range(5, 0, -1), centers):
+                ax.text(beta[-1] * .96, y, f'q{q}', ha='right', va='center',
+                        color='white' if q == 5 else INK, fontsize=10, fontweight='bold')
+            ax.set(xlim=(beta[0], beta[-1]), ylim=(0, 1), xlabel=r'$\beta$')
+            ax.set_title(split.capitalize())
+            ax.grid(visible=False)
+        np.atleast_1d(axes)[0].set_ylabel('Top-10 exposure share')
+        fig.tight_layout(pad=.6)
+        fig.savefig(Path(FIG) / 'fig10_exposure_stream.png', bbox_inches='tight')
+        plt.close(fig)
 
 
 if __name__ == "__main__":
     prepare_figdata()
     panels = load_panels(); fd = load_figdata()
     print(f"datasets: {list(panels)}")
-    fig1_pareto(panels)
     fig2_diversification(panels)
     if fd:
         fig3_lorenz(fd)
         fig4_marginal_pop(fd)
-    fig5_head_tail_slope(panels)
-    fig6_d3()
-    fig7_tokenizer()
     fig8_rankshift()
     fig9b_quintile_heatmap()
     fig10_exposure_stream()
-    fig2b_delta_board(panels)
     print(f"figures -> {FIG}")
     for f in sorted(glob.glob(os.path.join(FIG, "*.png"))):
         print("  ", os.path.basename(f))

@@ -1,4 +1,4 @@
-"""Validation-selected beta (reviewer: avoid test-set operating-point selection).
+"""Validation-selected beta (select correction without test-set operating points).
 Run from genrec/ root. For each dataset: score n=2000 VALIDATION users exactly,
 sweep beta on validation, apply the fixed rule (largest beta with overall R@10 >=
 baseline), report the selected beta. Test-set one-shot numbers at that beta already

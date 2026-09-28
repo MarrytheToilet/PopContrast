@@ -1,10 +1,10 @@
-"""Reviewer-response experiments (run from genrec/ root):
-1) LEACE closed-form linear concept erasure at a decoder layer (cited-but-untested gap):
+"""Linear erasure and marginal-estimation controls (run from genrec/ root):
+1) LEACE closed-form linear concept erasure at a decoder layer:
    fit eraser x' = x − Σ^{1/2} P Σ^{-1/2}(x−μ) with P the projector onto the whitened
    popularity cross-covariance; hook it; measure tail/overall R@10 vs baseline.
 2) M-sensitivity of the marginal: marginals from M=32/128 histories; Spearman with
    popularity + β=0.75 eval via cached user scores (evaluation itself is free).
-Outputs: results/rebuttal_checks.json
+Outputs: results/erasure_estimation.json
 """
 from __future__ import annotations
 import json, os
@@ -105,6 +105,6 @@ for M in [32, 128, 512]:
     print(f"  M={M}: {res_m[M]}", flush=True)
 out["m_sensitivity"] = res_m
 
-with open(os.path.join(RES, "rebuttal_checks.json"), "w") as f:
+with open(os.path.join(RES, "erasure_estimation.json"), "w") as f:
     json.dump(out, f, indent=2)
-print("saved results/rebuttal_checks.json", flush=True)
+print("saved results/erasure_estimation.json", flush=True)
