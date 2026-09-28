@@ -1,0 +1,11 @@
+{
+  "elapsed_seconds": 592.9292000159621,
+  "history_estimation_seconds": 575.2022655680776,
+  "null_estimation_seconds": 17.474732220172882,
+  "gpu_shared": true,
+  "histories": 32,
+  "vector_bytes_fp32": 48404,
+  "unique_scored_sid_prefixes": 7689,
+  "catalog_items": 12101,
+  "prefix_sharing": true
+}

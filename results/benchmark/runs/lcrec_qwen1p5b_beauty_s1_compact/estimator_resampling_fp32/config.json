@@ -1,0 +1,31 @@
+{
+  "split": "beauty",
+  "cache_dir": "runs/lcrec_qwen1p5b_beauty_s1_compact/evaluation",
+  "background_dir": "runs/lcrec_qwen1p5b_beauty_s1_compact/evaluation",
+  "output": "runs/lcrec_qwen1p5b_beauty_s1_compact/estimator_resampling_fp32",
+  "repetitions": 20,
+  "sizes": [
+    1,
+    4,
+    8,
+    16,
+    32
+  ],
+  "betas": [
+    0.0,
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    1.0,
+    1.5,
+    2.0
+  ],
+  "base_seed": 991,
+  "background_sha256": "bcbeb36ac65791d9c2ea0e2de187b5749c11de40c35fafb22ac2e1a46c9a189d",
+  "checkpoint_sha256": "75ba5190017f2cdfff12108c16b8b77b8500f3f55035262d7b6c4bea17f60bfc",
+  "scope": "finite-bank sampling sensitivity; not training randomness or population uncertainty",
+  "selection": "per-family validation only; same beta grid and recall constraints",
+  "nested_subsets_across_M": true,
+  "created_unix": 1790599019.0840247
+}

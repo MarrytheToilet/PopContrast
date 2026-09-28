@@ -1,0 +1,33 @@
+{
+  "split": "beauty",
+  "cache_dir": "results/benchmark/remote/fair_baselines_beauty_b20",
+  "background_dir": "results/benchmark/remote/legacy_beauty_prior128",
+  "output": "results/benchmark/estimator_resampling/beauty",
+  "repetitions": 20,
+  "sizes": [
+    1,
+    4,
+    8,
+    16,
+    32,
+    64,
+    128
+  ],
+  "betas": [
+    0.0,
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    1.0,
+    1.5,
+    2.0
+  ],
+  "base_seed": 991,
+  "background_sha256": "dc925d94aa4f0fcb56e9dbd4aa9f4d1969025b5311e8c6ce92f8887f49b3fc25",
+  "checkpoint_sha256": "baae4508d72676cf9768b2205cc04444d0d8a9809df635095ed59a3f30469a29",
+  "scope": "finite-bank sampling sensitivity; not training randomness or population uncertainty",
+  "selection": "per-family validation only; same beta grid and recall constraints",
+  "nested_subsets_across_M": true,
+  "created_unix": 1790589343.8483434
+}

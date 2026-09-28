@@ -1,0 +1,33 @@
+{
+  "n": 1000,
+  "beams": [
+    20,
+    100
+  ],
+  "users": "original cache order, independently target-verified during export",
+  "original_decoder_sha256": "f22c66aa195a3629245b47ab4b89c915db0e86edb55b7d929234efbae783229d",
+  "checkpoint_sha256": "baae4508d72676cf9768b2205cc04444d0d8a9809df635095ed59a3f30469a29",
+  "modes": {
+    "historical": {
+      "encoder_bf16": false,
+      "decoder_bf16": true,
+      "float_logsoftmax": false
+    },
+    "float_logsoftmax": {
+      "encoder_bf16": false,
+      "decoder_bf16": true,
+      "float_logsoftmax": true
+    },
+    "aligned_bf16_encoder": {
+      "encoder_bf16": true,
+      "decoder_bf16": true,
+      "float_logsoftmax": true
+    },
+    "all_fp32": {
+      "encoder_bf16": false,
+      "decoder_bf16": false,
+      "float_logsoftmax": true
+    }
+  },
+  "hardware_library_difference": "historical source on current RTX5090/torch2.12.1; exact bitwise old-run reproduction not assumed"
+}

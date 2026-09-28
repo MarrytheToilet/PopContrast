@@ -1,0 +1,86 @@
+{
+  "dataset": "games2023",
+  "sid_length": 4,
+  "interpretation": "label-aware retrospective oracle ceilings; no parameter selection",
+  "identity": "tail recall = P(target in raw beam | tail) * P(hit | tail and target in raw beam)",
+  "source_sha256": {
+    "complete.json": "9dae100c78a0d5fcad07e5dd11387096bc2b89c32a9fe7a66d8a22bee416814a",
+    "config.json": "8cb618bc935c74cb7b59e0d54b7ee5063685a03dd6844b2407131101e45bbaea",
+    "validation_selection.json": "752cda7fae8ea847f360429272e546cd58c22b02a9b85e56d5c8be22a2e60766",
+    "test_candidates.npz": "d435e32f75e772a86b98b238fd88fec520f220800d6b5f3289cc002707cad0a0",
+    "valid_candidates.npz": "04a2467c35bf534ec761ceda54eacb89960e0d6c20addf3613258700922fe45d"
+  },
+  "partitions": {
+    "valid": {
+      "users": 5000,
+      "tail_users": 1601,
+      "tail_targets_available": 22,
+      "candidate_tail_recall_ceiling": 0.013741411617738912,
+      "candidate_overall_recall_ceiling": 0.0944,
+      "candidate_count_quantiles": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "methods": {
+        "arithmetic:0.1": {
+          "tail_hits": 10,
+          "tail_recall": 0.006246096189881324,
+          "conditional_tail_hit_rate_given_reachable": 0.45454545454545453
+        },
+        "geometric:0.75": {
+          "tail_hits": 11,
+          "tail_recall": 0.006870705808869456,
+          "conditional_tail_hit_rate_given_reachable": 0.5
+        },
+        "null:0.5": {
+          "tail_hits": 11,
+          "tail_recall": 0.006870705808869456,
+          "conditional_tail_hit_rate_given_reachable": 0.5
+        },
+        "raw": {
+          "tail_hits": 10,
+          "tail_recall": 0.006246096189881324,
+          "conditional_tail_hit_rate_given_reachable": 0.45454545454545453
+        }
+      }
+    },
+    "test": {
+      "users": 5000,
+      "tail_users": 1835,
+      "tail_targets_available": 22,
+      "candidate_tail_recall_ceiling": 0.011989100817438692,
+      "candidate_overall_recall_ceiling": 0.0948,
+      "candidate_count_quantiles": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "methods": {
+        "arithmetic:0.1": {
+          "tail_hits": 9,
+          "tail_recall": 0.004904632152588556,
+          "conditional_tail_hit_rate_given_reachable": 0.4090909090909091
+        },
+        "geometric:0.75": {
+          "tail_hits": 9,
+          "tail_recall": 0.004904632152588556,
+          "conditional_tail_hit_rate_given_reachable": 0.4090909090909091
+        },
+        "null:0.5": {
+          "tail_hits": 13,
+          "tail_recall": 0.007084468664850136,
+          "conditional_tail_hit_rate_given_reachable": 0.5909090909090909
+        },
+        "raw": {
+          "tail_hits": 9,
+          "tail_recall": 0.004904632152588556,
+          "conditional_tail_hit_rate_given_reachable": 0.4090909090909091
+        }
+      }
+    }
+  },
+  "finished_unix": 1790599078.9411016
+}

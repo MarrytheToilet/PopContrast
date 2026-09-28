@@ -1,0 +1,16 @@
+{
+  "model": "sasrec",
+  "split": "clothing",
+  "seed": 1,
+  "epochs": 100,
+  "patience": 10,
+  "batch_size": 256,
+  "output": "runs/sasrec_clothing_s1",
+  "n_items": 23033,
+  "dim": 128,
+  "objective": "last-item full CE",
+  "HSTU_time_bias": false,
+  "validation_n": 5000,
+  "item_indexing": "catalog ID + 1; zero padding excluded from logits",
+  "data_sha256": "db5e3b5444d5d519b26e2acdbcce6f33b26b90f675d18b6f9da35f7b115b4349"
+}

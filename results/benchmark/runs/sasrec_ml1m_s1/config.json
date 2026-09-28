@@ -1,0 +1,16 @@
+{
+  "model": "sasrec",
+  "split": "ml1m",
+  "seed": 1,
+  "epochs": 20,
+  "patience": 10,
+  "batch_size": 256,
+  "output": "runs/sasrec_ml1m_s1",
+  "n_items": 3706,
+  "dim": 128,
+  "objective": "last-item full CE",
+  "HSTU_time_bias": false,
+  "validation_n": 5000,
+  "item_indexing": "catalog ID + 1; zero padding excluded from logits",
+  "data_sha256": "e0276cf6a111bda76b323c5663ed45eb75b68fb76d1f84ba3f7382056d236cae"
+}

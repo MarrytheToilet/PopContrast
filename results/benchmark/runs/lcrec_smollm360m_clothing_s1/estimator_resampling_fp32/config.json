@@ -1,0 +1,31 @@
+{
+  "split": "clothing",
+  "cache_dir": "runs/lcrec_smollm360m_clothing_s1/evaluation_fp32",
+  "background_dir": "runs/lcrec_smollm360m_clothing_s1/evaluation_fp32",
+  "output": "runs/lcrec_smollm360m_clothing_s1/estimator_resampling_fp32",
+  "repetitions": 20,
+  "sizes": [
+    1,
+    4,
+    8,
+    16,
+    32
+  ],
+  "betas": [
+    0.0,
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    1.0,
+    1.5,
+    2.0
+  ],
+  "base_seed": 991,
+  "background_sha256": "5cb7da869b3b59261b3643ed0c1f195fcfce9e5824a5609d6452ebd48a4581f7",
+  "checkpoint_sha256": "20451e689ad0483ed8cf4b918297685b159da29342eb067f22c6d1606e44e69e",
+  "scope": "finite-bank sampling sensitivity; not training randomness or population uncertainty",
+  "selection": "per-family validation only; same beta grid and recall constraints",
+  "nested_subsets_across_M": true,
+  "created_unix": 1790592562.629095
+}

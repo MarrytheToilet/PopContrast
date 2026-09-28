@@ -1,0 +1,29 @@
+{
+  "dataset": "clothing",
+  "passed": true,
+  "checked": [
+    {
+      "partition": "test",
+      "method": "raw",
+      "users": 39387
+    },
+    {
+      "partition": "test",
+      "method": "geometric:0.5",
+      "users": 39387
+    },
+    {
+      "partition": "test",
+      "method": "geometric:0.75",
+      "users": 39387
+    }
+  ],
+  "source_sha256": {
+    "complete.json": "f8c6078ac4a4131348ecf80a7b70540de8cfab0e84c37a5a4577ca33cd217dbc",
+    "config.json": "807c2bcf11ac6e18fc8deacc046823ba8b0386362018ad09eb04b6043f5bcb4d",
+    "test_top10.npz": "8e0b8d3fd93bf3c6f736b274394d416f65ac7842d7ac382f8528a36e65a5521f",
+    "test_metrics.json": "92853803ab67649b6c72ee8283bf94f29fb8afb2eb350942e7ab653cd9ac0a6e"
+  },
+  "finished_unix": 1790599475.2751606,
+  "scope": "saved top10 identities, users, labels, point metrics and paired gain/loss counts; not a new uncertainty estimate"
+}

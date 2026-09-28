@@ -1,0 +1,50 @@
+{
+  "split": "sports",
+  "checkpoint": "runs/sports_s1_l3/best_model.pt",
+  "assistant_checkpoint": "runs/sasrec_sports_s1/best_model.pt",
+  "prior_file": "runs/sports_s1_l3/evaluation/priors.npz",
+  "candidate_source": "runs/sports_s1_l3/evaluation",
+  "output": "runs/fair_baselines_sports_seed1",
+  "beam": 20,
+  "n_valid": 5000,
+  "n_test": 5000,
+  "checkpoint_sha256": "070893296b0e1e44e2f4dbcc0c9e07070fd08432c5f246585977d8aa232d3782",
+  "assistant_sha256": "3924c5ed2c439c2baa0bc93aa5b3b9c59d1bcb324ee5362aaeaa22ee70440e00",
+  "correction_betas": [
+    0.0,
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    1.0,
+    1.5,
+    2.0
+  ],
+  "mmr_weights": [
+    0.0,
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    0.9,
+    0.95,
+    0.99,
+    1.0
+  ],
+  "fusion_weights": [
+    0.01,
+    0.03,
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "fusion": "(1-alpha)*TIGER log-prob + alpha*SASRec logit; SASRec log-normalizer cancels per user",
+  "mmr": "per-user standardized raw relevance, cosine redundancy, exact item-ID tie breaking",
+  "candidate_source_config_sha256": "1c0226ac32ce236e432ca4dd8b9f8951a3b8309f22649458abe7bcea00b7e104",
+  "embedding_sha256": "8e721014281e360ee59f7573b62c1a95a69345a1000e65add5c5909e7904cad2",
+  "quality_only": true,
+  "matched_candidates": true,
+  "matched_users": true
+}

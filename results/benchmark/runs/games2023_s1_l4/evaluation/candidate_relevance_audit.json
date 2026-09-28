@@ -1,0 +1,116 @@
+{
+  "dataset": "games2023",
+  "sid_length": 4,
+  "interpretation": "label-aware retrospective oracle ceilings; no parameter selection",
+  "identity": "tail recall = P(target in raw beam | tail) * P(hit | tail and target in raw beam)",
+  "source_sha256": {
+    "complete.json": "bfff53a3735182c9542b0e41861f8318f3e397740478f9648cabba0e10be91bc",
+    "config.json": "bd521fd812ff04865a09fab1713a55b7d58d0850de4705be3591e1d00222729e",
+    "validation_selection.json": "ec9a3698156a9552bc99b6f47659cd0b5ead88f881a4939884b29d7244db8d62",
+    "test_candidates.npz": "bee3539e049bf720b5183af5ce14032938a59e2c70129368a3a8e12df09d8aad",
+    "valid_candidates.npz": "6a37cf26f2c13133105165771871f34cea43d8f4465b72179b4783a026a2ba1e"
+  },
+  "partitions": {
+    "valid": {
+      "users": 5000,
+      "tail_users": 1601,
+      "tail_targets_available": 20,
+      "candidate_tail_recall_ceiling": 0.012492192379762648,
+      "candidate_overall_recall_ceiling": 0.094,
+      "candidate_count_quantiles": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "methods": {
+        "arithmetic:0.1": {
+          "tail_hits": 9,
+          "tail_recall": 0.005621486570893191,
+          "conditional_tail_hit_rate_given_reachable": 0.45
+        },
+        "arithmetic:1.0": {
+          "tail_hits": 10,
+          "tail_recall": 0.006246096189881324,
+          "conditional_tail_hit_rate_given_reachable": 0.5
+        },
+        "geometric:0.1": {
+          "tail_hits": 9,
+          "tail_recall": 0.005621486570893191,
+          "conditional_tail_hit_rate_given_reachable": 0.45
+        },
+        "geometric:1.0": {
+          "tail_hits": 10,
+          "tail_recall": 0.006246096189881324,
+          "conditional_tail_hit_rate_given_reachable": 0.5
+        },
+        "null:0.1": {
+          "tail_hits": 9,
+          "tail_recall": 0.005621486570893191,
+          "conditional_tail_hit_rate_given_reachable": 0.45
+        },
+        "null:1.0": {
+          "tail_hits": 11,
+          "tail_recall": 0.006870705808869456,
+          "conditional_tail_hit_rate_given_reachable": 0.55
+        },
+        "raw": {
+          "tail_hits": 8,
+          "tail_recall": 0.004996876951905059,
+          "conditional_tail_hit_rate_given_reachable": 0.4
+        }
+      }
+    },
+    "test": {
+      "users": 5000,
+      "tail_users": 1835,
+      "tail_targets_available": 19,
+      "candidate_tail_recall_ceiling": 0.010354223433242507,
+      "candidate_overall_recall_ceiling": 0.0928,
+      "candidate_count_quantiles": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "methods": {
+        "arithmetic:0.1": {
+          "tail_hits": 5,
+          "tail_recall": 0.0027247956403269754,
+          "conditional_tail_hit_rate_given_reachable": 0.2631578947368421
+        },
+        "arithmetic:1.0": {
+          "tail_hits": 10,
+          "tail_recall": 0.005449591280653951,
+          "conditional_tail_hit_rate_given_reachable": 0.5263157894736842
+        },
+        "geometric:0.1": {
+          "tail_hits": 5,
+          "tail_recall": 0.0027247956403269754,
+          "conditional_tail_hit_rate_given_reachable": 0.2631578947368421
+        },
+        "geometric:1.0": {
+          "tail_hits": 9,
+          "tail_recall": 0.004904632152588556,
+          "conditional_tail_hit_rate_given_reachable": 0.47368421052631576
+        },
+        "null:0.1": {
+          "tail_hits": 5,
+          "tail_recall": 0.0027247956403269754,
+          "conditional_tail_hit_rate_given_reachable": 0.2631578947368421
+        },
+        "null:1.0": {
+          "tail_hits": 8,
+          "tail_recall": 0.004359673024523161,
+          "conditional_tail_hit_rate_given_reachable": 0.42105263157894735
+        },
+        "raw": {
+          "tail_hits": 5,
+          "tail_recall": 0.0027247956403269754,
+          "conditional_tail_hit_rate_given_reachable": 0.2631578947368421
+        }
+      }
+    }
+  },
+  "finished_unix": 1790594820.452542
+}

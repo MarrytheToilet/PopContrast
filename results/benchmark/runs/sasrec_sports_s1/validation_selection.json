@@ -1,0 +1,32 @@
+{
+  "geometric": {
+    "strict": "geometric:0.1",
+    "budget_5pct": "geometric:0.25",
+    "simultaneous_ci_budget_5pct": "geometric:0.1",
+    "absolute_recall_budget": 0.00288,
+    "one_sided_lower_bounds": {
+      "geometric:0.1": -0.001,
+      "geometric:0.25": -0.005,
+      "geometric:0.5": -0.0118,
+      "geometric:0.75": -0.0184,
+      "geometric:1.0": -0.032,
+      "geometric:1.5": -0.0472,
+      "geometric:2.0": -0.0534
+    }
+  },
+  "logcount": {
+    "strict": "logcount:0.1",
+    "budget_5pct": "logcount:0.25",
+    "simultaneous_ci_budget_5pct": "logcount:0.1",
+    "absolute_recall_budget": 0.00288,
+    "one_sided_lower_bounds": {
+      "logcount:0.1": -0.0024,
+      "logcount:0.25": -0.0064,
+      "logcount:0.5": -0.016,
+      "logcount:0.75": -0.0312,
+      "logcount:1.0": -0.0424,
+      "logcount:1.5": -0.05091571428571428,
+      "logcount:2.0": -0.0538
+    }
+  }
+}

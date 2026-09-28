@@ -1,0 +1,47 @@
+{
+  "candidate_score_checks": [
+    {
+      "index": 8241,
+      "max_abs_error": 1.52587890625e-05,
+      "mean_abs_error": 3.981590270996094e-06
+    },
+    {
+      "index": 66168,
+      "max_abs_error": 9.059906005859375e-06,
+      "mean_abs_error": 3.314018249511719e-06
+    },
+    {
+      "index": 86942,
+      "max_abs_error": 1.239776611328125e-05,
+      "mean_abs_error": 3.790855407714844e-06
+    },
+    {
+      "index": 47553,
+      "max_abs_error": 1.049041748046875e-05,
+      "mean_abs_error": 5.769729614257812e-06
+    },
+    {
+      "index": 61861,
+      "max_abs_error": 1.049041748046875e-05,
+      "mean_abs_error": 4.076957702636719e-06
+    },
+    {
+      "index": 57662,
+      "max_abs_error": 1.2874603271484375e-05,
+      "mean_abs_error": 4.625320434570312e-06
+    },
+    {
+      "index": 70182,
+      "max_abs_error": 1.5735626220703125e-05,
+      "mean_abs_error": 5.4836273193359375e-06
+    },
+    {
+      "index": 73209,
+      "max_abs_error": 1.1920928955078125e-05,
+      "mean_abs_error": 3.361701965332031e-06
+    }
+  ],
+  "precision": "fp32",
+  "tolerance": 0.001,
+  "note": "Different matrix shapes can introduce rounding; repetition and ngram penalties explicitly disabled"
+}

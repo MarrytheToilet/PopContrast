@@ -1,0 +1,13 @@
+{
+  "split": "beauty",
+  "n_items": 12101,
+  "n_users": 22363,
+  "n_train": 131413,
+  "sid_length": 3,
+  "bundle_sha256": "76a033643a1f8cef95f6b738d0a22e62da61416705a81d03193ac24b15abb7af",
+  "checkpoint_sha256": "baae4508d72676cf9768b2205cc04444d0d8a9809df635095ed59a3f30469a29",
+  "tokenizer": "original frozen RQ-VAE; no new tokenizer training",
+  "legacy_cache_targets_verified": true,
+  "history_items": 50,
+  "original_training_seed": "not recorded in checkpoint; original trainer does not explicitly seed RNGs"
+}

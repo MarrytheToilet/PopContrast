@@ -1,39 +1,78 @@
-# ---- third-party (clone separately; see README "Setup") ----
-genrec/
+# External libraries, datasets, and pretrained models
+/genrec/
+/dataset/
+/data/
+/models/
+/checkpoints/
+/runs/
+/results/benchmark/raw/
 
-# ---- data / model artifacts (large, regenerable) ----
-dataset/
-*/dataset/
-results/*.pt
-results/*.npz
-logs/
+# Recomputable tensors, checkpoints, and prediction caches
+*.pt
+*.pth
 *.ckpt
 *.safetensors
+*.npz
+*.npy
+*.onnx
 
-# ---- python ----
+# Runtime state and generated reports
+/logs/
+/reports/
+/results/tables/
+/results/asset_sources.json
+/results/figure_sources.json
+*.log
+*.tmp
+*.pid
+*.stdout
+
+# Local manuscript and private working notes
+/paper/
+/IDEA.md
+/.claude/
+/.codex/
+
+# Python environments, caches, and package output
+.venv/
+venv/
 __pycache__/
-*.pyc
+*.py[cod]
 *.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
 .ipynb_checkpoints/
+/build/
+/dist/
+.coverage
+htmlcov/
 
-# ---- latex build ----
-paper/*.aux
-paper/*.bbl
-paper/*.blg
-paper/*.log
-paper/*.out
-paper/*.fls
-paper/*.fdb_latexmk
-paper/*.synctex.gz
-paper/cc.txt
-paper/compile_check.txt
+# LaTeX intermediates and archives
+*.aux
+*.bbl
+*.blg
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.zip
+*.tar
+*.tar.gz
 
-# ---- double-blind safety: internal notes & the under-review manuscript ----
-# Remove these lines AFTER the review period if you want them public.
-paper/
-reports/
-IDEA.md
-
-# ---- misc ----
-.claude/
+# Local credentials and editor files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
 .DS_Store
+*.swp
+.vscode/
+.idea/
+
+# Small, aggregate numerical inputs needed to redraw the diagnostic figures
+!/assets/plot_data/*.npz
+
+# Exported vector figures are regenerated; README previews remain tracked
+/results/figures/**/*.pdf

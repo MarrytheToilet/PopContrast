@@ -1,0 +1,12 @@
+{
+  "run": "runs/lcrec_smollm360m_clothing_s1/evaluation_fp32",
+  "dataset": "clothing",
+  "rho_actual_geometric_prior_train_count": 0.6904270189337347,
+  "items": 23033,
+  "prior_source": "runs/lcrec_smollm360m_clothing_s1/evaluation_fp32/priors.npz",
+  "prior_source_sha256": "3eb0380c98727f211861da409c66ec68753ef2716e1e2762b15d3a07c16bbd83",
+  "train_counts_array_sha256": "e103e85915d3763b8ff05ca5765307a25c2cd504e113bbaada64354ae1375542",
+  "validation_or_test_targets_used": false,
+  "finished_unix": 1790599592.2769961,
+  "scope": "actual stored prior used by this evaluation; correlation is descriptive, not a causal explanation or an applicability threshold"
+}

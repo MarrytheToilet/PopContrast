@@ -1,0 +1,39 @@
+{
+  "split": "games2023",
+  "checkpoint": "runs/games2023_s1_l4/best_model.pt",
+  "output": "runs/games2023_s1_l4/evaluation",
+  "data_dir": null,
+  "sid_length": 4,
+  "beam": 20,
+  "eval_batch_size": 8,
+  "n_test": 5000,
+  "n_valid": 5000,
+  "exact_n": 64,
+  "marginal_m": 128,
+  "chunk_size": 256,
+  "cached_catalog_scoring": false,
+  "bound_betas": [
+    0.75,
+    1.5
+  ],
+  "precision": "fp32",
+  "legacy_prior": false,
+  "gpu_shared": true,
+  "checkpoint_sha256": "bad8f41986b92fe9773d27781cbea84e7c6871d965af83e312fe88440294a8ea",
+  "torch": "2.12.1+cu130",
+  "tie_rule": "descending score then ascending item ID",
+  "beam_rule": "lexicographic prefixes on score ties; complete items sorted by ID",
+  "log_softmax": "float32 for both exact and beam",
+  "timestamp": 1790588157.7593021,
+  "quality_only": true,
+  "betas": [
+    0.0,
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    1.0,
+    1.5,
+    2.0
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "run": "runs/beauty_s1_l4_widths",
+  "passed": true,
+  "widths": [
+    "20",
+    "50",
+    "100"
+  ],
+  "users": 1000,
+  "sources": {
+    "width_20_top10.npz": "6659f9b82278a32de04025a4d72dedb44cd4b96eaf79f185029d13c665e3ec5d",
+    "width_50_top10.npz": "b6b6b6ab38a18d85ab93e20175c48783d925285878c21f21d7752adf91693e61",
+    "width_100_top10.npz": "899c698ba0088109f312ea66af84025b2b99eff2f26da15dd97e4311c574971e"
+  },
+  "results_sha256": "045f75409318568c19a9cc8e54aa707e7320b3825cb171908d6bb67f75dfffa3",
+  "finished_unix": 1790599591.3787699,
+  "scope": "same users and targets across widths, recommendation identities, overall/tail recall, coverage, paired gained/lost hits, overlap bounded by inclusion"
+}

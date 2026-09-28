@@ -1,0 +1,17 @@
+{
+  "split": "games2023",
+  "source_url": "https://mcauleylab.ucsd.edu/public_datasets/data/amazon_2023/benchmark/5core/rating_only/Video_Games.csv.gz",
+  "source_sha256": "a2bde5f3b945960d161538c200dd87845e6ee471b46da96410dde61613c6901c",
+  "n_items": 25612,
+  "n_users": 94762,
+  "n_interactions": 814586,
+  "n_rows_before_filtering": 814586,
+  "n_train": 530300,
+  "n_zero_train_items": 85,
+  "sid_length": 3,
+  "tokenizer": "residual MiniBatchKMeans, 3 x 256; collisions retained; distinct from original RQ-VAE",
+  "embedding_kind": "64-dimensional SVD of train-only item-user incidence; held-out interactions excluded",
+  "history_items": 50,
+  "split_protocol": "chronological per-user leave-last-two-out; all observed ratings; stable time ties",
+  "bundle_sha256": "3176184c41ff9031ddc748f348386091811d5b8f3695f4b3a6de565d00134942"
+}

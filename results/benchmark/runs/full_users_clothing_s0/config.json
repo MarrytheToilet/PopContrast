@@ -1,0 +1,53 @@
+{
+  "split": "clothing",
+  "checkpoint": "runs/clothing_s0_l3/best_model.pt",
+  "output": "runs/clothing_s0_l3/evaluation",
+  "data_dir": null,
+  "sid_length": 3,
+  "beam": 20,
+  "eval_batch_size": 8,
+  "n_test": 39387,
+  "n_valid": 5000,
+  "exact_n": 64,
+  "marginal_m": 128,
+  "chunk_size": 256,
+  "cached_catalog_scoring": false,
+  "bound_betas": [
+    0.75,
+    1.5
+  ],
+  "precision": "fp32",
+  "legacy_prior": false,
+  "gpu_shared": true,
+  "checkpoint_sha256": "ddc6209df0893a1680842ed79c2cefc2bd21d36b55d1b40c679fb2410e46bbc0",
+  "torch": "2.12.1+cu130",
+  "tie_rule": "descending score then ascending item ID",
+  "beam_rule": "lexicographic prefixes on score ties; complete items sorted by ID",
+  "log_softmax": "float32 for both exact and beam",
+  "timestamp": 1790591890.9105685,
+  "quality_only": true,
+  "betas": [
+    0.0,
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    1.0,
+    1.5,
+    2.0
+  ],
+  "source": "runs/clothing_s0_l3/evaluation",
+  "batch_size": 8,
+  "cohort": "all exported Clothing test users",
+  "new_test_selection": false,
+  "role": "posthoc_cohort_size_sensitivity",
+  "selection_sha256": "153284cc4de2b63b60b9b2f65ce8c34ee3824473e939ddd6917e8e4c423fe734",
+  "primary_top10_sha256": "932e088dc1d0f9b4b6aa067683c67d7cfb7bf11b0ce976c10078bc47061f6372",
+  "prior_sha256": "2b3272575945b4f4c1aa65efd65492662df4b38057c96f78c6c43fefd8abb8f8",
+  "primary_n_test": 5000,
+  "metadata_correction": {
+    "reason": "n_test field inherited from primary config; actual cohort loop always used all exported users",
+    "changed_unix": 1790599319.1456182,
+    "predictions_unchanged": true
+  }
+}

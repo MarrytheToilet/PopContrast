@@ -1,0 +1,37 @@
+{
+  "split": "beauty",
+  "checkpoint": "checkpoints/legacy/beauty.pt",
+  "output": "runs/legacy_beauty_full",
+  "data_dir": null,
+  "sid_length": 3,
+  "beam": 20,
+  "n_test": 5000,
+  "n_valid": 5000,
+  "exact_n": 64,
+  "marginal_m": 512,
+  "chunk_size": 128,
+  "bound_betas": [
+    0.75,
+    1.5
+  ],
+  "precision": "fp32",
+  "legacy_prior": true,
+  "gpu_shared": true,
+  "checkpoint_sha256": "baae4508d72676cf9768b2205cc04444d0d8a9809df635095ed59a3f30469a29",
+  "torch": "2.12.1+cu130",
+  "tie_rule": "descending score then ascending item ID",
+  "beam_rule": "lexicographic prefixes on score ties; complete items sorted by ID",
+  "log_softmax": "float32 for both exact and beam",
+  "timestamp": 1790577385.3172147,
+  "quality_only": true,
+  "betas": [
+    0.0,
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    1.0,
+    1.5,
+    2.0
+  ]
+}

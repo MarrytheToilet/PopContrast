@@ -1,0 +1,17 @@
+{
+  "candidate_score_checks": [
+    {
+      "index": 9556,
+      "max_abs_error": 2.7179718017578125e-05,
+      "mean_abs_error": 6.471361432756696e-06
+    },
+    {
+      "index": 3899,
+      "max_abs_error": 1.811981201171875e-05,
+      "mean_abs_error": 6.478173392159598e-06
+    }
+  ],
+  "precision": "fp32",
+  "tolerance": 0.001,
+  "note": "Different matrix shapes can introduce rounding; repetition and ngram penalties explicitly disabled"
+}

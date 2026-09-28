@@ -1,0 +1,17 @@
+{
+  "run": "runs/sasrec_beauty_s1",
+  "dataset": "beauty",
+  "model": "sasrec",
+  "checkpoint_sha256": "e5ca8ea3e85539110778e89d0b1e56e156113e1da6c0d8ef7046d39b175c9e80",
+  "histories": 128,
+  "rho_model_prior_item_train_count": 0.7971525329459092,
+  "personalization": {
+    "row_centered_total_score_variance": 3.5367066123156543,
+    "item_main_effect_variance": 0.8585228040472934,
+    "history_item_residual_variance": 2.67818380826836,
+    "item_main_effect_fraction": 0.24274640171104742,
+    "catalog_softmax_history_JS_nats": 2.077337239877219,
+    "scope": "descriptive personalization of catalog-normalized scores; not harmful-bias identification or a calibrated applicability threshold"
+  },
+  "test_labels_used": false
+}

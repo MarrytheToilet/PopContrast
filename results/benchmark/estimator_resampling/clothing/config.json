@@ -1,0 +1,33 @@
+{
+  "split": "clothing",
+  "cache_dir": "results/benchmark/remote/clothing_s1_l3/evaluation",
+  "background_dir": "results/benchmark/remote/clothing_s1_l3/evaluation",
+  "output": "results/benchmark/estimator_resampling/clothing",
+  "repetitions": 20,
+  "sizes": [
+    1,
+    4,
+    8,
+    16,
+    32,
+    64,
+    128
+  ],
+  "betas": [
+    0.0,
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    1.0,
+    1.5,
+    2.0
+  ],
+  "base_seed": 991,
+  "background_sha256": "d6ead16d8b6e5ef3aad0107de52682231135bbd996e759bd1b1ec7f7a5fab183",
+  "checkpoint_sha256": "11e1132e1e1ebfe1b88320150294190af90baabd28df61ff3b521472dc3260bb",
+  "scope": "finite-bank sampling sensitivity; not training randomness or population uncertainty",
+  "selection": "per-family validation only; same beta grid and recall constraints",
+  "nested_subsets_across_M": true,
+  "created_unix": 1790589343.916461
+}

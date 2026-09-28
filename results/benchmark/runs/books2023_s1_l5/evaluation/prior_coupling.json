@@ -1,0 +1,12 @@
+{
+  "run": "runs/books2023_s1_l5/evaluation",
+  "dataset": "books2023",
+  "rho_actual_geometric_prior_train_count": 0.2570276435639548,
+  "items": 495063,
+  "prior_source": "runs/books2023_s1_l5/evaluation/priors.npz",
+  "prior_source_sha256": "ac8606ef10ad28abb55e84f94f65a4dcbc908f5aca62cca499a8b0568778286d",
+  "train_counts_array_sha256": "118821dee016c4cdb0c88497317abac6735557d6c008800e868628ed3452b89b",
+  "validation_or_test_targets_used": false,
+  "finished_unix": 1790599592.1912804,
+  "scope": "actual stored prior used by this evaluation; correlation is descriptive, not a causal explanation or an applicability threshold"
+}

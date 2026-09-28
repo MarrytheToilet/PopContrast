@@ -1,0 +1,12 @@
+{
+  "run": "runs/games2023_s1_l4/evaluation",
+  "dataset": "games2023",
+  "rho_actual_geometric_prior_train_count": 0.7922626889747922,
+  "items": 25612,
+  "prior_source": "runs/games2023_s1_l4/evaluation/priors.npz",
+  "prior_source_sha256": "0962af14b83da5471323a1650158a18cb47b682a0f669d6477d5e4a5da5e3e6c",
+  "train_counts_array_sha256": "93f909dcdba8dbd3cabe81ac1be58291109142ce6f5f004cd1e0630059baca55",
+  "validation_or_test_targets_used": false,
+  "finished_unix": 1790599592.2292695,
+  "scope": "actual stored prior used by this evaluation; correlation is descriptive, not a causal explanation or an applicability threshold"
+}

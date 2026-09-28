@@ -1,0 +1,106 @@
+{
+  "dataset": "beauty",
+  "sid_length": 6,
+  "interpretation": "label-aware retrospective oracle ceilings; no parameter selection",
+  "identity": "tail recall = P(target in raw beam | tail) * P(hit | tail and target in raw beam)",
+  "source_sha256": {
+    "complete.json": "28f35566c4c7c8acf401bba6789958656d950815e9abae20dd7f20b54984316e",
+    "config.json": "fec5e80bdcaeffb5d5d5694e0b2c3568ba7ceb9da96d45377d96bff1548204af",
+    "validation_selection.json": "66eca0755d870d69ab5878ceef1645b8398dc31aed3dc9bd81b0705413457781",
+    "test_candidates.npz": "6b628b00183e7fc8ebcf93c691d657aac8cb867be0be959327842680734da193",
+    "valid_candidates.npz": "59e8130cde0e0816c0769f46fced6a13c47cad1425d04817632778779557b553"
+  },
+  "partitions": {
+    "valid": {
+      "users": 5000,
+      "tail_users": 2477,
+      "tail_targets_available": 27,
+      "candidate_tail_recall_ceiling": 0.010900282599919257,
+      "candidate_overall_recall_ceiling": 0.0786,
+      "candidate_count_quantiles": [
+        20.0,
+        29.0,
+        40.0,
+        58.0
+      ],
+      "methods": {
+        "arithmetic:1.0": {
+          "tail_hits": 10,
+          "tail_recall": 0.004037141703673799,
+          "conditional_tail_hit_rate_given_reachable": 0.37037037037037035
+        },
+        "geometric:0.1": {
+          "tail_hits": 10,
+          "tail_recall": 0.004037141703673799,
+          "conditional_tail_hit_rate_given_reachable": 0.37037037037037035
+        },
+        "geometric:0.75": {
+          "tail_hits": 11,
+          "tail_recall": 0.0044408558740411785,
+          "conditional_tail_hit_rate_given_reachable": 0.4074074074074074
+        },
+        "null:0.1": {
+          "tail_hits": 10,
+          "tail_recall": 0.004037141703673799,
+          "conditional_tail_hit_rate_given_reachable": 0.37037037037037035
+        },
+        "null:0.5": {
+          "tail_hits": 11,
+          "tail_recall": 0.0044408558740411785,
+          "conditional_tail_hit_rate_given_reachable": 0.4074074074074074
+        },
+        "raw": {
+          "tail_hits": 10,
+          "tail_recall": 0.004037141703673799,
+          "conditional_tail_hit_rate_given_reachable": 0.37037037037037035
+        }
+      }
+    },
+    "test": {
+      "users": 5000,
+      "tail_users": 2785,
+      "tail_targets_available": 25,
+      "candidate_tail_recall_ceiling": 0.008976660682226212,
+      "candidate_overall_recall_ceiling": 0.0632,
+      "candidate_count_quantiles": [
+        20.0,
+        30.0,
+        41.0,
+        63.0
+      ],
+      "methods": {
+        "arithmetic:1.0": {
+          "tail_hits": 7,
+          "tail_recall": 0.0025134649910233393,
+          "conditional_tail_hit_rate_given_reachable": 0.28
+        },
+        "geometric:0.1": {
+          "tail_hits": 6,
+          "tail_recall": 0.0021543985637342907,
+          "conditional_tail_hit_rate_given_reachable": 0.24
+        },
+        "geometric:0.75": {
+          "tail_hits": 9,
+          "tail_recall": 0.003231597845601436,
+          "conditional_tail_hit_rate_given_reachable": 0.36
+        },
+        "null:0.1": {
+          "tail_hits": 6,
+          "tail_recall": 0.0021543985637342907,
+          "conditional_tail_hit_rate_given_reachable": 0.24
+        },
+        "null:0.5": {
+          "tail_hits": 6,
+          "tail_recall": 0.0021543985637342907,
+          "conditional_tail_hit_rate_given_reachable": 0.24
+        },
+        "raw": {
+          "tail_hits": 6,
+          "tail_recall": 0.0021543985637342907,
+          "conditional_tail_hit_rate_given_reachable": 0.24
+        }
+      }
+    }
+  },
+  "finished_unix": 1790594819.786923
+}

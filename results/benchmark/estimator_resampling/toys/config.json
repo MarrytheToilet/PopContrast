@@ -1,0 +1,33 @@
+{
+  "split": "toys",
+  "cache_dir": "results/benchmark/remote/toys_s1_l3/evaluation",
+  "background_dir": "results/benchmark/remote/toys_s1_l3/evaluation",
+  "output": "results/benchmark/estimator_resampling/toys",
+  "repetitions": 20,
+  "sizes": [
+    1,
+    4,
+    8,
+    16,
+    32,
+    64,
+    128
+  ],
+  "betas": [
+    0.0,
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    1.0,
+    1.5,
+    2.0
+  ],
+  "base_seed": 991,
+  "background_sha256": "404e34284742bfac4d684baa934189cb55d49cd2a34e86d8ed321c38efea5809",
+  "checkpoint_sha256": "36d0e52dc24873f9a3c58690bed6af46dbdc313b8b2e8f00ca7ff4d4e1ec024a",
+  "scope": "finite-bank sampling sensitivity; not training randomness or population uncertainty",
+  "selection": "per-family validation only; same beta grid and recall constraints",
+  "nested_subsets_across_M": true,
+  "created_unix": 1790589343.8106594
+}

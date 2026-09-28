@@ -1,0 +1,17 @@
+{
+  "run": "runs/sasrec_arts2023_s1",
+  "dataset": "arts2023",
+  "model": "sasrec",
+  "checkpoint_sha256": "1546c8bd3e51ac4d15e92bfc6b318333fd538d042676d41f928ffd1ef7d9b177",
+  "histories": 128,
+  "rho_model_prior_item_train_count": 0.8373916867836478,
+  "personalization": {
+    "row_centered_total_score_variance": 5.185946597941422,
+    "item_main_effect_variance": 1.1535340616505827,
+    "history_item_residual_variance": 4.032412536290839,
+    "item_main_effect_fraction": 0.22243462015372115,
+    "catalog_softmax_history_JS_nats": 1.9642098550490132,
+    "scope": "descriptive personalization of catalog-normalized scores; not harmful-bias identification or a calibrated applicability threshold"
+  },
+  "test_labels_used": false
+}

@@ -1,0 +1,43 @@
+{
+  "selected": "best_adapter",
+  "candidates": {
+    "best_adapter": {
+      "sha256": "2d90eae17a4e440fe996cd31e38b6989848eb0c4067cbfee4887c31e70ba9345",
+      "validation": {
+        "n_users": 1000,
+        "hits": 96,
+        "R10": 0.096,
+        "N10": 0.06101944897776591,
+        "headR10": 0.1422924901185771,
+        "tailR10": 0.048582995951417005,
+        "head_users": 506,
+        "tail_users": 494,
+        "cov10": 0.23055945789604165,
+        "entropy": 0.7749856499132096,
+        "gini": 0.8960907528303446
+      }
+    },
+    "latest_adapter": {
+      "sha256": "27d90f842155a1cd7e9d4ab43e9477c52e979fb5238ba02ab8c2c7223378cf89",
+      "validation": {
+        "n_users": 1000,
+        "hits": 82,
+        "R10": 0.082,
+        "N10": 0.05122004216537849,
+        "headR10": 0.10869565217391304,
+        "tailR10": 0.05465587044534413,
+        "head_users": 506,
+        "tail_users": 494,
+        "cov10": 0.35162383274109577,
+        "entropy": 0.8482692885856437,
+        "gini": 0.8001410296669696
+      }
+    }
+  },
+  "users": 1000,
+  "repetition_penalty": 1.0,
+  "no_repeat_ngram_size": 0,
+  "beam": 20,
+  "finished_unix": 1790588928.0755687,
+  "training_validation_note": "Initial Qwen3B training selection used inherited chat repetition_penalty=1.05; this final likelihood-only selection uses no held-out test labels"
+}

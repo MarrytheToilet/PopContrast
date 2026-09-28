@@ -1,0 +1,12 @@
+{
+  "run": "runs/hstu_beauty_s1",
+  "dataset": "beauty",
+  "rho_actual_geometric_prior_train_count": 0.766842842975681,
+  "items": 12101,
+  "prior_source": "runs/hstu_beauty_s1/marginal.npy",
+  "prior_source_sha256": "8ded1ae40e8bee8a372c7c97c3c0f1ad1c7198ac183679c30478dfe09d198ea1",
+  "train_counts_array_sha256": "877ee2621b0cebb0366fa6e9f5d5060839c8e5d6870b4fd8b56bbbde4371258f",
+  "validation_or_test_targets_used": false,
+  "finished_unix": 1790599592.2329447,
+  "scope": "actual stored prior used by this evaluation; correlation is descriptive, not a causal explanation or an applicability threshold"
+}

@@ -1,0 +1,12 @@
+{
+  "run": "runs/ml1m_s1_l4/evaluation",
+  "dataset": "ml1m",
+  "rho_actual_geometric_prior_train_count": 0.8994837128975194,
+  "items": 3706,
+  "prior_source": "runs/ml1m_s1_l4/evaluation/priors.npz",
+  "prior_source_sha256": "2927ef505a6b4be178e26000c4be1a1384218c86804406dcb86d1c5b3316bbcf",
+  "train_counts_array_sha256": "55090322eea5e0b24f4f2291f0758847865a76c1123cb3107686948a43ed791f",
+  "validation_or_test_targets_used": false,
+  "finished_unix": 1790599592.2952456,
+  "scope": "actual stored prior used by this evaluation; correlation is descriptive, not a causal explanation or an applicability threshold"
+}

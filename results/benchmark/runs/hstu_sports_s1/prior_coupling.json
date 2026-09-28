@@ -1,0 +1,12 @@
+{
+  "run": "runs/hstu_sports_s1",
+  "dataset": "sports",
+  "rho_actual_geometric_prior_train_count": 0.85384176592319,
+  "items": 18357,
+  "prior_source": "runs/hstu_sports_s1/marginal.npy",
+  "prior_source_sha256": "e1f38fbb55a5fd9cc7a0bbd541430c852475d9be1cb52b6578dd6cc775aa6388",
+  "train_counts_array_sha256": "403ff38b83dc2409ddce6c4d9c5a485c87c4656996a277112a3b64ebf5b681aa",
+  "validation_or_test_targets_used": false,
+  "finished_unix": 1790599592.254088,
+  "scope": "actual stored prior used by this evaluation; correlation is descriptive, not a causal explanation or an applicability threshold"
+}

@@ -1,0 +1,12 @@
+{
+  "run": "runs/hstu_ml1m_s1",
+  "dataset": "ml1m",
+  "rho_actual_geometric_prior_train_count": 0.9330460995812683,
+  "items": 3706,
+  "prior_source": "runs/hstu_ml1m_s1/marginal.npy",
+  "prior_source_sha256": "0d8973587dda9fded8337aeb5a725c8c73c79076a17005322df9640d1c2f5ed1",
+  "train_counts_array_sha256": "55090322eea5e0b24f4f2291f0758847865a76c1123cb3107686948a43ed791f",
+  "validation_or_test_targets_used": false,
+  "finished_unix": 1790599592.2479408,
+  "scope": "actual stored prior used by this evaluation; correlation is descriptive, not a causal explanation or an applicability threshold"
+}

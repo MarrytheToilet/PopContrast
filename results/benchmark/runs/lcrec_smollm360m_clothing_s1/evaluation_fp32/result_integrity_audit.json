@@ -1,0 +1,306 @@
+{
+  "dataset": "clothing",
+  "passed": true,
+  "checked": [
+    {
+      "partition": "valid",
+      "method": "raw",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "geometric:0.1",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "geometric:0.25",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "geometric:0.5",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "geometric:0.75",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "geometric:1.0",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "geometric:1.5",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "geometric:2.0",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "arithmetic:0.1",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "arithmetic:0.25",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "arithmetic:0.5",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "arithmetic:0.75",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "arithmetic:1.0",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "arithmetic:1.5",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "arithmetic:2.0",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "null:0.1",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "null:0.25",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "null:0.5",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "null:0.75",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "null:1.0",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "null:1.5",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "null:2.0",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "logcount:0.1",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "logcount:0.25",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "logcount:0.5",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "logcount:0.75",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "logcount:1.0",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "logcount:1.5",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "logcount:2.0",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "raw",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "geometric:0.1",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "geometric:0.25",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "geometric:0.5",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "geometric:0.75",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "geometric:1.0",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "geometric:1.5",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "geometric:2.0",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "arithmetic:0.1",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "arithmetic:0.25",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "arithmetic:0.5",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "arithmetic:0.75",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "arithmetic:1.0",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "arithmetic:1.5",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "arithmetic:2.0",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "null:0.1",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "null:0.25",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "null:0.5",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "null:0.75",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "null:1.0",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "null:1.5",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "null:2.0",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "logcount:0.1",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "logcount:0.25",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "logcount:0.5",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "logcount:0.75",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "logcount:1.0",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "logcount:1.5",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "logcount:2.0",
+      "users": 5000
+    }
+  ],
+  "source_sha256": {
+    "complete.json": "46e222fd2d518560a826fc29c29bdef99ed68070deb2badd024cabaff0ef0b28",
+    "config.json": "213e330e1bab698e60f37b68c2532314cd09265bc4e215c00e93c167b53f9286",
+    "test_top10.npz": "a94d9f5339d10a4ddf5496989d5769ca113705db2839449a121927823a10e81a",
+    "test_metrics.json": "67d34213e57cb7e61b58c892e571780b48fb8433afec1086b279733656c557d8",
+    "valid_top10.npz": "0de64bf146d39f5aeb5588dd71840058e0ee02e44187231a63fc4470b4d4db28",
+    "valid_metrics.json": "18f6a2b8816bd773115bf1a0b20c1614806b33279fffdfc3c0ab64c579293cbb"
+  },
+  "finished_unix": 1790594453.3897483,
+  "scope": "saved top10 identities, users, labels, point metrics and paired gain/loss counts; not a new uncertainty estimate"
+}

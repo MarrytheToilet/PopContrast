@@ -1,0 +1,396 @@
+{
+  "dataset": "clothing",
+  "passed": true,
+  "checked": [
+    {
+      "partition": "valid",
+      "method": "raw",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "geometric:0.1",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "geometric:0.25",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "geometric:0.5",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "geometric:0.75",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "geometric:1.0",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "geometric:1.5",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "geometric:2.0",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "arithmetic:0.1",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "arithmetic:0.25",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "arithmetic:0.5",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "arithmetic:0.75",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "arithmetic:1.0",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "arithmetic:1.5",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "arithmetic:2.0",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "null:0.1",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "null:0.25",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "null:0.5",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "null:0.75",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "null:1.0",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "null:1.5",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "null:2.0",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "logcount:0.1",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "logcount:0.25",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "logcount:0.5",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "logcount:0.75",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "logcount:1.0",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "logcount:1.5",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "logcount:2.0",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "poprank:0.1",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "poprank:0.25",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "poprank:0.5",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "poprank:0.75",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "poprank:1.0",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "poprank:1.5",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "poprank:2.0",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "bound:0.75",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "bound:1.5",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "raw",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "geometric:0.1",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "geometric:0.25",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "geometric:0.5",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "geometric:0.75",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "geometric:1.0",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "geometric:1.5",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "geometric:2.0",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "arithmetic:0.1",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "arithmetic:0.25",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "arithmetic:0.5",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "arithmetic:0.75",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "arithmetic:1.0",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "arithmetic:1.5",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "arithmetic:2.0",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "null:0.1",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "null:0.25",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "null:0.5",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "null:0.75",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "null:1.0",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "null:1.5",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "null:2.0",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "logcount:0.1",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "logcount:0.25",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "logcount:0.5",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "logcount:0.75",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "logcount:1.0",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "logcount:1.5",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "logcount:2.0",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "poprank:0.1",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "poprank:0.25",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "poprank:0.5",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "poprank:0.75",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "poprank:1.0",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "poprank:1.5",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "poprank:2.0",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "bound:0.75",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "bound:1.5",
+      "users": 5000
+    }
+  ],
+  "source_sha256": {
+    "complete.json": "cbe8e528acf25bc972d0c198f3f9b779b4ebdfba405208182827dc0da686620c",
+    "config.json": "db28083dac1e0f90759af1aa8b6dcaac435afd501e135d55694ea0b250ceddee",
+    "test_top10.npz": "932e088dc1d0f9b4b6aa067683c67d7cfb7bf11b0ce976c10078bc47061f6372",
+    "test_metrics.json": "bedb995243519e4bfc0a5f512a07a4627948e4274ad2c9ecf50027ed7479cb96",
+    "valid_top10.npz": "31c089e4e2b39411f3c72fae0c479602aa5390b92792c9256976b2eda4ec9aab",
+    "valid_metrics.json": "9c47d8e15da8c1b2d9949ea54013a529052032921a4949eb01e433ac9ba2d3cb"
+  },
+  "finished_unix": 1790594449.6494524,
+  "scope": "saved top10 identities, users, labels, point metrics and paired gain/loss counts; not a new uncertainty estimate"
+}

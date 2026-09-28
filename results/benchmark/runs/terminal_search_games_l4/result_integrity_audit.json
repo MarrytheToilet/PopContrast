@@ -1,0 +1,176 @@
+{
+  "dataset": "games2023",
+  "passed": true,
+  "checked": [
+    {
+      "partition": "valid",
+      "method": "raw",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "rerank:0.25",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "rerank:0.5",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "rerank:0.75",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "rerank:1.0",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "rerank:1.5",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "terminal:0.25",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "terminal:0.5",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "terminal:0.75",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "terminal:1.0",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "terminal:1.5",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "potential:0.25",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "potential:0.5",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "potential:0.75",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "potential:1.0",
+      "users": 5000
+    },
+    {
+      "partition": "valid",
+      "method": "potential:1.5",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "raw",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "rerank:0.25",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "rerank:0.5",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "rerank:0.75",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "rerank:1.0",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "rerank:1.5",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "terminal:0.25",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "terminal:0.5",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "terminal:0.75",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "terminal:1.0",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "terminal:1.5",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "potential:0.25",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "potential:0.5",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "potential:0.75",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "potential:1.0",
+      "users": 5000
+    },
+    {
+      "partition": "test",
+      "method": "potential:1.5",
+      "users": 5000
+    }
+  ],
+  "source_sha256": {
+    "complete.json": "875c241db90321b391389cd461680f68e717e23579ef30e8605c0275c3f7e751",
+    "config.json": "bc64f59486e46989af401350dd7fdade6759c58091077a996c5bae9c5e4069d8",
+    "test_top10.npz": "63553b96bb400288cff316fe02c165b34c9dc0e26bd7e17d6efc99bfc198dc5f",
+    "test_metrics.json": "f6f068b13fa8ea416eb5a604d8572a72995af0fdb6c3bf0ae3249af2b6066f11",
+    "valid_top10.npz": "e86db40d2badb78191374af35ffe8d3f4d03e200eca6ed57804a8546318eb98a",
+    "valid_metrics.json": "065ddd46eaf89f2c829790851f9d9e12c2be4a730ba9c5baf19b160a035bf3e8"
+  },
+  "finished_unix": 1790597377.8467698,
+  "scope": "saved top10 identities, users, labels, point metrics and paired gain/loss counts; not a new uncertainty estimate"
+}

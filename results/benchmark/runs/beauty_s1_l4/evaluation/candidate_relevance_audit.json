@@ -1,0 +1,96 @@
+{
+  "dataset": "beauty",
+  "sid_length": 4,
+  "interpretation": "label-aware retrospective oracle ceilings; no parameter selection",
+  "identity": "tail recall = P(target in raw beam | tail) * P(hit | tail and target in raw beam)",
+  "source_sha256": {
+    "complete.json": "84a5621ddcf6087bc99cfece4694529835b9ffd91e7a49b60faae951440132b9",
+    "config.json": "af1c79278102dbaf41dbcf1c2b9b7b7989eaeaf73efc68f141b6b9c10906f633",
+    "validation_selection.json": "b9159612702d80ad334079e4612601360109e332b2f65b07537f9d6f43664fbc",
+    "test_candidates.npz": "0d9f3cb44ee9a27467ebe5d48faf32b4517cf1f8d1f44cdc7c14ba023346158e",
+    "valid_candidates.npz": "43e04a750e1f1d2f572a6859783590c2beae607ae36396580e6a489566cbbbe2"
+  },
+  "partitions": {
+    "valid": {
+      "users": 5000,
+      "tail_users": 2477,
+      "tail_targets_available": 53,
+      "candidate_tail_recall_ceiling": 0.021396851029471135,
+      "candidate_overall_recall_ceiling": 0.1132,
+      "candidate_count_quantiles": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "methods": {
+        "arithmetic:0.25": {
+          "tail_hits": 31,
+          "tail_recall": 0.012515139281388777,
+          "conditional_tail_hit_rate_given_reachable": 0.5849056603773585
+        },
+        "arithmetic:1.0": {
+          "tail_hits": 43,
+          "tail_recall": 0.017359709325797335,
+          "conditional_tail_hit_rate_given_reachable": 0.8113207547169812
+        },
+        "geometric:0.1": {
+          "tail_hits": 27,
+          "tail_recall": 0.010900282599919257,
+          "conditional_tail_hit_rate_given_reachable": 0.5094339622641509
+        },
+        "null:0.5": {
+          "tail_hits": 30,
+          "tail_recall": 0.012111425111021397,
+          "conditional_tail_hit_rate_given_reachable": 0.5660377358490566
+        },
+        "raw": {
+          "tail_hits": 26,
+          "tail_recall": 0.010496568429551878,
+          "conditional_tail_hit_rate_given_reachable": 0.49056603773584906
+        }
+      }
+    },
+    "test": {
+      "users": 5000,
+      "tail_users": 2785,
+      "tail_targets_available": 45,
+      "candidate_tail_recall_ceiling": 0.01615798922800718,
+      "candidate_overall_recall_ceiling": 0.089,
+      "candidate_count_quantiles": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "methods": {
+        "arithmetic:0.25": {
+          "tail_hits": 23,
+          "tail_recall": 0.008258527827648115,
+          "conditional_tail_hit_rate_given_reachable": 0.5111111111111111
+        },
+        "arithmetic:1.0": {
+          "tail_hits": 34,
+          "tail_recall": 0.012208258527827648,
+          "conditional_tail_hit_rate_given_reachable": 0.7555555555555555
+        },
+        "geometric:0.1": {
+          "tail_hits": 18,
+          "tail_recall": 0.006463195691202872,
+          "conditional_tail_hit_rate_given_reachable": 0.4
+        },
+        "null:0.5": {
+          "tail_hits": 25,
+          "tail_recall": 0.008976660682226212,
+          "conditional_tail_hit_rate_given_reachable": 0.5555555555555556
+        },
+        "raw": {
+          "tail_hits": 18,
+          "tail_recall": 0.006463195691202872,
+          "conditional_tail_hit_rate_given_reachable": 0.4
+        }
+      }
+    }
+  },
+  "finished_unix": 1790594819.5277202
+}

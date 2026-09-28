@@ -1,0 +1,247 @@
+{
+  "original_cache_sha256": "99390349558c17ef596bca37844705530a57ed73252531db6c5dba39c5a9d02e",
+  "results": {
+    "aligned_bf16_encoder/B20/beta0.75": {
+      "n": 1000,
+      "candidate_inclusion": 0.9116000000000001,
+      "different_score_overlap": 0.9034000000000001,
+      "common_score_replay_overlap": 0.9116000000000001,
+      "raw_candidate_score_abs_error_quantiles": [
+        0.0038514137268066406,
+        0.03170738220214844,
+        0.05928657531738281,
+        0.15667247772216797
+      ],
+      "R10": 0.049,
+      "tailR10": 0.011194029850746268,
+      "cov10": 0.09850425584662424
+    },
+    "aligned_bf16_encoder/B20/beta1.5": {
+      "n": 1000,
+      "candidate_inclusion": 0.6687000000000001,
+      "different_score_overlap": 0.6658999999999999,
+      "common_score_replay_overlap": 0.6687000000000001,
+      "raw_candidate_score_abs_error_quantiles": [
+        0.0038514137268066406,
+        0.03170738220214844,
+        0.05928657531738281,
+        0.15667247772216797
+      ],
+      "R10": 0.039,
+      "tailR10": 0.011194029850746268,
+      "cov10": 0.11527972894802083
+    },
+    "aligned_bf16_encoder/B100/beta0.75": {
+      "n": 1000,
+      "candidate_inclusion": 0.9991,
+      "different_score_overlap": 0.9716000000000001,
+      "common_score_replay_overlap": 0.9991,
+      "raw_candidate_score_abs_error_quantiles": [
+        0.01598680019378662,
+        0.04534139633178719,
+        0.08081363677978504,
+        0.17837810516357422
+      ],
+      "R10": 0.043,
+      "tailR10": 0.011194029850746268,
+      "cov10": 0.09916535823485663
+    },
+    "aligned_bf16_encoder/B100/beta1.5": {
+      "n": 1000,
+      "candidate_inclusion": 0.9105,
+      "different_score_overlap": 0.8897,
+      "common_score_replay_overlap": 0.9105,
+      "raw_candidate_score_abs_error_quantiles": [
+        0.01598680019378662,
+        0.04534139633178719,
+        0.08081363677978504,
+        0.17837810516357422
+      ],
+      "R10": 0.029,
+      "tailR10": 0.014925373134328358,
+      "cov10": 0.12883232790678456
+    },
+    "all_fp32/B20/beta0.75": {
+      "n": 1000,
+      "candidate_inclusion": 0.912,
+      "different_score_overlap": 0.9012,
+      "common_score_replay_overlap": 0.912,
+      "raw_candidate_score_abs_error_quantiles": [
+        0.012179255485534668,
+        0.03031015396118164,
+        0.05053567886352539,
+        0.10475301742553711
+      ],
+      "R10": 0.048,
+      "tailR10": 0.011194029850746268,
+      "cov10": 0.09817370465250806
+    },
+    "all_fp32/B20/beta1.5": {
+      "n": 1000,
+      "candidate_inclusion": 0.67,
+      "different_score_overlap": 0.6674000000000001,
+      "common_score_replay_overlap": 0.67,
+      "raw_candidate_score_abs_error_quantiles": [
+        0.012179255485534668,
+        0.03031015396118164,
+        0.05053567886352539,
+        0.10475301742553711
+      ],
+      "R10": 0.038,
+      "tailR10": 0.011194029850746268,
+      "cov10": 0.11536236674654987
+    },
+    "all_fp32/B100/beta0.75": {
+      "n": 1000,
+      "candidate_inclusion": 0.9991,
+      "different_score_overlap": 0.9795,
+      "common_score_replay_overlap": 0.9991,
+      "raw_candidate_score_abs_error_quantiles": [
+        0.012121200561523438,
+        0.030173778533935547,
+        0.05061154365539558,
+        0.1274585723876953
+      ],
+      "R10": 0.046,
+      "tailR10": 0.011194029850746268,
+      "cov10": 0.09900008263779853
+    },
+    "all_fp32/B100/beta1.5": {
+      "n": 1000,
+      "candidate_inclusion": 0.9107999999999999,
+      "different_score_overlap": 0.896,
+      "common_score_replay_overlap": 0.9107999999999999,
+      "raw_candidate_score_abs_error_quantiles": [
+        0.012121200561523438,
+        0.030173778533935547,
+        0.05061154365539558,
+        0.1274585723876953
+      ],
+      "R10": 0.029,
+      "tailR10": 0.014925373134328358,
+      "cov10": 0.12800594992149408
+    },
+    "float_logsoftmax/B20/beta0.75": {
+      "n": 1000,
+      "candidate_inclusion": 0.9122,
+      "different_score_overlap": 0.9018,
+      "common_score_replay_overlap": 0.9122,
+      "raw_candidate_score_abs_error_quantiles": [
+        0.004125118255615234,
+        0.032253456115722653,
+        0.062327237129211295,
+        0.1489543914794922
+      ],
+      "R10": 0.049,
+      "tailR10": 0.011194029850746268,
+      "cov10": 0.0984216180480952
+    },
+    "float_logsoftmax/B20/beta1.5": {
+      "n": 1000,
+      "candidate_inclusion": 0.6695999999999999,
+      "different_score_overlap": 0.6666,
+      "common_score_replay_overlap": 0.6695999999999999,
+      "raw_candidate_score_abs_error_quantiles": [
+        0.004125118255615234,
+        0.032253456115722653,
+        0.062327237129211295,
+        0.1489543914794922
+      ],
+      "R10": 0.039,
+      "tailR10": 0.011194029850746268,
+      "cov10": 0.11527972894802083
+    },
+    "float_logsoftmax/B100/beta0.75": {
+      "n": 1000,
+      "candidate_inclusion": 0.9991,
+      "different_score_overlap": 0.9701000000000002,
+      "common_score_replay_overlap": 0.9991,
+      "raw_candidate_score_abs_error_quantiles": [
+        0.01616644859313965,
+        0.04602527618408203,
+        0.08096190452575669,
+        0.2043895721435547
+      ],
+      "R10": 0.046,
+      "tailR10": 0.011194029850746268,
+      "cov10": 0.09891744483926948
+    },
+    "float_logsoftmax/B100/beta1.5": {
+      "n": 1000,
+      "candidate_inclusion": 0.9109,
+      "different_score_overlap": 0.8902,
+      "common_score_replay_overlap": 0.9109,
+      "raw_candidate_score_abs_error_quantiles": [
+        0.01616644859313965,
+        0.04602527618408203,
+        0.08096190452575669,
+        0.2043895721435547
+      ],
+      "R10": 0.03,
+      "tailR10": 0.014925373134328358,
+      "cov10": 0.12850177671266838
+    },
+    "historical/B20/beta0.75": {
+      "n": 1000,
+      "candidate_inclusion": 0.9122,
+      "different_score_overlap": 0.9018,
+      "common_score_replay_overlap": 0.9122,
+      "raw_candidate_score_abs_error_quantiles": [
+        0.004125118255615234,
+        0.032253456115722653,
+        0.062327237129211295,
+        0.1489543914794922
+      ],
+      "R10": 0.049,
+      "tailR10": 0.011194029850746268,
+      "cov10": 0.0984216180480952
+    },
+    "historical/B20/beta1.5": {
+      "n": 1000,
+      "candidate_inclusion": 0.6695999999999999,
+      "different_score_overlap": 0.6666,
+      "common_score_replay_overlap": 0.6695999999999999,
+      "raw_candidate_score_abs_error_quantiles": [
+        0.004125118255615234,
+        0.032253456115722653,
+        0.062327237129211295,
+        0.1489543914794922
+      ],
+      "R10": 0.039,
+      "tailR10": 0.011194029850746268,
+      "cov10": 0.11527972894802083
+    },
+    "historical/B100/beta0.75": {
+      "n": 1000,
+      "candidate_inclusion": 0.9991,
+      "different_score_overlap": 0.9701000000000002,
+      "common_score_replay_overlap": 0.9991,
+      "raw_candidate_score_abs_error_quantiles": [
+        0.01616644859313965,
+        0.04602527618408203,
+        0.08096190452575669,
+        0.2043895721435547
+      ],
+      "R10": 0.046,
+      "tailR10": 0.011194029850746268,
+      "cov10": 0.09891744483926948
+    },
+    "historical/B100/beta1.5": {
+      "n": 1000,
+      "candidate_inclusion": 0.9109,
+      "different_score_overlap": 0.8902,
+      "common_score_replay_overlap": 0.9109,
+      "raw_candidate_score_abs_error_quantiles": [
+        0.01616644859313965,
+        0.04602527618408203,
+        0.08096190452575669,
+        0.2043895721435547
+      ],
+      "R10": 0.03,
+      "tailR10": 0.014925373134328358,
+      "cov10": 0.12850177671266838
+    }
+  },
+  "ties": "deterministic item-ID ties for both reference and replay; submitted GPU tie order not assumed",
+  "scope": "historical source on current hardware; original cached reference retained; not exact old-kernel replay"
+}

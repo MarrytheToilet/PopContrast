@@ -1,0 +1,6 @@
+{
+  "precision": "fp32",
+  "reason": "Qwen3B validation-only audit found BF16 shape-dependent score differences and FP32 parity; apply FP32 to future Qwen1.5B evaluation before test",
+  "decision_unix": 1790592136.5016425,
+  "changes_training": false
+}

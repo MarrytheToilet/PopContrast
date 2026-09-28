@@ -1,0 +1,8 @@
+{
+  "epochs": 20,
+  "best_valid": 0.05808701873630551,
+  "checkpoint_sha256": "48ab36d2de0caa6e48daa556014248fe45a8de2e088965e6a9b26c1493fe8061",
+  "finished_unix": 1790589200.1605084,
+  "completion_reason": "prespecified training-exposure snapshot",
+  "converged": false
+}

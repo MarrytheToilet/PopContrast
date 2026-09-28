@@ -1,0 +1,7 @@
+{
+  "best_valid_R10": 0.094,
+  "steps": 12324,
+  "finished_unix": 1790588629.0804312,
+  "completion_reason": "validation_early_stopping",
+  "next_step": "freeze best adapter; estimate marginal; matched corrected beam evaluation"
+}

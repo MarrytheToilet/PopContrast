@@ -1,0 +1,85 @@
+{
+  "configuration": {
+    "split": "beauty",
+    "checkpoint": "checkpoints/legacy/beauty.pt",
+    "output": "runs/latency_beauty_b20",
+    "beam": 20,
+    "users": 300
+  },
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "precision": "FP32 forward and log-softmax",
+  "exclusive_checks_passed": true,
+  "scope": "single-request encoder + trie beam + final ranking; pretokenized GPU inputs",
+  "offline_estimation_excluded": true,
+  "warmup_requests_per_method": 30,
+  "order": "random paired method order per identical user",
+  "summary": {
+    "raw": {
+      "mean_ms": 12.30880405753851,
+      "p50_ms": 12.086126953363419,
+      "p95_ms": 12.575984559953213
+    },
+    "leaf": {
+      "mean_ms": 12.335449370245138,
+      "p50_ms": 12.082720175385475,
+      "p95_ms": 13.600526377558708,
+      "paired_mean_overhead_ms": 0.026645312706629436,
+      "paired_ci95_ms": [
+        -0.1683672203992804,
+        0.19196036520103596
+      ]
+    },
+    "bound": {
+      "mean_ms": 12.699314467608929,
+      "p50_ms": 12.52187229692936,
+      "p95_ms": 13.005574978888038,
+      "paired_mean_overhead_ms": 0.3905104100704193,
+      "paired_ci95_ms": [
+        0.24197380027423301,
+        0.5244393038252989
+      ]
+    }
+  },
+  "matched_subset_quality": {
+    "raw": {
+      "n_users": 300,
+      "hits": 8,
+      "R10": 0.02666666666666667,
+      "N10": 0.017407215777828253,
+      "headR10": 0.05185185185185185,
+      "tailR10": 0.006060606060606061,
+      "head_users": 135,
+      "tail_users": 165,
+      "cov10": 0.05635897859681018,
+      "entropy": 0.6302469833240415,
+      "gini": 0.9752221028565132
+    },
+    "leaf": {
+      "n_users": 300,
+      "hits": 11,
+      "R10": 0.03666666666666667,
+      "N10": 0.01892166314703978,
+      "headR10": 0.05925925925925926,
+      "tailR10": 0.01818181818181818,
+      "head_users": 135,
+      "tail_users": 165,
+      "cov10": 0.06842409718205107,
+      "entropy": 0.661632825127334,
+      "gini": 0.966993691981379
+    },
+    "bound": {
+      "n_users": 300,
+      "hits": 13,
+      "R10": 0.043333333333333335,
+      "N10": 0.02170971239320609,
+      "headR10": 0.07407407407407407,
+      "tailR10": 0.01818181818181818,
+      "head_users": 135,
+      "tail_users": 165,
+      "cov10": 0.06520122303941824,
+      "entropy": 0.6564801365964391,
+      "gini": 0.9686785114177892
+    }
+  },
+  "marginal_vector_bytes_fp32": 48404
+}

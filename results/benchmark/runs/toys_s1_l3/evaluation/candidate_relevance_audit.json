@@ -1,0 +1,116 @@
+{
+  "dataset": "toys",
+  "sid_length": 3,
+  "interpretation": "label-aware retrospective oracle ceilings; no parameter selection",
+  "identity": "tail recall = P(target in raw beam | tail) * P(hit | tail and target in raw beam)",
+  "source_sha256": {
+    "complete.json": "65265adf3715eb7c5bf01d08d767d767727b01b91e32e752f91f97a76d5e7afc",
+    "config.json": "5333acbe9d14980d82239bc6951a89313cbc9f21c130f743a5d526165002aff1",
+    "validation_selection.json": "123ecc72914b732b4fd0e7e2788aaad4b7b2605a74e95750fb1b6db0e6ef1d39",
+    "test_candidates.npz": "c825d21ce06d0cbbca911293481b4cb0cdf8c8bb864b4d0f22433d9ab679f23a",
+    "valid_candidates.npz": "271f69f531f15530c2956fe1ca75a5ce32aca743c074e3b4d6ad86863d40cea7"
+  },
+  "partitions": {
+    "valid": {
+      "users": 5000,
+      "tail_users": 2863,
+      "tail_targets_available": 185,
+      "candidate_tail_recall_ceiling": 0.06461753405518687,
+      "candidate_overall_recall_ceiling": 0.1068,
+      "candidate_count_quantiles": [
+        20.0,
+        22.0,
+        26.0,
+        42.0
+      ],
+      "methods": {
+        "arithmetic:0.25": {
+          "tail_hits": 108,
+          "tail_recall": 0.037722668529514496,
+          "conditional_tail_hit_rate_given_reachable": 0.5837837837837838
+        },
+        "arithmetic:1.5": {
+          "tail_hits": 130,
+          "tail_recall": 0.045406915822563745,
+          "conditional_tail_hit_rate_given_reachable": 0.7027027027027027
+        },
+        "geometric:0.1": {
+          "tail_hits": 101,
+          "tail_recall": 0.035277680754453374,
+          "conditional_tail_hit_rate_given_reachable": 0.5459459459459459
+        },
+        "geometric:0.75": {
+          "tail_hits": 123,
+          "tail_recall": 0.042961928047502616,
+          "conditional_tail_hit_rate_given_reachable": 0.6648648648648648
+        },
+        "geometric:1.5": {
+          "tail_hits": 133,
+          "tail_recall": 0.04645476772616137,
+          "conditional_tail_hit_rate_given_reachable": 0.7189189189189189
+        },
+        "null:1.0": {
+          "tail_hits": 119,
+          "tail_recall": 0.04156479217603912,
+          "conditional_tail_hit_rate_given_reachable": 0.6432432432432432
+        },
+        "raw": {
+          "tail_hits": 98,
+          "tail_recall": 0.034229828850855744,
+          "conditional_tail_hit_rate_given_reachable": 0.5297297297297298
+        }
+      }
+    },
+    "test": {
+      "users": 5000,
+      "tail_users": 3135,
+      "tail_targets_available": 146,
+      "candidate_tail_recall_ceiling": 0.04657097288676236,
+      "candidate_overall_recall_ceiling": 0.083,
+      "candidate_count_quantiles": [
+        20.0,
+        22.0,
+        26.0,
+        45.0
+      ],
+      "methods": {
+        "arithmetic:0.25": {
+          "tail_hits": 79,
+          "tail_recall": 0.025199362041467305,
+          "conditional_tail_hit_rate_given_reachable": 0.541095890410959
+        },
+        "arithmetic:1.5": {
+          "tail_hits": 103,
+          "tail_recall": 0.0328548644338118,
+          "conditional_tail_hit_rate_given_reachable": 0.7054794520547946
+        },
+        "geometric:0.1": {
+          "tail_hits": 77,
+          "tail_recall": 0.02456140350877193,
+          "conditional_tail_hit_rate_given_reachable": 0.5273972602739726
+        },
+        "geometric:0.75": {
+          "tail_hits": 96,
+          "tail_recall": 0.03062200956937799,
+          "conditional_tail_hit_rate_given_reachable": 0.6575342465753424
+        },
+        "geometric:1.5": {
+          "tail_hits": 101,
+          "tail_recall": 0.03221690590111643,
+          "conditional_tail_hit_rate_given_reachable": 0.6917808219178082
+        },
+        "null:1.0": {
+          "tail_hits": 105,
+          "tail_recall": 0.03349282296650718,
+          "conditional_tail_hit_rate_given_reachable": 0.7191780821917808
+        },
+        "raw": {
+          "tail_hits": 76,
+          "tail_recall": 0.024242424242424242,
+          "conditional_tail_hit_rate_given_reachable": 0.5205479452054794
+        }
+      }
+    }
+  },
+  "finished_unix": 1790594821.279409
+}

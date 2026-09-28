@@ -1,0 +1,23 @@
+{
+  "split": "games2023",
+  "checkpoint": "runs/games2023_s1_l4/best_model.pt",
+  "prior_file": "runs/games2023_s1_l4/evaluation/priors.npz",
+  "output": "runs/terminal_search_games_l4",
+  "n_valid": 5000,
+  "n_test": 5000,
+  "beam": 20,
+  "sid_length": 4,
+  "eval_batch_size": 8,
+  "betas": [
+    0.25,
+    0.5,
+    0.75,
+    1.0,
+    1.5
+  ],
+  "checkpoint_sha256": "bad8f41986b92fe9773d27781cbea84e7c6871d965af83e312fe88440294a8ea",
+  "prior_sha256": "0962af14b83da5471323a1650158a18cb47b682a0f669d6477d5e4a5da5e3e6c",
+  "quality_only": true,
+  "hypothesis": "offline prior-mass lookahead approximates continuation tilt; terminal score unchanged",
+  "development_status": "Beauty has been inspected during method development; do not treat it as untouched confirmation"
+}

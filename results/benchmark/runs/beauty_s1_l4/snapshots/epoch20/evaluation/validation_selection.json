@@ -1,0 +1,87 @@
+{
+  "arithmetic": {
+    "strict": "arithmetic:0.5",
+    "budget_5pct": "arithmetic:1.5",
+    "simultaneous_ci_budget_5pct": "arithmetic:0.5",
+    "absolute_recall_budget": 0.0029200000000000003,
+    "one_sided_lower_bounds": {
+      "arithmetic:0.1": -0.001,
+      "arithmetic:0.25": -0.0018,
+      "arithmetic:0.5": -0.0022,
+      "arithmetic:0.75": -0.0026,
+      "arithmetic:1.0": -0.0042,
+      "arithmetic:1.5": -0.0068,
+      "arithmetic:2.0": -0.009115714285714284
+    }
+  },
+  "bound": {
+    "strict": "raw",
+    "budget_5pct": "raw",
+    "simultaneous_ci_budget_5pct": "raw",
+    "absolute_recall_budget": 0.0029200000000000003,
+    "one_sided_lower_bounds": {
+      "bound:0.75": -0.0146,
+      "bound:1.5": -0.0228
+    }
+  },
+  "geometric": {
+    "strict": "raw",
+    "budget_5pct": "geometric:0.75",
+    "simultaneous_ci_budget_5pct": "raw",
+    "absolute_recall_budget": 0.0029200000000000003,
+    "one_sided_lower_bounds": {
+      "geometric:0.1": -0.0016,
+      "geometric:0.25": -0.003,
+      "geometric:0.5": -0.006,
+      "geometric:0.75": -0.0064,
+      "geometric:1.0": -0.0074,
+      "geometric:1.5": -0.0126,
+      "geometric:2.0": -0.0136
+    }
+  },
+  "logcount": {
+    "strict": "raw",
+    "budget_5pct": "raw",
+    "simultaneous_ci_budget_5pct": "raw",
+    "absolute_recall_budget": 0.0029200000000000003,
+    "one_sided_lower_bounds": {
+      "logcount:0.1": -0.0026,
+      "logcount:0.25": -0.0046,
+      "logcount:0.5": -0.0098,
+      "logcount:0.75": -0.0134,
+      "logcount:1.0": -0.0188,
+      "logcount:1.5": -0.0236,
+      "logcount:2.0": -0.0258
+    }
+  },
+  "null": {
+    "strict": "null:0.5",
+    "budget_5pct": "null:1.0",
+    "simultaneous_ci_budget_5pct": "null:0.25",
+    "absolute_recall_budget": 0.0029200000000000003,
+    "one_sided_lower_bounds": {
+      "null:0.1": -0.0012,
+      "null:0.25": -0.0016,
+      "null:0.5": -0.0034,
+      "null:0.75": -0.0066,
+      "null:1.0": -0.0072,
+      "null:1.5": -0.011,
+      "null:2.0": -0.0126
+    }
+  },
+  "poprank": {
+    "strict": "poprank:0.1",
+    "budget_5pct": "poprank:1.0",
+    "simultaneous_ci_budget_5pct": "poprank:0.5",
+    "absolute_recall_budget": 0.0029200000000000003,
+    "one_sided_lower_bounds": {
+      "poprank:0.1": 0.0,
+      "poprank:0.25": -0.0014,
+      "poprank:0.5": -0.0028,
+      "poprank:0.75": -0.004,
+      "poprank:1.0": -0.0044,
+      "poprank:1.5": -0.0058,
+      "poprank:2.0": -0.0078
+    }
+  }
+}

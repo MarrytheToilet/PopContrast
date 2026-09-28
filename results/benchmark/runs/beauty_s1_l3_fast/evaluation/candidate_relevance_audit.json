@@ -1,0 +1,116 @@
+{
+  "dataset": "beauty",
+  "sid_length": 3,
+  "interpretation": "label-aware retrospective oracle ceilings; no parameter selection",
+  "identity": "tail recall = P(target in raw beam | tail) * P(hit | tail and target in raw beam)",
+  "source_sha256": {
+    "complete.json": "1e97b890865102859c3da7902cd4bd8ba90623c6c8bc3c48dc124646392b32e8",
+    "config.json": "05c1d070550250f2740f37df389df6f62e84dcfa5c0ec48cd7242c3b4991eb44",
+    "validation_selection.json": "2975704e61df37c6da1482ff5219d473330de9de3af00729eaae730501da039f",
+    "test_candidates.npz": "6379290b5b9c62e0fa1088463393b39be4abfb891a4adcdecdad4e01ae0c7f91",
+    "valid_candidates.npz": "4f30aeba0ec94ca4ed0915082030ee11da3c78beb9bd5306c342f16f28cd0e47"
+  },
+  "partitions": {
+    "valid": {
+      "users": 5000,
+      "tail_users": 2477,
+      "tail_targets_available": 84,
+      "candidate_tail_recall_ceiling": 0.03391199031085991,
+      "candidate_overall_recall_ceiling": 0.1268,
+      "candidate_count_quantiles": [
+        20.0,
+        25.0,
+        35.0,
+        50.0
+      ],
+      "methods": {
+        "arithmetic:0.5": {
+          "tail_hits": 55,
+          "tail_recall": 0.022204279370205894,
+          "conditional_tail_hit_rate_given_reachable": 0.6547619047619048
+        },
+        "arithmetic:1.0": {
+          "tail_hits": 63,
+          "tail_recall": 0.025433992733144933,
+          "conditional_tail_hit_rate_given_reachable": 0.75
+        },
+        "geometric:0.25": {
+          "tail_hits": 46,
+          "tail_recall": 0.018570851836899476,
+          "conditional_tail_hit_rate_given_reachable": 0.5476190476190477
+        },
+        "geometric:0.5": {
+          "tail_hits": 53,
+          "tail_recall": 0.021396851029471135,
+          "conditional_tail_hit_rate_given_reachable": 0.6309523809523809
+        },
+        "null:0.25": {
+          "tail_hits": 47,
+          "tail_recall": 0.018974566007266856,
+          "conditional_tail_hit_rate_given_reachable": 0.5595238095238095
+        },
+        "null:0.5": {
+          "tail_hits": 48,
+          "tail_recall": 0.019378280177634235,
+          "conditional_tail_hit_rate_given_reachable": 0.5714285714285714
+        },
+        "raw": {
+          "tail_hits": 38,
+          "tail_recall": 0.015341138473960436,
+          "conditional_tail_hit_rate_given_reachable": 0.4523809523809524
+        }
+      }
+    },
+    "test": {
+      "users": 5000,
+      "tail_users": 2785,
+      "tail_targets_available": 68,
+      "candidate_tail_recall_ceiling": 0.024416517055655295,
+      "candidate_overall_recall_ceiling": 0.0962,
+      "candidate_count_quantiles": [
+        20.0,
+        25.0,
+        36.0,
+        55.0
+      ],
+      "methods": {
+        "arithmetic:0.5": {
+          "tail_hits": 39,
+          "tail_recall": 0.01400359066427289,
+          "conditional_tail_hit_rate_given_reachable": 0.5735294117647058
+        },
+        "arithmetic:1.0": {
+          "tail_hits": 42,
+          "tail_recall": 0.015080789946140035,
+          "conditional_tail_hit_rate_given_reachable": 0.6176470588235294
+        },
+        "geometric:0.25": {
+          "tail_hits": 31,
+          "tail_recall": 0.011131059245960502,
+          "conditional_tail_hit_rate_given_reachable": 0.45588235294117646
+        },
+        "geometric:0.5": {
+          "tail_hits": 35,
+          "tail_recall": 0.012567324955116697,
+          "conditional_tail_hit_rate_given_reachable": 0.5147058823529411
+        },
+        "null:0.25": {
+          "tail_hits": 30,
+          "tail_recall": 0.010771992818671455,
+          "conditional_tail_hit_rate_given_reachable": 0.4411764705882353
+        },
+        "null:0.5": {
+          "tail_hits": 38,
+          "tail_recall": 0.013644524236983842,
+          "conditional_tail_hit_rate_given_reachable": 0.5588235294117647
+        },
+        "raw": {
+          "tail_hits": 25,
+          "tail_recall": 0.008976660682226212,
+          "conditional_tail_hit_rate_given_reachable": 0.36764705882352944
+        }
+      }
+    }
+  },
+  "finished_unix": 1790594819.3174205
+}

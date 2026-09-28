@@ -1,0 +1,116 @@
+{
+  "dataset": "beauty",
+  "sid_length": 3,
+  "interpretation": "label-aware retrospective oracle ceilings; no parameter selection",
+  "identity": "tail recall = P(target in raw beam | tail) * P(hit | tail and target in raw beam)",
+  "source_sha256": {
+    "complete.json": "147f1d35e7e4ad2a1ea080f471587a982d2893e7e12f030f3d1a3933d0c466a2",
+    "config.json": "d656741b1de1c7e3b7a3bbfddb2bcddc0382056d2e772098e2b972a7b1251a58",
+    "validation_selection.json": "a05847caa79a05975058cb3b6e60cd7bf75e92f5eae835c53e148d7454247e88",
+    "test_candidates.npz": "c1831d872986e0bd92eee397917979fa7f272905423b5b6561c66f1c70838d17",
+    "valid_candidates.npz": "1de0f748b41165655212576d66b8e022015b0a5616c30ee212d1eb4961fa4c2a"
+  },
+  "partitions": {
+    "valid": {
+      "users": 5000,
+      "tail_users": 2477,
+      "tail_targets_available": 157,
+      "candidate_tail_recall_ceiling": 0.06338312474767864,
+      "candidate_overall_recall_ceiling": 0.1378,
+      "candidate_count_quantiles": [
+        20.0,
+        24.0,
+        33.0,
+        53.0
+      ],
+      "methods": {
+        "arithmetic:0.25": {
+          "tail_hits": 114,
+          "tail_recall": 0.046023415421881306,
+          "conditional_tail_hit_rate_given_reachable": 0.7261146496815286
+        },
+        "arithmetic:1.0": {
+          "tail_hits": 123,
+          "tail_recall": 0.04965684295518773,
+          "conditional_tail_hit_rate_given_reachable": 0.7834394904458599
+        },
+        "geometric:0.25": {
+          "tail_hits": 113,
+          "tail_recall": 0.045619701251513926,
+          "conditional_tail_hit_rate_given_reachable": 0.7197452229299363
+        },
+        "geometric:0.75": {
+          "tail_hits": 120,
+          "tail_recall": 0.04844570044408559,
+          "conditional_tail_hit_rate_given_reachable": 0.7643312101910829
+        },
+        "null:0.5": {
+          "tail_hits": 114,
+          "tail_recall": 0.046023415421881306,
+          "conditional_tail_hit_rate_given_reachable": 0.7261146496815286
+        },
+        "null:0.75": {
+          "tail_hits": 116,
+          "tail_recall": 0.046830843762616065,
+          "conditional_tail_hit_rate_given_reachable": 0.7388535031847133
+        },
+        "raw": {
+          "tail_hits": 100,
+          "tail_recall": 0.04037141703673799,
+          "conditional_tail_hit_rate_given_reachable": 0.6369426751592356
+        }
+      }
+    },
+    "test": {
+      "users": 5000,
+      "tail_users": 2785,
+      "tail_targets_available": 124,
+      "candidate_tail_recall_ceiling": 0.04452423698384201,
+      "candidate_overall_recall_ceiling": 0.1076,
+      "candidate_count_quantiles": [
+        20.0,
+        24.0,
+        34.0,
+        54.0
+      ],
+      "methods": {
+        "arithmetic:0.25": {
+          "tail_hits": 73,
+          "tail_recall": 0.02621184919210054,
+          "conditional_tail_hit_rate_given_reachable": 0.5887096774193549
+        },
+        "arithmetic:1.0": {
+          "tail_hits": 92,
+          "tail_recall": 0.03303411131059246,
+          "conditional_tail_hit_rate_given_reachable": 0.7419354838709677
+        },
+        "geometric:0.25": {
+          "tail_hits": 69,
+          "tail_recall": 0.024775583482944345,
+          "conditional_tail_hit_rate_given_reachable": 0.5564516129032258
+        },
+        "geometric:0.75": {
+          "tail_hits": 88,
+          "tail_recall": 0.03159784560143627,
+          "conditional_tail_hit_rate_given_reachable": 0.7096774193548387
+        },
+        "null:0.5": {
+          "tail_hits": 81,
+          "tail_recall": 0.029084380610412925,
+          "conditional_tail_hit_rate_given_reachable": 0.6532258064516129
+        },
+        "null:0.75": {
+          "tail_hits": 89,
+          "tail_recall": 0.03195691202872531,
+          "conditional_tail_hit_rate_given_reachable": 0.717741935483871
+        },
+        "raw": {
+          "tail_hits": 65,
+          "tail_recall": 0.02333931777378815,
+          "conditional_tail_hit_rate_given_reachable": 0.5241935483870968
+        }
+      }
+    }
+  },
+  "finished_unix": 1790597370.4813597
+}

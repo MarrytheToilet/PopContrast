@@ -1,0 +1,18 @@
+{
+  "run": "runs/books2023_s1_l5_widths",
+  "passed": true,
+  "widths": [
+    "20",
+    "50",
+    "100"
+  ],
+  "users": 1000,
+  "sources": {
+    "width_20_top10.npz": "56a2acc0f80566bb4cbed57602067083aa2e80c2478789d499dd89d304907d78",
+    "width_50_top10.npz": "86e5983b2c006bcc65aa9d0ee96aba169fa4de596d12e312e292e47f0048e88a",
+    "width_100_top10.npz": "e5ec439439b290c631875f3856c51c69c96d1e474d100303d4d7c32c43725e38"
+  },
+  "results_sha256": "df1e6ef9e27c63994d607aeb650e67424e5e7d98da73e98ac0013c297bd6a9a3",
+  "finished_unix": 1790599595.8089979,
+  "scope": "same users and targets across widths, recommendation identities, overall/tail recall, coverage, paired gained/lost hits, overlap bounded by inclusion"
+}

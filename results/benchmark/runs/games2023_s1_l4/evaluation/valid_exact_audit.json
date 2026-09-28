@@ -1,0 +1,2818 @@
+[
+  {
+    "sample_index": 42848,
+    "score_max_abs_error_raw_candidates": 2.5533081497997046e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          24558,
+          16103,
+          25426,
+          11141,
+          10915,
+          16675,
+          17548,
+          11338,
+          25359,
+          15574
+        ],
+        "bound_overlap": 0.7,
+        "in_bound_beam": 0.7
+      },
+      "1.5": {
+        "in_raw_beam": 0.8,
+        "leaf_overlap": 0.8,
+        "common_score_replay_overlap": 0.8,
+        "leaf_exact_top": [
+          24558,
+          16103,
+          11141,
+          14501,
+          13806,
+          25426,
+          10915,
+          16675,
+          16556,
+          19542
+        ],
+        "bound_overlap": 0.4,
+        "in_bound_beam": 0.4
+      }
+    }
+  },
+  {
+    "sample_index": 6208,
+    "score_max_abs_error_raw_candidates": 5.62518835067749e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          25352,
+          19707,
+          15574,
+          19508,
+          16487,
+          16818,
+          16927,
+          18703,
+          19494,
+          21402
+        ],
+        "bound_overlap": 0.8,
+        "in_bound_beam": 0.8
+      },
+      "1.5": {
+        "in_raw_beam": 0.4,
+        "leaf_overlap": 0.4,
+        "common_score_replay_overlap": 0.4,
+        "leaf_exact_top": [
+          25352,
+          19707,
+          19508,
+          18007,
+          21434,
+          21643,
+          16487,
+          19394,
+          23144,
+          18703
+        ],
+        "bound_overlap": 0.3,
+        "in_bound_beam": 0.3
+      }
+    }
+  },
+  {
+    "sample_index": 74752,
+    "score_max_abs_error_raw_candidates": 5.96320751355961e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          24558,
+          16103,
+          25426,
+          11141,
+          16675,
+          11338,
+          17548,
+          15493,
+          13806,
+          10915
+        ],
+        "bound_overlap": 0.6,
+        "in_bound_beam": 0.6
+      },
+      "1.5": {
+        "in_raw_beam": 0.7,
+        "leaf_overlap": 0.7,
+        "common_score_replay_overlap": 0.7,
+        "leaf_exact_top": [
+          24558,
+          15493,
+          16675,
+          16556,
+          13806,
+          16103,
+          11141,
+          25426,
+          18325,
+          11338
+        ],
+        "bound_overlap": 0.4,
+        "in_bound_beam": 0.4
+      }
+    }
+  },
+  {
+    "sample_index": 77403,
+    "score_max_abs_error_raw_candidates": 3.6656856536865234e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          17805,
+          11229,
+          10501,
+          14075,
+          9182,
+          11228,
+          9177,
+          9183,
+          13566,
+          12686
+        ],
+        "bound_overlap": 0.8,
+        "in_bound_beam": 0.8
+      },
+      "1.5": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          17805,
+          11229,
+          10501,
+          9182,
+          14075,
+          11228,
+          9177,
+          12686,
+          13566,
+          9183
+        ],
+        "bound_overlap": 0.5,
+        "in_bound_beam": 0.5
+      }
+    }
+  },
+  {
+    "sample_index": 22778,
+    "score_max_abs_error_raw_candidates": 2.5039189495146275e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          9183,
+          10134,
+          7575,
+          8178,
+          6242,
+          9032,
+          7398,
+          10501,
+          3716,
+          6431
+        ],
+        "bound_overlap": 0.5,
+        "in_bound_beam": 0.5
+      },
+      "1.5": {
+        "in_raw_beam": 0.8,
+        "leaf_overlap": 0.8,
+        "common_score_replay_overlap": 0.8,
+        "leaf_exact_top": [
+          7575,
+          9183,
+          8178,
+          10134,
+          9032,
+          6242,
+          9073,
+          7398,
+          6431,
+          4825
+        ],
+        "bound_overlap": 0.2,
+        "in_bound_beam": 0.2
+      }
+    }
+  },
+  {
+    "sample_index": 221,
+    "score_max_abs_error_raw_candidates": 3.993511199951172e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          11939,
+          6315,
+          7280,
+          12719,
+          11946,
+          7199,
+          7441,
+          12536,
+          7898,
+          12947
+        ],
+        "bound_overlap": 1.0,
+        "in_bound_beam": 1.0
+      },
+      "1.5": {
+        "in_raw_beam": 0.8,
+        "leaf_overlap": 0.8,
+        "common_score_replay_overlap": 0.8,
+        "leaf_exact_top": [
+          11939,
+          6315,
+          7898,
+          13385,
+          12719,
+          11946,
+          7280,
+          12947,
+          12536,
+          12285
+        ],
+        "bound_overlap": 1.0,
+        "in_bound_beam": 1.0
+      }
+    }
+  },
+  {
+    "sample_index": 60934,
+    "score_max_abs_error_raw_candidates": 3.4570693969726562e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          8827,
+          6992,
+          10118,
+          7018,
+          10140,
+          8755,
+          11095,
+          10920,
+          9690,
+          10130
+        ],
+        "bound_overlap": 0.7,
+        "in_bound_beam": 0.7
+      },
+      "1.5": {
+        "in_raw_beam": 0.5,
+        "leaf_overlap": 0.5,
+        "common_score_replay_overlap": 0.5,
+        "leaf_exact_top": [
+          8827,
+          6992,
+          9112,
+          7018,
+          10140,
+          8258,
+          9104,
+          10745,
+          9126,
+          4605
+        ],
+        "bound_overlap": 0.3,
+        "in_bound_beam": 0.3
+      }
+    }
+  },
+  {
+    "sample_index": 54254,
+    "score_max_abs_error_raw_candidates": 3.0994415283203125e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          20836,
+          15574,
+          20514,
+          18237,
+          16818,
+          25556,
+          20115,
+          18232,
+          16225,
+          17018
+        ],
+        "bound_overlap": 0.6,
+        "in_bound_beam": 0.6
+      },
+      "1.5": {
+        "in_raw_beam": 0.5,
+        "leaf_overlap": 0.5,
+        "common_score_replay_overlap": 0.5,
+        "leaf_exact_top": [
+          20836,
+          19401,
+          18232,
+          18237,
+          16225,
+          18007,
+          19825,
+          20907,
+          20115,
+          16017
+        ],
+        "bound_overlap": 0.4,
+        "in_bound_beam": 0.4
+      }
+    }
+  },
+  {
+    "sample_index": 6841,
+    "score_max_abs_error_raw_candidates": 4.559755325317383e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          22364,
+          25201,
+          25357,
+          25339,
+          25143,
+          21405,
+          24284,
+          21698,
+          20085,
+          23134
+        ],
+        "bound_overlap": 0.8,
+        "in_bound_beam": 0.8
+      },
+      "1.5": {
+        "in_raw_beam": 0.6,
+        "leaf_overlap": 0.6,
+        "common_score_replay_overlap": 0.6,
+        "leaf_exact_top": [
+          22364,
+          25339,
+          22944,
+          24548,
+          25357,
+          25201,
+          21698,
+          17647,
+          24678,
+          19249
+        ],
+        "bound_overlap": 0.5,
+        "in_bound_beam": 0.5
+      }
+    }
+  },
+  {
+    "sample_index": 43063,
+    "score_max_abs_error_raw_candidates": 3.323657438158989e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          25352,
+          15574,
+          19508,
+          21194,
+          16818,
+          19707,
+          20836,
+          21256,
+          18007,
+          16349
+        ],
+        "bound_overlap": 0.8,
+        "in_bound_beam": 0.8
+      },
+      "1.5": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          18007,
+          25352,
+          19401,
+          19508,
+          15574,
+          19707,
+          21194,
+          16335,
+          23993,
+          21256
+        ],
+        "bound_overlap": 0.6,
+        "in_bound_beam": 0.6
+      }
+    }
+  },
+  {
+    "sample_index": 4328,
+    "score_max_abs_error_raw_candidates": 1.862645149230957e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          5646,
+          3718,
+          5708,
+          4707,
+          6297,
+          3713,
+          5754,
+          5259,
+          5709,
+          4544
+        ],
+        "bound_overlap": 0.9,
+        "in_bound_beam": 0.9
+      },
+      "1.5": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          3718,
+          5708,
+          4707,
+          5646,
+          6297,
+          6148,
+          3713,
+          4544,
+          5709,
+          5259
+        ],
+        "bound_overlap": 0.1,
+        "in_bound_beam": 0.1
+      }
+    }
+  },
+  {
+    "sample_index": 62228,
+    "score_max_abs_error_raw_candidates": 2.8586655389517546e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          17805,
+          11229,
+          9177,
+          11228,
+          14114,
+          9183,
+          9182,
+          10905,
+          10725,
+          6967
+        ],
+        "bound_overlap": 0.6,
+        "in_bound_beam": 0.6
+      },
+      "1.5": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          17805,
+          11229,
+          9177,
+          11228,
+          9183,
+          9182,
+          7013,
+          6967,
+          14114,
+          10725
+        ],
+        "bound_overlap": 0.3,
+        "in_bound_beam": 0.3
+      }
+    }
+  },
+  {
+    "sample_index": 63059,
+    "score_max_abs_error_raw_candidates": 2.742057404248044e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.8,
+        "leaf_overlap": 0.8,
+        "common_score_replay_overlap": 0.8,
+        "leaf_exact_top": [
+          7406,
+          8178,
+          6950,
+          14114,
+          9183,
+          7872,
+          3716,
+          19959,
+          6761,
+          7398
+        ],
+        "bound_overlap": 0.3,
+        "in_bound_beam": 0.3
+      },
+      "1.5": {
+        "in_raw_beam": 0.8,
+        "leaf_overlap": 0.8,
+        "common_score_replay_overlap": 0.8,
+        "leaf_exact_top": [
+          7406,
+          8178,
+          6950,
+          9183,
+          14114,
+          7398,
+          6761,
+          7872,
+          3716,
+          6992
+        ],
+        "bound_overlap": 0.3,
+        "in_bound_beam": 0.3
+      }
+    }
+  },
+  {
+    "sample_index": 26408,
+    "score_max_abs_error_raw_candidates": 4.507601261138916e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          19949,
+          16978,
+          21256,
+          15355,
+          15574,
+          16315,
+          17752,
+          16287,
+          18097,
+          14892
+        ],
+        "bound_overlap": 0.9,
+        "in_bound_beam": 0.9
+      },
+      "1.5": {
+        "in_raw_beam": 0.7,
+        "leaf_overlap": 0.7,
+        "common_score_replay_overlap": 0.7,
+        "leaf_exact_top": [
+          17752,
+          21256,
+          19949,
+          15355,
+          18097,
+          16315,
+          20732,
+          25277,
+          16978,
+          14892
+        ],
+        "bound_overlap": 0.7,
+        "in_bound_beam": 0.7
+      }
+    }
+  },
+  {
+    "sample_index": 7687,
+    "score_max_abs_error_raw_candidates": 3.55718657374382e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          15574,
+          20514,
+          16409,
+          16818,
+          20512,
+          20836,
+          20115,
+          21194,
+          17329,
+          21497
+        ],
+        "bound_overlap": 0.8,
+        "in_bound_beam": 0.8
+      },
+      "1.5": {
+        "in_raw_beam": 0.6,
+        "leaf_overlap": 0.6,
+        "common_score_replay_overlap": 0.6,
+        "leaf_exact_top": [
+          19401,
+          21834,
+          16409,
+          21497,
+          17229,
+          20514,
+          15574,
+          17329,
+          16326,
+          16818
+        ],
+        "bound_overlap": 0.5,
+        "in_bound_beam": 0.5
+      }
+    }
+  },
+  {
+    "sample_index": 91436,
+    "score_max_abs_error_raw_candidates": 3.1888484954833984e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          21194,
+          15574,
+          18895,
+          20514,
+          21497,
+          16818,
+          15862,
+          20115,
+          20836,
+          21691
+        ],
+        "bound_overlap": 0.9,
+        "in_bound_beam": 0.9
+      },
+      "1.5": {
+        "in_raw_beam": 0.7,
+        "leaf_overlap": 0.7,
+        "common_score_replay_overlap": 0.7,
+        "leaf_exact_top": [
+          21194,
+          18895,
+          21497,
+          15989,
+          15862,
+          15574,
+          15174,
+          15172,
+          17926,
+          18909
+        ],
+        "bound_overlap": 0.6,
+        "in_bound_beam": 0.6
+      }
+    }
+  },
+  {
+    "sample_index": 83490,
+    "score_max_abs_error_raw_candidates": 3.0975788831710815e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          5966,
+          5406,
+          5346,
+          1579,
+          1931,
+          3592,
+          3257,
+          3293,
+          2360,
+          1786
+        ],
+        "bound_overlap": 0.3,
+        "in_bound_beam": 0.3
+      },
+      "1.5": {
+        "in_raw_beam": 0.6,
+        "leaf_overlap": 0.6,
+        "common_score_replay_overlap": 0.6,
+        "leaf_exact_top": [
+          2451,
+          5966,
+          3592,
+          1579,
+          1931,
+          5406,
+          5713,
+          1786,
+          3046,
+          2617
+        ],
+        "bound_overlap": 0.1,
+        "in_bound_beam": 0.1
+      }
+    }
+  },
+  {
+    "sample_index": 62511,
+    "score_max_abs_error_raw_candidates": 3.994278813479468e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          20514,
+          20512,
+          16409,
+          15574,
+          20520,
+          16818,
+          20836,
+          17329,
+          21194,
+          20115
+        ],
+        "bound_overlap": 0.9,
+        "in_bound_beam": 0.9
+      },
+      "1.5": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          16409,
+          20514,
+          20512,
+          20520,
+          17329,
+          15574,
+          16818,
+          20836,
+          21194,
+          20115
+        ],
+        "bound_overlap": 0.8,
+        "in_bound_beam": 0.8
+      }
+    }
+  },
+  {
+    "sample_index": 9034,
+    "score_max_abs_error_raw_candidates": 3.680586814880371e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          15574,
+          20514,
+          20836,
+          20512,
+          16818,
+          25352,
+          18564,
+          20509,
+          16927,
+          20087
+        ],
+        "bound_overlap": 0.8,
+        "in_bound_beam": 0.8
+      },
+      "1.5": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          20509,
+          20514,
+          18564,
+          20836,
+          20512,
+          15574,
+          20907,
+          25352,
+          16818,
+          19401
+        ],
+        "bound_overlap": 0.8,
+        "in_bound_beam": 0.8
+      }
+    }
+  },
+  {
+    "sample_index": 27885,
+    "score_max_abs_error_raw_candidates": 2.2055755835026503e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          15574,
+          14993,
+          24558,
+          16103,
+          20514,
+          12491,
+          13529,
+          11141,
+          13108,
+          10915
+        ],
+        "bound_overlap": 0.7,
+        "in_bound_beam": 0.7
+      },
+      "1.5": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          15574,
+          24558,
+          14993,
+          16103,
+          12491,
+          11141,
+          20514,
+          13529,
+          15670,
+          10915
+        ],
+        "bound_overlap": 0.5,
+        "in_bound_beam": 0.5
+      }
+    }
+  },
+  {
+    "sample_index": 92830,
+    "score_max_abs_error_raw_candidates": 6.139278411865234e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          6242,
+          7575,
+          6431,
+          10501,
+          10140,
+          4825,
+          7406,
+          9183,
+          8792,
+          10104
+        ],
+        "bound_overlap": 0.7,
+        "in_bound_beam": 0.7
+      },
+      "1.5": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          6242,
+          7575,
+          6431,
+          4825,
+          10140,
+          8792,
+          10501,
+          9032,
+          9183,
+          7406
+        ],
+        "bound_overlap": 0.3,
+        "in_bound_beam": 0.3
+      }
+    }
+  },
+  {
+    "sample_index": 85214,
+    "score_max_abs_error_raw_candidates": 4.32133674621582e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          15574,
+          25352,
+          16818,
+          19707,
+          21194,
+          16349,
+          20115,
+          21402,
+          20514,
+          19508
+        ],
+        "bound_overlap": 0.9,
+        "in_bound_beam": 0.9
+      },
+      "1.5": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          15574,
+          25352,
+          19707,
+          21194,
+          19508,
+          21402,
+          20115,
+          23993,
+          16349,
+          18007
+        ],
+        "bound_overlap": 0.6,
+        "in_bound_beam": 0.6
+      }
+    }
+  },
+  {
+    "sample_index": 90109,
+    "score_max_abs_error_raw_candidates": 2.8625800041481853e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          13911,
+          13530,
+          19942,
+          12489,
+          13364,
+          19961,
+          13578,
+          11259,
+          12202,
+          14837
+        ],
+        "bound_overlap": 0.5,
+        "in_bound_beam": 0.5
+      },
+      "1.5": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          13911,
+          12489,
+          13530,
+          14837,
+          19942,
+          11259,
+          13578,
+          13790,
+          19961,
+          13364
+        ],
+        "bound_overlap": 0.3,
+        "in_bound_beam": 0.3
+      }
+    }
+  },
+  {
+    "sample_index": 20589,
+    "score_max_abs_error_raw_candidates": 3.680586814880371e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.8,
+        "leaf_overlap": 0.8,
+        "common_score_replay_overlap": 0.8,
+        "leaf_exact_top": [
+          21256,
+          25352,
+          19707,
+          15574,
+          18065,
+          18007,
+          24938,
+          23089,
+          19494,
+          16874
+        ],
+        "bound_overlap": 0.9,
+        "in_bound_beam": 0.9
+      },
+      "1.5": {
+        "in_raw_beam": 0.7,
+        "leaf_overlap": 0.7,
+        "common_score_replay_overlap": 0.7,
+        "leaf_exact_top": [
+          18007,
+          19707,
+          21256,
+          23089,
+          25352,
+          22035,
+          24938,
+          18065,
+          21792,
+          16874
+        ],
+        "bound_overlap": 0.6,
+        "in_bound_beam": 0.6
+      }
+    }
+  },
+  {
+    "sample_index": 89470,
+    "score_max_abs_error_raw_candidates": 4.373490810394287e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          22875,
+          23693,
+          23276,
+          25239,
+          23271,
+          22928,
+          22719,
+          22603,
+          24291,
+          21345
+        ],
+        "bound_overlap": 0.7,
+        "in_bound_beam": 0.7
+      },
+      "1.5": {
+        "in_raw_beam": 0.6,
+        "leaf_overlap": 0.6,
+        "common_score_replay_overlap": 0.6,
+        "leaf_exact_top": [
+          24291,
+          23693,
+          25110,
+          23276,
+          22875,
+          22603,
+          22928,
+          22166,
+          22719,
+          22791
+        ],
+        "bound_overlap": 0.4,
+        "in_bound_beam": 0.4
+      }
+    }
+  },
+  {
+    "sample_index": 58664,
+    "score_max_abs_error_raw_candidates": 2.9802322387695312e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          21256,
+          25077,
+          25511,
+          25198,
+          15242,
+          22190,
+          17930,
+          19514,
+          23397,
+          21689
+        ],
+        "bound_overlap": 0.6,
+        "in_bound_beam": 0.6
+      },
+      "1.5": {
+        "in_raw_beam": 0.8,
+        "leaf_overlap": 0.8,
+        "common_score_replay_overlap": 0.8,
+        "leaf_exact_top": [
+          21256,
+          23397,
+          22191,
+          25077,
+          21957,
+          17930,
+          22190,
+          25511,
+          24584,
+          25198
+        ],
+        "bound_overlap": 0.3,
+        "in_bound_beam": 0.3
+      }
+    }
+  },
+  {
+    "sample_index": 23398,
+    "score_max_abs_error_raw_candidates": 2.6244379114359617e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.8,
+        "leaf_overlap": 0.8,
+        "common_score_replay_overlap": 0.8,
+        "leaf_exact_top": [
+          15574,
+          17805,
+          12459,
+          10134,
+          9177,
+          13693,
+          10459,
+          10501,
+          14993,
+          4293
+        ],
+        "bound_overlap": 0.7,
+        "in_bound_beam": 0.7
+      },
+      "1.5": {
+        "in_raw_beam": 0.4,
+        "leaf_overlap": 0.4,
+        "common_score_replay_overlap": 0.4,
+        "leaf_exact_top": [
+          418,
+          8140,
+          9177,
+          12459,
+          4293,
+          13693,
+          10134,
+          342,
+          17805,
+          5042
+        ],
+        "bound_overlap": 0.2,
+        "in_bound_beam": 0.2
+      }
+    }
+  },
+  {
+    "sample_index": 83746,
+    "score_max_abs_error_raw_candidates": 5.4836273193359375e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          18840,
+          12490,
+          13985,
+          12681,
+          12705,
+          15511,
+          13626,
+          11863,
+          11461,
+          13012
+        ],
+        "bound_overlap": 0.8,
+        "in_bound_beam": 0.8
+      },
+      "1.5": {
+        "in_raw_beam": 0.7,
+        "leaf_overlap": 0.7,
+        "common_score_replay_overlap": 0.7,
+        "leaf_exact_top": [
+          18840,
+          13985,
+          12490,
+          12705,
+          11863,
+          13626,
+          12902,
+          12681,
+          14125,
+          12101
+        ],
+        "bound_overlap": 0.4,
+        "in_bound_beam": 0.4
+      }
+    }
+  },
+  {
+    "sample_index": 21416,
+    "score_max_abs_error_raw_candidates": 6.521586328744888e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          15574,
+          14993,
+          13012,
+          18840,
+          12491,
+          11496,
+          12433,
+          13529,
+          20514,
+          18273
+        ],
+        "bound_overlap": 0.6,
+        "in_bound_beam": 0.6
+      },
+      "1.5": {
+        "in_raw_beam": 0.8,
+        "leaf_overlap": 0.8,
+        "common_score_replay_overlap": 0.8,
+        "leaf_exact_top": [
+          18840,
+          14993,
+          13012,
+          13626,
+          15574,
+          12491,
+          11496,
+          15183,
+          13529,
+          12433
+        ],
+        "bound_overlap": 0.4,
+        "in_bound_beam": 0.4
+      }
+    }
+  },
+  {
+    "sample_index": 8538,
+    "score_max_abs_error_raw_candidates": 4.172325134277344e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.7,
+        "leaf_overlap": 0.7,
+        "common_score_replay_overlap": 0.7,
+        "leaf_exact_top": [
+          21256,
+          25360,
+          25160,
+          22097,
+          22586,
+          23282,
+          25150,
+          22148,
+          20915,
+          23784
+        ],
+        "bound_overlap": 0.6,
+        "in_bound_beam": 0.6
+      },
+      "1.5": {
+        "in_raw_beam": 0.5,
+        "leaf_overlap": 0.5,
+        "common_score_replay_overlap": 0.5,
+        "leaf_exact_top": [
+          22586,
+          25360,
+          25160,
+          25150,
+          21256,
+          25487,
+          21720,
+          23784,
+          20915,
+          20916
+        ],
+        "bound_overlap": 0.7,
+        "in_bound_beam": 0.7
+      }
+    }
+  },
+  {
+    "sample_index": 36106,
+    "score_max_abs_error_raw_candidates": 5.885958671569824e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          15574,
+          20514,
+          20512,
+          16409,
+          16818,
+          20520,
+          16349,
+          21194,
+          20115,
+          20087
+        ],
+        "bound_overlap": 0.8,
+        "in_bound_beam": 0.8
+      },
+      "1.5": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          20514,
+          15574,
+          16409,
+          20512,
+          16818,
+          20520,
+          21194,
+          20115,
+          16349,
+          17627
+        ],
+        "bound_overlap": 0.7,
+        "in_bound_beam": 0.7
+      }
+    }
+  },
+  {
+    "sample_index": 64689,
+    "score_max_abs_error_raw_candidates": 2.771615982055664e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.7,
+        "leaf_overlap": 0.7,
+        "common_score_replay_overlap": 0.7,
+        "leaf_exact_top": [
+          4960,
+          9149,
+          6570,
+          8437,
+          10745,
+          5468,
+          7979,
+          7914,
+          7771,
+          7114
+        ],
+        "bound_overlap": 0.2,
+        "in_bound_beam": 0.2
+      },
+      "1.5": {
+        "in_raw_beam": 0.6,
+        "leaf_overlap": 0.6,
+        "common_score_replay_overlap": 0.6,
+        "leaf_exact_top": [
+          4960,
+          9149,
+          6570,
+          10745,
+          8437,
+          5468,
+          7914,
+          7114,
+          8258,
+          4926
+        ],
+        "bound_overlap": 0.1,
+        "in_bound_beam": 0.1
+      }
+    }
+  },
+  {
+    "sample_index": 16283,
+    "score_max_abs_error_raw_candidates": 4.149973392486572e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          14885,
+          11238,
+          16978,
+          13578,
+          13579,
+          13621,
+          14811,
+          14884,
+          19949,
+          13911
+        ],
+        "bound_overlap": 0.9,
+        "in_bound_beam": 0.9
+      },
+      "1.5": {
+        "in_raw_beam": 0.8,
+        "leaf_overlap": 0.8,
+        "common_score_replay_overlap": 0.8,
+        "leaf_exact_top": [
+          14885,
+          11238,
+          14811,
+          13579,
+          13578,
+          13621,
+          14884,
+          19949,
+          16089,
+          20065
+        ],
+        "bound_overlap": 0.7,
+        "in_bound_beam": 0.7
+      }
+    }
+  },
+  {
+    "sample_index": 7371,
+    "score_max_abs_error_raw_candidates": 2.7662099455483258e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          10920,
+          11797,
+          11089,
+          10968,
+          10923,
+          10921,
+          11186,
+          11026,
+          11070,
+          12202
+        ],
+        "bound_overlap": 0.9,
+        "in_bound_beam": 0.9
+      },
+      "1.5": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          11089,
+          11797,
+          10920,
+          10923,
+          10921,
+          10968,
+          11186,
+          11070,
+          19818,
+          12202
+        ],
+        "bound_overlap": 0.8,
+        "in_bound_beam": 0.8
+      }
+    }
+  },
+  {
+    "sample_index": 91993,
+    "score_max_abs_error_raw_candidates": 3.3961405279114842e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          14889,
+          15355,
+          19106,
+          14892,
+          16287,
+          18097,
+          17752,
+          19949,
+          21105,
+          17460
+        ],
+        "bound_overlap": 0.8,
+        "in_bound_beam": 0.8
+      },
+      "1.5": {
+        "in_raw_beam": 0.8,
+        "leaf_overlap": 0.8,
+        "common_score_replay_overlap": 0.8,
+        "leaf_exact_top": [
+          14889,
+          15355,
+          19106,
+          14892,
+          17752,
+          18097,
+          21105,
+          14891,
+          16287,
+          17460
+        ],
+        "bound_overlap": 0.6,
+        "in_bound_beam": 0.6
+      }
+    }
+  },
+  {
+    "sample_index": 3340,
+    "score_max_abs_error_raw_candidates": 4.4405460357666016e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          23086,
+          21752,
+          22756,
+          22789,
+          21481,
+          21359,
+          21036,
+          20832,
+          23176,
+          25502
+        ],
+        "bound_overlap": 1.0,
+        "in_bound_beam": 1.0
+      },
+      "1.5": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          23086,
+          22756,
+          21752,
+          22789,
+          25502,
+          23176,
+          24191,
+          21481,
+          21359,
+          21036
+        ],
+        "bound_overlap": 1.0,
+        "in_bound_beam": 1.0
+      }
+    }
+  },
+  {
+    "sample_index": 30227,
+    "score_max_abs_error_raw_candidates": 6.541609764099121e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          17805,
+          11229,
+          14993,
+          18897,
+          14075,
+          13566,
+          10501,
+          9182,
+          11228,
+          13529
+        ],
+        "bound_overlap": 0.7,
+        "in_bound_beam": 0.7
+      },
+      "1.5": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          17805,
+          11229,
+          18897,
+          14993,
+          13566,
+          14075,
+          9182,
+          11228,
+          10501,
+          14355
+        ],
+        "bound_overlap": 0.5,
+        "in_bound_beam": 0.5
+      }
+    }
+  },
+  {
+    "sample_index": 17963,
+    "score_max_abs_error_raw_candidates": 3.56137752532959e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          3257,
+          3737,
+          1664,
+          5383,
+          4505,
+          5564,
+          211,
+          1467,
+          2937,
+          3616
+        ],
+        "bound_overlap": 0.5,
+        "in_bound_beam": 0.5
+      },
+      "1.5": {
+        "in_raw_beam": 0.7,
+        "leaf_overlap": 0.7,
+        "common_score_replay_overlap": 0.7,
+        "leaf_exact_top": [
+          1664,
+          3737,
+          5383,
+          3257,
+          211,
+          1467,
+          5443,
+          4508,
+          5503,
+          4213
+        ],
+        "bound_overlap": 0.2,
+        "in_bound_beam": 0.2
+      }
+    }
+  },
+  {
+    "sample_index": 44182,
+    "score_max_abs_error_raw_candidates": 3.1888484954833984e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          5656,
+          11754,
+          5801,
+          1420,
+          1470,
+          1697,
+          5664,
+          1539,
+          5402,
+          5932
+        ],
+        "bound_overlap": 0.6,
+        "in_bound_beam": 0.6
+      },
+      "1.5": {
+        "in_raw_beam": 0.6,
+        "leaf_overlap": 0.6,
+        "common_score_replay_overlap": 0.6,
+        "leaf_exact_top": [
+          5656,
+          1420,
+          1470,
+          1697,
+          5932,
+          1922,
+          1837,
+          1954,
+          1748,
+          11754
+        ],
+        "bound_overlap": 0.6,
+        "in_bound_beam": 0.6
+      }
+    }
+  },
+  {
+    "sample_index": 87473,
+    "score_max_abs_error_raw_candidates": 2.859393134713173e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          15574,
+          16409,
+          20514,
+          16818,
+          20836,
+          20512,
+          25352,
+          14993,
+          13529,
+          20087
+        ],
+        "bound_overlap": 0.8,
+        "in_bound_beam": 0.8
+      },
+      "1.5": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          16409,
+          15574,
+          20514,
+          20836,
+          16818,
+          25352,
+          20512,
+          20115,
+          18564,
+          20520
+        ],
+        "bound_overlap": 0.7,
+        "in_bound_beam": 0.7
+      }
+    }
+  },
+  {
+    "sample_index": 58667,
+    "score_max_abs_error_raw_candidates": 2.159231371479109e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          19970,
+          7805,
+          8813,
+          5709,
+          7838,
+          8755,
+          7087,
+          6767,
+          5724,
+          5646
+        ],
+        "bound_overlap": 0.8,
+        "in_bound_beam": 0.8
+      },
+      "1.5": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          7838,
+          8813,
+          19970,
+          5709,
+          6767,
+          7087,
+          7805,
+          8198,
+          7660,
+          7949
+        ],
+        "bound_overlap": 0.5,
+        "in_bound_beam": 0.5
+      }
+    }
+  },
+  {
+    "sample_index": 87131,
+    "score_max_abs_error_raw_candidates": 3.874301910400391e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          10118,
+          11070,
+          12327,
+          10968,
+          11089,
+          11026,
+          13574,
+          12328,
+          10923,
+          11186
+        ],
+        "bound_overlap": 0.8,
+        "in_bound_beam": 0.8
+      },
+      "1.5": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          12327,
+          11070,
+          11089,
+          13574,
+          10118,
+          12328,
+          10968,
+          10886,
+          11026,
+          11186
+        ],
+        "bound_overlap": 0.7,
+        "in_bound_beam": 0.7
+      }
+    }
+  },
+  {
+    "sample_index": 63693,
+    "score_max_abs_error_raw_candidates": 3.546476364135742e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          21256,
+          25077,
+          15574,
+          15242,
+          25198,
+          20604,
+          21396,
+          25359,
+          15493,
+          16349
+        ],
+        "bound_overlap": 0.5,
+        "in_bound_beam": 0.5
+      },
+      "1.5": {
+        "in_raw_beam": 0.8,
+        "leaf_overlap": 0.8,
+        "common_score_replay_overlap": 0.8,
+        "leaf_exact_top": [
+          25077,
+          21256,
+          25198,
+          15493,
+          15242,
+          22190,
+          20604,
+          21396,
+          19460,
+          20579
+        ],
+        "bound_overlap": 0.5,
+        "in_bound_beam": 0.5
+      }
+    }
+  },
+  {
+    "sample_index": 7095,
+    "score_max_abs_error_raw_candidates": 2.5038116291398183e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          9896,
+          8593,
+          10129,
+          8755,
+          10189,
+          10118,
+          19962,
+          7088,
+          9489,
+          19807
+        ],
+        "bound_overlap": 0.7,
+        "in_bound_beam": 0.7
+      },
+      "1.5": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          9896,
+          8593,
+          19807,
+          10129,
+          7088,
+          10189,
+          8755,
+          9489,
+          9690,
+          19962
+        ],
+        "bound_overlap": 0.6,
+        "in_bound_beam": 0.6
+      }
+    }
+  },
+  {
+    "sample_index": 62305,
+    "score_max_abs_error_raw_candidates": 3.545192157616839e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          1246,
+          25359,
+          21396,
+          15493,
+          1889,
+          24558,
+          3609,
+          20694,
+          14501,
+          22507
+        ],
+        "bound_overlap": 0.5,
+        "in_bound_beam": 0.5
+      },
+      "1.5": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          1246,
+          15493,
+          3609,
+          21396,
+          1889,
+          25359,
+          20694,
+          20038,
+          22507,
+          24558
+        ],
+        "bound_overlap": 0.4,
+        "in_bound_beam": 0.4
+      }
+    }
+  },
+  {
+    "sample_index": 84370,
+    "score_max_abs_error_raw_candidates": 2.623142790980637e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          13911,
+          13530,
+          14837,
+          13578,
+          13580,
+          13579,
+          19942,
+          13364,
+          19719,
+          19820
+        ],
+        "bound_overlap": 0.4,
+        "in_bound_beam": 0.4
+      },
+      "1.5": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          14837,
+          13530,
+          13911,
+          19820,
+          15367,
+          13580,
+          13578,
+          13579,
+          13574,
+          19719
+        ],
+        "bound_overlap": 0.3,
+        "in_bound_beam": 0.3
+      }
+    }
+  },
+  {
+    "sample_index": 75299,
+    "score_max_abs_error_raw_candidates": 2.149150532204658e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          11026,
+          10931,
+          10968,
+          10118,
+          10920,
+          12372,
+          19962,
+          11292,
+          11095,
+          19959
+        ],
+        "bound_overlap": 1.0,
+        "in_bound_beam": 1.0
+      },
+      "1.5": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          10931,
+          11026,
+          11292,
+          19962,
+          12372,
+          10968,
+          10920,
+          10922,
+          19968,
+          10118
+        ],
+        "bound_overlap": 0.9,
+        "in_bound_beam": 0.9
+      }
+    }
+  },
+  {
+    "sample_index": 52751,
+    "score_max_abs_error_raw_candidates": 5.125999450683594e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          10725,
+          9182,
+          9177,
+          9183,
+          17805,
+          10134,
+          9181,
+          7872,
+          18840,
+          9082
+        ],
+        "bound_overlap": 0.4,
+        "in_bound_beam": 0.4
+      },
+      "1.5": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          10725,
+          9182,
+          9177,
+          18840,
+          9181,
+          9183,
+          9082,
+          10134,
+          17805,
+          12059
+        ],
+        "bound_overlap": 0.2,
+        "in_bound_beam": 0.2
+      }
+    }
+  },
+  {
+    "sample_index": 36965,
+    "score_max_abs_error_raw_candidates": 2.459997631376609e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          12669,
+          17544,
+          12671,
+          12670,
+          13000,
+          10436,
+          11444,
+          12681,
+          12970,
+          10015
+        ],
+        "bound_overlap": 0.8,
+        "in_bound_beam": 0.8
+      },
+      "1.5": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          12669,
+          12671,
+          17544,
+          12670,
+          12681,
+          13000,
+          11444,
+          10436,
+          11151,
+          12970
+        ],
+        "bound_overlap": 0.1,
+        "in_bound_beam": 0.1
+      }
+    }
+  },
+  {
+    "sample_index": 43425,
+    "score_max_abs_error_raw_candidates": 5.117006367072463e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.8,
+        "leaf_overlap": 0.8,
+        "common_score_replay_overlap": 0.8,
+        "leaf_exact_top": [
+          21256,
+          25352,
+          25150,
+          19707,
+          15574,
+          22097,
+          22148,
+          23784,
+          23282,
+          16349
+        ],
+        "bound_overlap": 0.5,
+        "in_bound_beam": 0.5
+      },
+      "1.5": {
+        "in_raw_beam": 0.6,
+        "leaf_overlap": 0.6,
+        "common_score_replay_overlap": 0.6,
+        "leaf_exact_top": [
+          25150,
+          21256,
+          22586,
+          23784,
+          25352,
+          18007,
+          22148,
+          25487,
+          25277,
+          20915
+        ],
+        "bound_overlap": 0.4,
+        "in_bound_beam": 0.4
+      }
+    }
+  },
+  {
+    "sample_index": 55101,
+    "score_max_abs_error_raw_candidates": 4.723668098449707e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          23158,
+          17375,
+          11259,
+          19942,
+          13438,
+          13610,
+          13364,
+          19961,
+          14036,
+          12372
+        ],
+        "bound_overlap": 0.7,
+        "in_bound_beam": 0.7
+      },
+      "1.5": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          23158,
+          13610,
+          17375,
+          11259,
+          13438,
+          14036,
+          13178,
+          11112,
+          19942,
+          13364
+        ],
+        "bound_overlap": 0.3,
+        "in_bound_beam": 0.3
+      }
+    }
+  },
+  {
+    "sample_index": 35798,
+    "score_max_abs_error_raw_candidates": 4.55416738986969e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          12372,
+          17375,
+          12202,
+          19968,
+          12416,
+          11292,
+          11975,
+          19757,
+          10931,
+          11067
+        ],
+        "bound_overlap": 0.7,
+        "in_bound_beam": 0.7
+      },
+      "1.5": {
+        "in_raw_beam": 0.7,
+        "leaf_overlap": 0.7,
+        "common_score_replay_overlap": 0.7,
+        "leaf_exact_top": [
+          17375,
+          19757,
+          19968,
+          12372,
+          12339,
+          12202,
+          11593,
+          14036,
+          18695,
+          11975
+        ],
+        "bound_overlap": 0.4,
+        "in_bound_beam": 0.4
+      }
+    }
+  },
+  {
+    "sample_index": 71187,
+    "score_max_abs_error_raw_candidates": 2.385015250183642e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          8755,
+          11095,
+          9994,
+          10130,
+          7772,
+          11070,
+          11026,
+          9041,
+          10979,
+          10118
+        ],
+        "bound_overlap": 0.9,
+        "in_bound_beam": 0.9
+      },
+      "1.5": {
+        "in_raw_beam": 0.7,
+        "leaf_overlap": 0.7,
+        "common_score_replay_overlap": 0.7,
+        "leaf_exact_top": [
+          8755,
+          9994,
+          7772,
+          10745,
+          10130,
+          11095,
+          11070,
+          9874,
+          9041,
+          7740
+        ],
+        "bound_overlap": 0.2,
+        "in_bound_beam": 0.2
+      }
+    }
+  },
+  {
+    "sample_index": 34775,
+    "score_max_abs_error_raw_candidates": 5.811452865600586e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          13911,
+          14993,
+          19942,
+          15574,
+          18897,
+          13530,
+          12442,
+          19961,
+          13364,
+          14155
+        ],
+        "bound_overlap": 0.5,
+        "in_bound_beam": 0.5
+      },
+      "1.5": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          14993,
+          18897,
+          13911,
+          19942,
+          13530,
+          12442,
+          17247,
+          19961,
+          14174,
+          14155
+        ],
+        "bound_overlap": 0.2,
+        "in_bound_beam": 0.2
+      }
+    }
+  },
+  {
+    "sample_index": 41677,
+    "score_max_abs_error_raw_candidates": 3.516441211104393e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          19942,
+          23158,
+          15574,
+          13944,
+          14993,
+          11218,
+          16103,
+          13364,
+          17375,
+          12442
+        ],
+        "bound_overlap": 0.8,
+        "in_bound_beam": 0.8
+      },
+      "1.5": {
+        "in_raw_beam": 0.7,
+        "leaf_overlap": 0.7,
+        "common_score_replay_overlap": 0.7,
+        "leaf_exact_top": [
+          13944,
+          23158,
+          19942,
+          15574,
+          14079,
+          17375,
+          16103,
+          14993,
+          14155,
+          13578
+        ],
+        "bound_overlap": 0.6,
+        "in_bound_beam": 0.6
+      }
+    }
+  },
+  {
+    "sample_index": 738,
+    "score_max_abs_error_raw_candidates": 3.81041900254786e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          17805,
+          10134,
+          6950,
+          9183,
+          11229,
+          14114,
+          7872,
+          10905,
+          11228,
+          7012
+        ],
+        "bound_overlap": 0.4,
+        "in_bound_beam": 0.4
+      },
+      "1.5": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          17805,
+          6950,
+          10134,
+          9183,
+          7012,
+          11229,
+          14114,
+          9181,
+          7872,
+          11228
+        ],
+        "bound_overlap": 0.3,
+        "in_bound_beam": 0.3
+      }
+    }
+  },
+  {
+    "sample_index": 74440,
+    "score_max_abs_error_raw_candidates": 4.060566425323486e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          18273,
+          16526,
+          11238,
+          20514,
+          15511,
+          17541,
+          20521,
+          15836,
+          21497,
+          18582
+        ],
+        "bound_overlap": 0.5,
+        "in_bound_beam": 0.5
+      },
+      "1.5": {
+        "in_raw_beam": 0.5,
+        "leaf_overlap": 0.5,
+        "common_score_replay_overlap": 0.5,
+        "leaf_exact_top": [
+          16526,
+          21497,
+          17229,
+          21834,
+          20521,
+          17541,
+          18273,
+          19401,
+          17648,
+          18582
+        ],
+        "bound_overlap": 0.3,
+        "in_bound_beam": 0.3
+      }
+    }
+  },
+  {
+    "sample_index": 74549,
+    "score_max_abs_error_raw_candidates": 4.105269908905029e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.9,
+        "leaf_overlap": 0.9,
+        "common_score_replay_overlap": 0.9,
+        "leaf_exact_top": [
+          17805,
+          10501,
+          11229,
+          10905,
+          11228,
+          9177,
+          10224,
+          14314,
+          11231,
+          6967
+        ],
+        "bound_overlap": 0.6,
+        "in_bound_beam": 0.6
+      },
+      "1.5": {
+        "in_raw_beam": 0.8,
+        "leaf_overlap": 0.8,
+        "common_score_replay_overlap": 0.8,
+        "leaf_exact_top": [
+          17805,
+          11229,
+          10501,
+          10905,
+          10224,
+          11228,
+          10463,
+          9177,
+          11231,
+          6967
+        ],
+        "bound_overlap": 0.4,
+        "in_bound_beam": 0.4
+      }
+    }
+  },
+  {
+    "sample_index": 17663,
+    "score_max_abs_error_raw_candidates": 3.904104232788086e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          1198,
+          2248,
+          21736,
+          320,
+          129,
+          364,
+          22024,
+          18754,
+          2780,
+          3161
+        ],
+        "bound_overlap": 1.0,
+        "in_bound_beam": 1.0
+      },
+      "1.5": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          1198,
+          2248,
+          320,
+          21736,
+          129,
+          364,
+          22024,
+          2780,
+          18754,
+          3161
+        ],
+        "bound_overlap": 0.9,
+        "in_bound_beam": 0.9
+      }
+    }
+  },
+  {
+    "sample_index": 58816,
+    "score_max_abs_error_raw_candidates": 2.6151537895202637e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.7,
+        "leaf_overlap": 0.7,
+        "common_score_replay_overlap": 0.7,
+        "leaf_exact_top": [
+          18733,
+          15574,
+          25352,
+          12514,
+          25410,
+          19707,
+          19825,
+          25556,
+          16349,
+          20836
+        ],
+        "bound_overlap": 0.4,
+        "in_bound_beam": 0.4
+      },
+      "1.5": {
+        "in_raw_beam": 0.3,
+        "leaf_overlap": 0.3,
+        "common_score_replay_overlap": 0.3,
+        "leaf_exact_top": [
+          18733,
+          25410,
+          12514,
+          20053,
+          19069,
+          19825,
+          18232,
+          14591,
+          19910,
+          19769
+        ],
+        "bound_overlap": 0.1,
+        "in_bound_beam": 0.1
+      }
+    }
+  },
+  {
+    "sample_index": 90730,
+    "score_max_abs_error_raw_candidates": 4.418659955263138e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          13880,
+          13803,
+          15311,
+          12767,
+          13805,
+          12768,
+          12766,
+          15333,
+          15370,
+          14267
+        ],
+        "bound_overlap": 1.0,
+        "in_bound_beam": 1.0
+      },
+      "1.5": {
+        "in_raw_beam": 1.0,
+        "leaf_overlap": 1.0,
+        "common_score_replay_overlap": 1.0,
+        "leaf_exact_top": [
+          13880,
+          13803,
+          13805,
+          15311,
+          12767,
+          12768,
+          15370,
+          15333,
+          14267,
+          12766
+        ],
+        "bound_overlap": 1.0,
+        "in_bound_beam": 1.0
+      }
+    }
+  },
+  {
+    "sample_index": 94125,
+    "score_max_abs_error_raw_candidates": 4.410743713378906e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.8,
+        "leaf_overlap": 0.8,
+        "common_score_replay_overlap": 0.8,
+        "leaf_exact_top": [
+          18733,
+          19825,
+          20053,
+          25015,
+          18232,
+          18237,
+          25556,
+          12514,
+          18192,
+          15642
+        ],
+        "bound_overlap": 0.2,
+        "in_bound_beam": 0.2
+      },
+      "1.5": {
+        "in_raw_beam": 0.5,
+        "leaf_overlap": 0.5,
+        "common_score_replay_overlap": 0.5,
+        "leaf_exact_top": [
+          18733,
+          20053,
+          19825,
+          18232,
+          25015,
+          19910,
+          15642,
+          18349,
+          16017,
+          19750
+        ],
+        "bound_overlap": 0.1,
+        "in_bound_beam": 0.1
+      }
+    }
+  },
+  {
+    "sample_index": 25086,
+    "score_max_abs_error_raw_candidates": 2.8526410460472107e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.7,
+        "leaf_overlap": 0.7,
+        "common_score_replay_overlap": 0.7,
+        "leaf_exact_top": [
+          21256,
+          25160,
+          25150,
+          20915,
+          22586,
+          20916,
+          25352,
+          21876,
+          22035,
+          23784
+        ],
+        "bound_overlap": 0.8,
+        "in_bound_beam": 0.8
+      },
+      "1.5": {
+        "in_raw_beam": 0.4,
+        "leaf_overlap": 0.4,
+        "common_score_replay_overlap": 0.4,
+        "leaf_exact_top": [
+          22586,
+          25150,
+          25160,
+          21256,
+          20915,
+          22106,
+          20916,
+          21876,
+          21720,
+          25487
+        ],
+        "bound_overlap": 0.6,
+        "in_bound_beam": 0.6
+      }
+    }
+  },
+  {
+    "sample_index": 77475,
+    "score_max_abs_error_raw_candidates": 5.342066287994385e-06,
+    "comparisons": {
+      "0.75": {
+        "in_raw_beam": 0.7,
+        "leaf_overlap": 0.7,
+        "common_score_replay_overlap": 0.7,
+        "leaf_exact_top": [
+          23729,
+          25352,
+          25360,
+          23089,
+          19707,
+          21060,
+          20616,
+          21495,
+          23144,
+          21256
+        ],
+        "bound_overlap": 0.6,
+        "in_bound_beam": 0.6
+      },
+      "1.5": {
+        "in_raw_beam": 0.4,
+        "leaf_overlap": 0.4,
+        "common_score_replay_overlap": 0.4,
+        "leaf_exact_top": [
+          23729,
+          21060,
+          25360,
+          23089,
+          23624,
+          21495,
+          21049,
+          20616,
+          22544,
+          21278
+        ],
+        "bound_overlap": 0.4,
+        "in_bound_beam": 0.4
+      }
+    }
+  }
+]

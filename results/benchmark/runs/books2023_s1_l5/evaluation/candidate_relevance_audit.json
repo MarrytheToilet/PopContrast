@@ -1,0 +1,86 @@
+{
+  "dataset": "books2023",
+  "sid_length": 5,
+  "interpretation": "label-aware retrospective oracle ceilings; no parameter selection",
+  "identity": "tail recall = P(target in raw beam | tail) * P(hit | tail and target in raw beam)",
+  "source_sha256": {
+    "complete.json": "eedfa821a41725ca0c5ffce1cd894e657acb0584737f15697deb168811deda1a",
+    "config.json": "7d6ee4ba58184536fca69f32e4f0f63d0e8550ebc1a942020d2106261439a944",
+    "validation_selection.json": "1c723e3842512ee1a90b36b2610ad42b4b3a8cbae1319518d01a3f8d65316f1d",
+    "test_candidates.npz": "7498e33fb010c10896542db75d9a284013585272dd1a047e67b4ec8e2807f7a4",
+    "valid_candidates.npz": "9bb3cee833e395c8baf4b6847f25b0a94de824e81b7837348b0a03511f3cb24b"
+  },
+  "partitions": {
+    "valid": {
+      "users": 5000,
+      "tail_users": 1872,
+      "tail_targets_available": 3,
+      "candidate_tail_recall_ceiling": 0.0016025641025641025,
+      "candidate_overall_recall_ceiling": 0.0142,
+      "candidate_count_quantiles": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "methods": {
+        "arithmetic:0.25": {
+          "tail_hits": 1,
+          "tail_recall": 0.0005341880341880342,
+          "conditional_tail_hit_rate_given_reachable": 0.3333333333333333
+        },
+        "geometric:0.1": {
+          "tail_hits": 1,
+          "tail_recall": 0.0005341880341880342,
+          "conditional_tail_hit_rate_given_reachable": 0.3333333333333333
+        },
+        "null:0.25": {
+          "tail_hits": 2,
+          "tail_recall": 0.0010683760683760685,
+          "conditional_tail_hit_rate_given_reachable": 0.6666666666666666
+        },
+        "raw": {
+          "tail_hits": 1,
+          "tail_recall": 0.0005341880341880342,
+          "conditional_tail_hit_rate_given_reachable": 0.3333333333333333
+        }
+      }
+    },
+    "test": {
+      "users": 5000,
+      "tail_users": 2040,
+      "tail_targets_available": 7,
+      "candidate_tail_recall_ceiling": 0.003431372549019608,
+      "candidate_overall_recall_ceiling": 0.0136,
+      "candidate_count_quantiles": [
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "methods": {
+        "arithmetic:0.25": {
+          "tail_hits": 5,
+          "tail_recall": 0.0024509803921568627,
+          "conditional_tail_hit_rate_given_reachable": 0.7142857142857143
+        },
+        "geometric:0.1": {
+          "tail_hits": 4,
+          "tail_recall": 0.00196078431372549,
+          "conditional_tail_hit_rate_given_reachable": 0.5714285714285714
+        },
+        "null:0.25": {
+          "tail_hits": 4,
+          "tail_recall": 0.00196078431372549,
+          "conditional_tail_hit_rate_given_reachable": 0.5714285714285714
+        },
+        "raw": {
+          "tail_hits": 5,
+          "tail_recall": 0.0024509803921568627,
+          "conditional_tail_hit_rate_given_reachable": 0.7142857142857143
+        }
+      }
+    }
+  },
+  "finished_unix": 1790597369.8002074
+}

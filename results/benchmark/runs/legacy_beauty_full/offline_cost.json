@@ -1,0 +1,8 @@
+{
+  "estimation_seconds": 0.9275354221463203,
+  "legacy_marginal_reused": true,
+  "sampled_histories": 512,
+  "geometric_vector_bytes_float32": 48404,
+  "timing_gpu_shared": true,
+  "note": "No latency inference from a shared-GPU run; reused legacy marginal cost is excluded."
+}

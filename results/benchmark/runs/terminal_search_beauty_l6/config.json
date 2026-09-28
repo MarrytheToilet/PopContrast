@@ -1,0 +1,23 @@
+{
+  "split": "beauty",
+  "checkpoint": "runs/beauty_s1_l6/best_model.pt",
+  "prior_file": "runs/beauty_s1_l6/evaluation/priors.npz",
+  "output": "runs/terminal_search_beauty_l6",
+  "n_valid": 5000,
+  "n_test": 5000,
+  "beam": 20,
+  "sid_length": 6,
+  "eval_batch_size": 8,
+  "betas": [
+    0.25,
+    0.5,
+    0.75,
+    1.0,
+    1.5
+  ],
+  "checkpoint_sha256": "5eb3e39fe2ade8670a380e1fd878ffc4f24d994969cca768f1e0519e17794700",
+  "prior_sha256": "4261544bf6456f9008b4e5185643220a2c05a9051b547141b9ea011dd47de3d0",
+  "quality_only": true,
+  "hypothesis": "offline prior-mass lookahead approximates continuation tilt; terminal score unchanged",
+  "development_status": "Beauty has been inspected during method development; do not treat it as untouched confirmation"
+}

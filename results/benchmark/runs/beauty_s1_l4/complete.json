@@ -1,0 +1,6 @@
+{
+  "epochs": 60,
+  "best_valid": 0.07677860752135224,
+  "checkpoint_sha256": "de0075df2e73266bd61609943def050ac0265dee077690bddf97c8f2da7920e1",
+  "finished_unix": 1790590820.7210364
+}

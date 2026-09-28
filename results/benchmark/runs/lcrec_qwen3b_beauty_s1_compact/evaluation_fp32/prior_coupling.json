@@ -1,0 +1,12 @@
+{
+  "run": "runs/lcrec_qwen3b_beauty_s1_compact/evaluation_fp32",
+  "dataset": "beauty",
+  "rho_actual_geometric_prior_train_count": 0.5811266361120209,
+  "items": 12101,
+  "prior_source": "runs/lcrec_qwen3b_beauty_s1_compact/evaluation_fp32/priors.npz",
+  "prior_source_sha256": "487ac91afc4212447330095b3753cbe65f4c6fc1dc9e7aec2bfeeda19b4f076d",
+  "train_counts_array_sha256": "877ee2621b0cebb0366fa6e9f5d5060839c8e5d6870b4fd8b56bbbde4371258f",
+  "validation_or_test_targets_used": false,
+  "finished_unix": 1790599592.2698271,
+  "scope": "actual stored prior used by this evaluation; correlation is descriptive, not a causal explanation or an applicability threshold"
+}

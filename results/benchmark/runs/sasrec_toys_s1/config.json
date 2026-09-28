@@ -1,0 +1,16 @@
+{
+  "model": "sasrec",
+  "split": "toys",
+  "seed": 1,
+  "epochs": 100,
+  "patience": 10,
+  "batch_size": 256,
+  "output": "runs/sasrec_toys_s1",
+  "n_items": 11924,
+  "dim": 128,
+  "objective": "last-item full CE",
+  "HSTU_time_bias": false,
+  "validation_n": 5000,
+  "item_indexing": "catalog ID + 1; zero padding excluded from logits",
+  "data_sha256": "1b718dedfd7470544ac5effc290611d8b5c5f92ff218fa642e2c7266ba424ea7"
+}
