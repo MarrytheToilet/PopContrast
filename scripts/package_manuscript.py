@@ -59,11 +59,10 @@ def main():
         if name.startswith('results/'):files['plot_data/'+name]=ROOT/name
         elif name.startswith('assets/plot_data/'):files[name]=ROOT/name
     files['VALIDATION.json']=ROOT/'reports/www2027/VALIDATION.json'
-    archive=output/'PopContrast_WWW2027_updated_source.zip'
+    archive=output/'PopContrast_WWW2027_source.zip'
     with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:
         for name,path in sorted(files.items()):z.write(path,name)
-    shutil.copy2(archive,output/'PopContrast_WWW2027_source.zip')
-    pdf=output/'PopContrast_WWW2027_updated.pdf';shutil.copy2(PAPER/'main.pdf',pdf)
+    pdf=output/'PopContrast_WWW2027.pdf';shutil.copy2(PAPER/'main.pdf',pdf)
     # Verify the actual bundle, including plot regeneration, outside the checkout.
     import fitz
     with tempfile.TemporaryDirectory(prefix='popcontrast_package_') as work:

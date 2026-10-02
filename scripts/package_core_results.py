@@ -46,7 +46,7 @@ def main():
     for path in compact.rglob("*"):
         if path.is_file():
             files[str(path.relative_to(ROOT))] = path
-    for name in ["PopContrast_WWW2027_updated_source.zip", "PopContrast_WWW2027_updated.pdf"]:
+    for name in ["PopContrast_WWW2027_source.zip", "PopContrast_WWW2027.pdf"]:
         path = ROOT / "reports/www2027" / name
         if path.exists():
             files["manuscript/" + name] = path
