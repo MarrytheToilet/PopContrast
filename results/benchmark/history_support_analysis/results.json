@@ -1,0 +1,2058 @@
+{
+  "protocol": {
+    "datasets": {
+      "clothing": "clothing_s1_l3",
+      "ml1m": "ml1m_s1_l4",
+      "sports": "sports_s1_l3",
+      "toys": "toys_s1_l3"
+    },
+    "excluded": {
+      "beauty": "No matching complete candidate cache in local run."
+    },
+    "reference_bank": "All 128 archived histories; match stored priors and checkpoint metadata.",
+    "selection": "Archived per-family budget_5pct validation choices; no new beta/estimator selection.",
+    "primary_signal": "log(mean probability) minus mean(log probability), in training-catalog SD units",
+    "sensitivity_signal": "log(M * sum(history_probability_weights ** 2)), in catalog SD units",
+    "controls": [
+      "log1p(training count)",
+      "squared log1p(training count)",
+      "raw target rank groups: 1, 2-5, 6-10, 11-15, 16-20, >20",
+      "raw target score minus score of tenth candidate"
+    ],
+    "populations": [
+      "reachable targets",
+      "reachable tail targets",
+      "reachable head targets"
+    ],
+    "outcome": "Arithmetic hit minus geometric hit, with separately validation-selected strengths.",
+    "inference": "Exploratory OLS, target-item clustered 95% intervals, no multiple-test adjustment.",
+    "transfer": "Fit on validation; test reduction in MSE from adding primary signal to controls.",
+    "groups": "Catalog-derived gap terciles; report both raw-miss recovery and raw-hit loss.",
+    "caveat": "These datasets and outcomes were previously studied; this is not confirmatory evaluation."
+  },
+  "sources": {
+    "experiments/benchmark/analyze_history_support.py": "fd46891efedfeea3cb0977cdf8487e2d5011a9e3eb46d8f8bd3ebd1c1b28fe1e",
+    "results/benchmark/runs/clothing_s1_l3/evaluation/config.json": "54c4edb20a2de25ed1a63cb7795176be1fb19b81c5184fb3aaaea93cd9848251",
+    "results/benchmark/estimator_resampling/clothing/config.json": "cf923e02bf4b40eb58861e976f67d94ce5506aa16f12cae35b96a52a47953cc6",
+    "results/benchmark/runs/clothing_s1_l3/evaluation/sampled_history_scores.npz": "d6ead16d8b6e5ef3aad0107de52682231135bbd996e759bd1b1ec7f7a5fab183",
+    "results/benchmark/runs/clothing_s1_l3/evaluation/priors.npz": "cbcfc81677014847dbb75e7235d795d88d1f1ab34cb906efc997e95b77875d17",
+    "results/benchmark/runs/clothing_s1_l3/evaluation/test_item_hits.npz": "cb6985e26969cf779cee760dce48a95609b3ead541ba4f8cb112b9a2aabea4cd",
+    "results/benchmark/runs/clothing_s1_l3/evaluation/validation_selection.json": "781c3b6b49115e980f01bd20eae242c1d6e430606167c93e511759b4dac616cc",
+    "results/benchmark/runs/clothing_s1_l3/evaluation/valid_candidates.npz": "a5a760d2228ef9114d7e8ea4b6d9d5e8fce9d1faabfd4eb8e98239f485eb6553",
+    "results/benchmark/runs/clothing_s1_l3/evaluation/valid_top10.npz": "dfe1042130e65d1cf071928695136eb9c19cb18835c4f72fafcb00aaeafc4ff8",
+    "results/benchmark/runs/clothing_s1_l3/evaluation/valid_metrics.json": "fac53ae8f792712980bb195b93c8179228fcc139109e974d2f2ab0608c710f41",
+    "results/benchmark/runs/clothing_s1_l3/evaluation/test_candidates.npz": "98d3446c57b2e85b8246f33a078eea31886ba9b14560cd4c6a1603fb0980412f",
+    "results/benchmark/runs/clothing_s1_l3/evaluation/test_top10.npz": "2f04f8a1709ef0cdfc902a205015942e9bde89cb85de61724f56bb3d0a951f6f",
+    "results/benchmark/runs/clothing_s1_l3/evaluation/test_metrics.json": "e33a276e9b2a58eef23c568613545f8d36da6737846b9500a6b3181ccd32f48f",
+    "results/benchmark/runs/ml1m_s1_l4/evaluation/config.json": "93344913401c43b5ab50a109508ed84f96276d8fcee429d4d8af5f256f398278",
+    "results/benchmark/estimator_resampling/ml1m/config.json": "6f5f041fda3c8cd5c57e5866c936cb31618748a5c61ff25ca2071973f3a97123",
+    "results/benchmark/runs/ml1m_s1_l4/evaluation/sampled_history_scores.npz": "eca14d340c2b1f755265f3590b13b63a206a9a0c58344c6b54a2b2f5dfaf70ec",
+    "results/benchmark/runs/ml1m_s1_l4/evaluation/priors.npz": "2927ef505a6b4be178e26000c4be1a1384218c86804406dcb86d1c5b3316bbcf",
+    "results/benchmark/runs/ml1m_s1_l4/evaluation/test_item_hits.npz": "b2200662df635669d90ce35a5dbda25cd640ef6f194c3ff6a45486ea90caa151",
+    "results/benchmark/runs/ml1m_s1_l4/evaluation/validation_selection.json": "fd9b7c683c256b9bd8303320dcd96fb88014eaafb5177d9831be08dea6a605b0",
+    "results/benchmark/runs/ml1m_s1_l4/evaluation/valid_candidates.npz": "45dec0e50a96f152d6f8d661d8452d818eb589ef4c33acedaf830df025f6e2a3",
+    "results/benchmark/runs/ml1m_s1_l4/evaluation/valid_top10.npz": "ee23b86ba437833168b1a2e59754997d9a3ab40c9407e093ca28d1c4b1edaddf",
+    "results/benchmark/runs/ml1m_s1_l4/evaluation/valid_metrics.json": "bbb8034b64d0e58867fd7dd8614ce77265843105e6a159a977d7254ec2d74feb",
+    "results/benchmark/runs/ml1m_s1_l4/evaluation/test_candidates.npz": "d4dd470bdb75933b5620f07f6ef336d646e62a4930b24cd12169cb6cf5ad92a8",
+    "results/benchmark/runs/ml1m_s1_l4/evaluation/test_top10.npz": "a8be0b9907c7fa8d69c693a553882a86d75598c9c2a24b69d4e2034e0bb552f2",
+    "results/benchmark/runs/ml1m_s1_l4/evaluation/test_metrics.json": "b31b33abe62964c6bcca9e8305beb09b91ba8c0169c3f8912e90dbdf71037d1d",
+    "results/benchmark/runs/sports_s1_l3/evaluation/config.json": "1c0226ac32ce236e432ca4dd8b9f8951a3b8309f22649458abe7bcea00b7e104",
+    "results/benchmark/estimator_resampling/sports/config.json": "d4e72b293a6de23f6c653a3bf83ae0525ff966efaac8df3d17290b3ff4b90811",
+    "results/benchmark/runs/sports_s1_l3/evaluation/sampled_history_scores.npz": "0fecb28adaee032d7417b88edb38239778ededebf51ca6d2ec1fb4db91269ae4",
+    "results/benchmark/runs/sports_s1_l3/evaluation/priors.npz": "547e3e0eb25da9e0b4d8eadb90b5178cced06fc02cb958074107ddb2e54a66ba",
+    "results/benchmark/runs/sports_s1_l3/evaluation/test_item_hits.npz": "7368b2fde59840a9ccb892ece06603b7ddb53452e0207c71d3f04461a7cac209",
+    "results/benchmark/runs/sports_s1_l3/evaluation/validation_selection.json": "40bce58f7fc09583de58df9c410ca01b7e398d614e515cea715fa970142630d3",
+    "results/benchmark/runs/sports_s1_l3/evaluation/valid_candidates.npz": "10ed394a580a0b2ac3537f73b63f7f8fdea03a28bac0438861bd91ef11b9f565",
+    "results/benchmark/runs/sports_s1_l3/evaluation/valid_top10.npz": "3df0641ebd8e2176ff2abc84bd10b4f8e7c35f7a78fbe99fbfb7526027892151",
+    "results/benchmark/runs/sports_s1_l3/evaluation/valid_metrics.json": "fd97ec01cd0e4b983f05b68e69f815a8cd670e83f9b149c894017282ce4b34fd",
+    "results/benchmark/runs/sports_s1_l3/evaluation/test_candidates.npz": "46323d15f98d3b6329b85ff34fa1f379492e2a973d885aac23a8984c457d88ad",
+    "results/benchmark/runs/sports_s1_l3/evaluation/test_top10.npz": "c0e9f1a7cd5851b35ab4d153b91b8af5dc233feee9ad050d680895b9c3badfdb",
+    "results/benchmark/runs/sports_s1_l3/evaluation/test_metrics.json": "0c2174c264eaa178d9139da618ff38456c4d0bf1204a28e0c1fcc502054356aa",
+    "results/benchmark/runs/toys_s1_l3/evaluation/config.json": "5333acbe9d14980d82239bc6951a89313cbc9f21c130f743a5d526165002aff1",
+    "results/benchmark/estimator_resampling/toys/config.json": "48c87e68ece15c8514ed0da0894fb3015357feefe838d415afabea30a34bea67",
+    "results/benchmark/runs/toys_s1_l3/evaluation/sampled_history_scores.npz": "404e34284742bfac4d684baa934189cb55d49cd2a34e86d8ed321c38efea5809",
+    "results/benchmark/runs/toys_s1_l3/evaluation/priors.npz": "9e9d57ffd715ec45f9e4fbe6b95de8fb54f9fa9d4e817d83590f7cec4258e4cd",
+    "results/benchmark/runs/toys_s1_l3/evaluation/test_item_hits.npz": "963a13e9936730e5b70cb23daaa0908c09f0e695edf1bb056c656efaacfe56b8",
+    "results/benchmark/runs/toys_s1_l3/evaluation/validation_selection.json": "123ecc72914b732b4fd0e7e2788aaad4b7b2605a74e95750fb1b6db0e6ef1d39",
+    "results/benchmark/runs/toys_s1_l3/evaluation/valid_candidates.npz": "271f69f531f15530c2956fe1ca75a5ce32aca743c074e3b4d6ad86863d40cea7",
+    "results/benchmark/runs/toys_s1_l3/evaluation/valid_top10.npz": "053708871d20868f0ef6224871a70e6e50b92bdaf82452827d0f39075ac9d3f6",
+    "results/benchmark/runs/toys_s1_l3/evaluation/valid_metrics.json": "0f2ece19b6eff87de95d7f9e7865f24b7b3a7c1f798831996e84295511702e58",
+    "results/benchmark/runs/toys_s1_l3/evaluation/test_candidates.npz": "c825d21ce06d0cbbca911293481b4cb0cdf8c8bb864b4d0f22433d9ab679f23a",
+    "results/benchmark/runs/toys_s1_l3/evaluation/test_top10.npz": "23b21110dabf6173b60b404abd80ac4e336d5d0336cf878e174c2e8dee6a572d",
+    "results/benchmark/runs/toys_s1_l3/evaluation/test_metrics.json": "255050ce616e904b2b499ba71ec0b8443ccabaf31ddac933f646c980c4835667"
+  },
+  "results": {
+    "clothing": {
+      "histories": 128,
+      "items": 23033,
+      "selected": {
+        "geometric": "geometric:2.0",
+        "arithmetic": "arithmetic:2.0",
+        "null": "null:2.0"
+      },
+      "gap_tercile_thresholds": [
+        0.7352722230327314,
+        1.0713886789988039
+      ],
+      "paired": {
+        "all": {
+          "raw_to_geometric": {
+            "n": 5000,
+            "lost": 36,
+            "gained": 40,
+            "delta_pp": 0.08,
+            "ci95_pp": [
+              -0.26,
+              0.42
+            ]
+          },
+          "raw_to_arithmetic": {
+            "n": 5000,
+            "lost": 35,
+            "gained": 37,
+            "delta_pp": 0.04,
+            "ci95_pp": [
+              -0.27999999999999997,
+              0.38
+            ]
+          },
+          "geometric_to_arithmetic": {
+            "n": 5000,
+            "lost": 14,
+            "gained": 12,
+            "delta_pp": -0.04,
+            "ci95_pp": [
+              -0.24,
+              0.16
+            ]
+          },
+          "geometric_to_null": {
+            "n": 5000,
+            "lost": 9,
+            "gained": 16,
+            "delta_pp": 0.13999999999999999,
+            "ci95_pp": [
+              -0.06,
+              0.33999999999999997
+            ]
+          }
+        },
+        "tail": {
+          "raw_to_geometric": {
+            "n": 3077,
+            "lost": 3,
+            "gained": 10,
+            "delta_pp": 0.22749431264218392,
+            "ci95_pp": [
+              0.0,
+              0.45498862528436784
+            ]
+          },
+          "raw_to_arithmetic": {
+            "n": 3077,
+            "lost": 5,
+            "gained": 10,
+            "delta_pp": 0.16249593760155995,
+            "ci95_pp": [
+              -0.09749756256093597,
+              0.42248943776405595
+            ]
+          },
+          "geometric_to_arithmetic": {
+            "n": 3077,
+            "lost": 5,
+            "gained": 3,
+            "delta_pp": -0.06499837504062399,
+            "ci95_pp": [
+              -0.25999350016249595,
+              0.09749756256093597
+            ]
+          },
+          "geometric_to_null": {
+            "n": 3077,
+            "lost": 4,
+            "gained": 4,
+            "delta_pp": 0.0,
+            "ci95_pp": [
+              -0.19499512512187195,
+              0.16249593760155995
+            ]
+          }
+        }
+      },
+      "adjusted": {
+        "all": {
+          "gap_valid": {
+            "n": 317,
+            "item_clusters": 262,
+            "coefficient_pp_per_catalog_sd": -4.309911553997013,
+            "ci95_pp": [
+              -8.126584034154154,
+              -0.4932390738398726
+            ]
+          },
+          "gap_test": {
+            "n": 233,
+            "item_clusters": 199,
+            "coefficient_pp_per_catalog_sd": -6.877759855899614,
+            "ci95_pp": [
+              -10.870541881033066,
+              -2.884977830766161
+            ]
+          },
+          "validation_to_test_mse_reduction": {
+            "mean": 0.0073440957775611545,
+            "ci95": [
+              0.001150516961771709,
+              0.0135376745933506
+            ],
+            "baseline_mse": 0.1170398775227078,
+            "augmented_mse": 0.10969578174514663
+          },
+          "concentration_valid": {
+            "n": 317,
+            "item_clusters": 262,
+            "coefficient_pp_per_catalog_sd": -1.3217217134716897,
+            "ci95_pp": [
+              -5.462977683653478,
+              2.8195342567101
+            ]
+          },
+          "concentration_test": {
+            "n": 233,
+            "item_clusters": 199,
+            "coefficient_pp_per_catalog_sd": -6.842395240633982,
+            "ci95_pp": [
+              -11.268802840445726,
+              -2.415987640822236
+            ]
+          }
+        },
+        "tail": {
+          "gap_valid": {
+            "n": 69,
+            "item_clusters": 63,
+            "coefficient_pp_per_catalog_sd": -8.905075628538354,
+            "ci95_pp": [
+              -18.177054725890226,
+              0.36690346881351754
+            ]
+          },
+          "gap_test": {
+            "n": 54,
+            "item_clusters": 49,
+            "coefficient_pp_per_catalog_sd": -5.741917009001926,
+            "ci95_pp": [
+              -15.7754919588514,
+              4.291657940847547
+            ]
+          },
+          "validation_to_test_mse_reduction": {
+            "mean": 0.007533684737489429,
+            "ci95": [
+              -0.01790884905347006,
+              0.03297621852844892
+            ],
+            "baseline_mse": 0.14445468295858774,
+            "augmented_mse": 0.13692099822109835
+          },
+          "concentration_valid": {
+            "n": 69,
+            "item_clusters": 63,
+            "coefficient_pp_per_catalog_sd": -5.711892531661307,
+            "ci95_pp": [
+              -12.363899305887873,
+              0.9401142425652619
+            ]
+          },
+          "concentration_test": {
+            "n": 54,
+            "item_clusters": 49,
+            "coefficient_pp_per_catalog_sd": -3.863576163034134,
+            "ci95_pp": [
+              -10.941110180983543,
+              3.213957854915275
+            ]
+          }
+        },
+        "head": {
+          "gap_valid": {
+            "n": 248,
+            "item_clusters": 199,
+            "coefficient_pp_per_catalog_sd": -3.432789807932609,
+            "ci95_pp": [
+              -7.609834637769003,
+              0.7442550219037849
+            ]
+          },
+          "gap_test": {
+            "n": 179,
+            "item_clusters": 150,
+            "coefficient_pp_per_catalog_sd": -6.515991832387617,
+            "ci95_pp": [
+              -10.784189578766924,
+              -2.247794086008312
+            ]
+          },
+          "validation_to_test_mse_reduction": {
+            "mean": 0.006521848595263365,
+            "ci95": [
+              0.0008359708021446659,
+              0.012207726388382065
+            ],
+            "baseline_mse": 0.10902709468067527,
+            "augmented_mse": 0.10250524608541194
+          },
+          "concentration_valid": {
+            "n": 248,
+            "item_clusters": 199,
+            "coefficient_pp_per_catalog_sd": 0.42005688472194525,
+            "ci95_pp": [
+              -4.7300026655539815,
+              5.570116434997871
+            ]
+          },
+          "concentration_test": {
+            "n": 179,
+            "item_clusters": 150,
+            "coefficient_pp_per_catalog_sd": -7.273109142439568,
+            "ci95_pp": [
+              -12.092471906607994,
+              -2.453746378271144
+            ]
+          }
+        }
+      },
+      "grouped": {
+        "all": [
+          {
+            "gap_group": 0,
+            "n": 23,
+            "raw_hits": 7,
+            "raw_misses": 16,
+            "geometric": {
+              "gained": 3,
+              "lost": 5,
+              "net": -2,
+              "recovery_rate": 0.1875,
+              "loss_rate": 0.7142857142857143
+            },
+            "arithmetic": {
+              "gained": 4,
+              "lost": 3,
+              "net": 1,
+              "recovery_rate": 0.25,
+              "loss_rate": 0.42857142857142855
+            },
+            "null": {
+              "gained": 2,
+              "lost": 3,
+              "net": -1,
+              "recovery_rate": 0.125,
+              "loss_rate": 0.42857142857142855
+            }
+          },
+          {
+            "gap_group": 1,
+            "n": 63,
+            "raw_hits": 16,
+            "raw_misses": 47,
+            "geometric": {
+              "gained": 5,
+              "lost": 9,
+              "net": -4,
+              "recovery_rate": 0.10638297872340426,
+              "loss_rate": 0.5625
+            },
+            "arithmetic": {
+              "gained": 6,
+              "lost": 8,
+              "net": -2,
+              "recovery_rate": 0.1276595744680851,
+              "loss_rate": 0.5
+            },
+            "null": {
+              "gained": 5,
+              "lost": 9,
+              "net": -4,
+              "recovery_rate": 0.10638297872340426,
+              "loss_rate": 0.5625
+            }
+          },
+          {
+            "gap_group": 2,
+            "n": 147,
+            "raw_hits": 57,
+            "raw_misses": 90,
+            "geometric": {
+              "gained": 32,
+              "lost": 22,
+              "net": 10,
+              "recovery_rate": 0.35555555555555557,
+              "loss_rate": 0.38596491228070173
+            },
+            "arithmetic": {
+              "gained": 27,
+              "lost": 24,
+              "net": 3,
+              "recovery_rate": 0.3,
+              "loss_rate": 0.42105263157894735
+            },
+            "null": {
+              "gained": 36,
+              "lost": 20,
+              "net": 16,
+              "recovery_rate": 0.4,
+              "loss_rate": 0.3508771929824561
+            }
+          }
+        ],
+        "tail": [
+          {
+            "gap_group": 0,
+            "n": 8,
+            "raw_hits": 1,
+            "raw_misses": 7,
+            "geometric": {
+              "gained": 2,
+              "lost": 1,
+              "net": 1,
+              "recovery_rate": 0.2857142857142857,
+              "loss_rate": 1.0
+            },
+            "arithmetic": {
+              "gained": 3,
+              "lost": 1,
+              "net": 2,
+              "recovery_rate": 0.42857142857142855,
+              "loss_rate": 1.0
+            },
+            "null": {
+              "gained": 1,
+              "lost": 0,
+              "net": 1,
+              "recovery_rate": 0.14285714285714285,
+              "loss_rate": 0.0
+            }
+          },
+          {
+            "gap_group": 1,
+            "n": 12,
+            "raw_hits": 2,
+            "raw_misses": 10,
+            "geometric": {
+              "gained": 2,
+              "lost": 1,
+              "net": 1,
+              "recovery_rate": 0.2,
+              "loss_rate": 0.5
+            },
+            "arithmetic": {
+              "gained": 1,
+              "lost": 1,
+              "net": 0,
+              "recovery_rate": 0.1,
+              "loss_rate": 0.5
+            },
+            "null": {
+              "gained": 1,
+              "lost": 1,
+              "net": 0,
+              "recovery_rate": 0.1,
+              "loss_rate": 0.5
+            }
+          },
+          {
+            "gap_group": 2,
+            "n": 34,
+            "raw_hits": 10,
+            "raw_misses": 24,
+            "geometric": {
+              "gained": 6,
+              "lost": 1,
+              "net": 5,
+              "recovery_rate": 0.25,
+              "loss_rate": 0.1
+            },
+            "arithmetic": {
+              "gained": 6,
+              "lost": 3,
+              "net": 3,
+              "recovery_rate": 0.25,
+              "loss_rate": 0.3
+            },
+            "null": {
+              "gained": 8,
+              "lost": 2,
+              "net": 6,
+              "recovery_rate": 0.3333333333333333,
+              "loss_rate": 0.2
+            }
+          }
+        ],
+        "head": [
+          {
+            "gap_group": 0,
+            "n": 15,
+            "raw_hits": 6,
+            "raw_misses": 9,
+            "geometric": {
+              "gained": 1,
+              "lost": 4,
+              "net": -3,
+              "recovery_rate": 0.1111111111111111,
+              "loss_rate": 0.6666666666666666
+            },
+            "arithmetic": {
+              "gained": 1,
+              "lost": 2,
+              "net": -1,
+              "recovery_rate": 0.1111111111111111,
+              "loss_rate": 0.3333333333333333
+            },
+            "null": {
+              "gained": 1,
+              "lost": 3,
+              "net": -2,
+              "recovery_rate": 0.1111111111111111,
+              "loss_rate": 0.5
+            }
+          },
+          {
+            "gap_group": 1,
+            "n": 51,
+            "raw_hits": 14,
+            "raw_misses": 37,
+            "geometric": {
+              "gained": 3,
+              "lost": 8,
+              "net": -5,
+              "recovery_rate": 0.08108108108108109,
+              "loss_rate": 0.5714285714285714
+            },
+            "arithmetic": {
+              "gained": 5,
+              "lost": 7,
+              "net": -2,
+              "recovery_rate": 0.13513513513513514,
+              "loss_rate": 0.5
+            },
+            "null": {
+              "gained": 4,
+              "lost": 8,
+              "net": -4,
+              "recovery_rate": 0.10810810810810811,
+              "loss_rate": 0.5714285714285714
+            }
+          },
+          {
+            "gap_group": 2,
+            "n": 113,
+            "raw_hits": 47,
+            "raw_misses": 66,
+            "geometric": {
+              "gained": 26,
+              "lost": 21,
+              "net": 5,
+              "recovery_rate": 0.3939393939393939,
+              "loss_rate": 0.44680851063829785
+            },
+            "arithmetic": {
+              "gained": 21,
+              "lost": 21,
+              "net": 0,
+              "recovery_rate": 0.3181818181818182,
+              "loss_rate": 0.44680851063829785
+            },
+            "null": {
+              "gained": 28,
+              "lost": 18,
+              "net": 10,
+              "recovery_rate": 0.42424242424242425,
+              "loss_rate": 0.3829787234042553
+            }
+          }
+        ]
+      }
+    },
+    "ml1m": {
+      "histories": 128,
+      "items": 3706,
+      "selected": {
+        "geometric": "geometric:1.0",
+        "arithmetic": "arithmetic:2.0",
+        "null": "null:0.75"
+      },
+      "gap_tercile_thresholds": [
+        1.6844593500433227,
+        2.3286142424803202
+      ],
+      "paired": {
+        "all": {
+          "raw_to_geometric": {
+            "n": 5000,
+            "lost": 96,
+            "gained": 107,
+            "delta_pp": 0.22,
+            "ci95_pp": [
+              -0.33999999999999997,
+              0.76
+            ]
+          },
+          "raw_to_arithmetic": {
+            "n": 5000,
+            "lost": 119,
+            "gained": 122,
+            "delta_pp": 0.06,
+            "ci95_pp": [
+              -0.5599999999999999,
+              0.66
+            ]
+          },
+          "geometric_to_arithmetic": {
+            "n": 5000,
+            "lost": 86,
+            "gained": 78,
+            "delta_pp": -0.16,
+            "ci95_pp": [
+              -0.6799999999999999,
+              0.33999999999999997
+            ]
+          },
+          "geometric_to_null": {
+            "n": 5000,
+            "lost": 89,
+            "gained": 79,
+            "delta_pp": -0.2,
+            "ci95_pp": [
+              -0.7000000000000001,
+              0.32
+            ]
+          }
+        },
+        "tail": {
+          "raw_to_geometric": {
+            "n": 1950,
+            "lost": 6,
+            "gained": 46,
+            "delta_pp": 2.051282051282051,
+            "ci95_pp": [
+              1.3333333333333335,
+              2.8205128205128207
+            ]
+          },
+          "raw_to_arithmetic": {
+            "n": 1950,
+            "lost": 7,
+            "gained": 53,
+            "delta_pp": 2.358974358974359,
+            "ci95_pp": [
+              1.5897435897435899,
+              3.1794871794871797
+            ]
+          },
+          "geometric_to_arithmetic": {
+            "n": 1950,
+            "lost": 17,
+            "gained": 23,
+            "delta_pp": 0.3076923076923077,
+            "ci95_pp": [
+              -0.3076923076923077,
+              0.9230769230769231
+            ]
+          },
+          "geometric_to_null": {
+            "n": 1950,
+            "lost": 27,
+            "gained": 8,
+            "delta_pp": -0.9743589743589745,
+            "ci95_pp": [
+              -1.5897435897435899,
+              -0.41025641025641024
+            ]
+          }
+        }
+      },
+      "adjusted": {
+        "all": {
+          "gap_valid": {
+            "n": 1227,
+            "item_clusters": 572,
+            "coefficient_pp_per_catalog_sd": -15.064833129870786,
+            "ci95_pp": [
+              -18.11055546497341,
+              -12.01911079476816
+            ]
+          },
+          "gap_test": {
+            "n": 1138,
+            "item_clusters": 517,
+            "coefficient_pp_per_catalog_sd": -15.440127833864539,
+            "ci95_pp": [
+              -18.574347967275394,
+              -12.305907700453686
+            ]
+          },
+          "validation_to_test_mse_reduction": {
+            "mean": 0.016260743939164945,
+            "ci95": [
+              0.008724260879260698,
+              0.023797226999069193
+            ],
+            "baseline_mse": 0.14272889151776766,
+            "augmented_mse": 0.1264681475786027
+          },
+          "concentration_valid": {
+            "n": 1227,
+            "item_clusters": 572,
+            "coefficient_pp_per_catalog_sd": -12.78133261153505,
+            "ci95_pp": [
+              -15.99914965385156,
+              -9.563515569218536
+            ]
+          },
+          "concentration_test": {
+            "n": 1138,
+            "item_clusters": 517,
+            "coefficient_pp_per_catalog_sd": -9.932514253502408,
+            "ci95_pp": [
+              -13.27909605918935,
+              -6.585932447815466
+            ]
+          }
+        },
+        "tail": {
+          "gap_valid": {
+            "n": 213,
+            "item_clusters": 160,
+            "coefficient_pp_per_catalog_sd": -14.097877238394727,
+            "ci95_pp": [
+              -19.918503487242166,
+              -8.277250989547287
+            ]
+          },
+          "gap_test": {
+            "n": 196,
+            "item_clusters": 135,
+            "coefficient_pp_per_catalog_sd": -17.4840307541677,
+            "ci95_pp": [
+              -23.412037698117498,
+              -11.556023810217903
+            ]
+          },
+          "validation_to_test_mse_reduction": {
+            "mean": 0.0484889649406022,
+            "ci95": [
+              0.014844449176263902,
+              0.0821334807049405
+            ],
+            "baseline_mse": 0.2175603558021372,
+            "augmented_mse": 0.16907139086153503
+          },
+          "concentration_valid": {
+            "n": 213,
+            "item_clusters": 160,
+            "coefficient_pp_per_catalog_sd": -14.393539456357857,
+            "ci95_pp": [
+              -21.859074495020355,
+              -6.928004417695358
+            ]
+          },
+          "concentration_test": {
+            "n": 196,
+            "item_clusters": 135,
+            "coefficient_pp_per_catalog_sd": -12.244526934259529,
+            "ci95_pp": [
+              -20.919010670104342,
+              -3.5700431984147185
+            ]
+          }
+        },
+        "head": {
+          "gap_valid": {
+            "n": 1014,
+            "item_clusters": 412,
+            "coefficient_pp_per_catalog_sd": -15.328587413784032,
+            "ci95_pp": [
+              -18.89016876001659,
+              -11.767006067551472
+            ]
+          },
+          "gap_test": {
+            "n": 942,
+            "item_clusters": 382,
+            "coefficient_pp_per_catalog_sd": -14.869897792842632,
+            "ci95_pp": [
+              -18.268841628247596,
+              -11.470953957437665
+            ]
+          },
+          "validation_to_test_mse_reduction": {
+            "mean": 0.011027997951582973,
+            "ci95": [
+              0.005673923514381801,
+              0.016382072388784145
+            ],
+            "baseline_mse": 0.12964711150898914,
+            "augmented_mse": 0.11861911355740618
+          },
+          "concentration_valid": {
+            "n": 1014,
+            "item_clusters": 412,
+            "coefficient_pp_per_catalog_sd": -12.158786924506702,
+            "ci95_pp": [
+              -15.546532587710916,
+              -8.771041261302488
+            ]
+          },
+          "concentration_test": {
+            "n": 942,
+            "item_clusters": 382,
+            "coefficient_pp_per_catalog_sd": -9.922007026744154,
+            "ci95_pp": [
+              -12.991890639472329,
+              -6.852123414015981
+            ]
+          }
+        }
+      },
+      "grouped": {
+        "all": [
+          {
+            "gap_group": 0,
+            "n": 266,
+            "raw_hits": 168,
+            "raw_misses": 98,
+            "geometric": {
+              "gained": 3,
+              "lost": 50,
+              "net": -47,
+              "recovery_rate": 0.030612244897959183,
+              "loss_rate": 0.2976190476190476
+            },
+            "arithmetic": {
+              "gained": 24,
+              "lost": 34,
+              "net": -10,
+              "recovery_rate": 0.24489795918367346,
+              "loss_rate": 0.20238095238095238
+            },
+            "null": {
+              "gained": 9,
+              "lost": 36,
+              "net": -27,
+              "recovery_rate": 0.09183673469387756,
+              "loss_rate": 0.21428571428571427
+            }
+          },
+          {
+            "gap_group": 1,
+            "n": 436,
+            "raw_hits": 288,
+            "raw_misses": 148,
+            "geometric": {
+              "gained": 26,
+              "lost": 36,
+              "net": -10,
+              "recovery_rate": 0.17567567567567569,
+              "loss_rate": 0.125
+            },
+            "arithmetic": {
+              "gained": 43,
+              "lost": 53,
+              "net": -10,
+              "recovery_rate": 0.2905405405405405,
+              "loss_rate": 0.1840277777777778
+            },
+            "null": {
+              "gained": 33,
+              "lost": 36,
+              "net": -3,
+              "recovery_rate": 0.22297297297297297,
+              "loss_rate": 0.125
+            }
+          },
+          {
+            "gap_group": 2,
+            "n": 436,
+            "raw_hits": 275,
+            "raw_misses": 161,
+            "geometric": {
+              "gained": 78,
+              "lost": 10,
+              "net": 68,
+              "recovery_rate": 0.484472049689441,
+              "loss_rate": 0.03636363636363636
+            },
+            "arithmetic": {
+              "gained": 55,
+              "lost": 32,
+              "net": 23,
+              "recovery_rate": 0.3416149068322981,
+              "loss_rate": 0.11636363636363636
+            },
+            "null": {
+              "gained": 47,
+              "lost": 16,
+              "net": 31,
+              "recovery_rate": 0.2919254658385093,
+              "loss_rate": 0.05818181818181818
+            }
+          }
+        ],
+        "tail": [
+          {
+            "gap_group": 0,
+            "n": 25,
+            "raw_hits": 12,
+            "raw_misses": 13,
+            "geometric": {
+              "gained": 2,
+              "lost": 4,
+              "net": -2,
+              "recovery_rate": 0.15384615384615385,
+              "loss_rate": 0.3333333333333333
+            },
+            "arithmetic": {
+              "gained": 10,
+              "lost": 0,
+              "net": 10,
+              "recovery_rate": 0.7692307692307693,
+              "loss_rate": 0.0
+            },
+            "null": {
+              "gained": 3,
+              "lost": 4,
+              "net": -1,
+              "recovery_rate": 0.23076923076923078,
+              "loss_rate": 0.3333333333333333
+            }
+          },
+          {
+            "gap_group": 1,
+            "n": 45,
+            "raw_hits": 26,
+            "raw_misses": 19,
+            "geometric": {
+              "gained": 9,
+              "lost": 2,
+              "net": 7,
+              "recovery_rate": 0.47368421052631576,
+              "loss_rate": 0.07692307692307693
+            },
+            "arithmetic": {
+              "gained": 14,
+              "lost": 1,
+              "net": 13,
+              "recovery_rate": 0.7368421052631579,
+              "loss_rate": 0.038461538461538464
+            },
+            "null": {
+              "gained": 6,
+              "lost": 2,
+              "net": 4,
+              "recovery_rate": 0.3157894736842105,
+              "loss_rate": 0.07692307692307693
+            }
+          },
+          {
+            "gap_group": 2,
+            "n": 126,
+            "raw_hits": 65,
+            "raw_misses": 61,
+            "geometric": {
+              "gained": 35,
+              "lost": 0,
+              "net": 35,
+              "recovery_rate": 0.5737704918032787,
+              "loss_rate": 0.0
+            },
+            "arithmetic": {
+              "gained": 29,
+              "lost": 6,
+              "net": 23,
+              "recovery_rate": 0.47540983606557374,
+              "loss_rate": 0.09230769230769231
+            },
+            "null": {
+              "gained": 22,
+              "lost": 4,
+              "net": 18,
+              "recovery_rate": 0.36065573770491804,
+              "loss_rate": 0.06153846153846154
+            }
+          }
+        ],
+        "head": [
+          {
+            "gap_group": 0,
+            "n": 241,
+            "raw_hits": 156,
+            "raw_misses": 85,
+            "geometric": {
+              "gained": 1,
+              "lost": 46,
+              "net": -45,
+              "recovery_rate": 0.011764705882352941,
+              "loss_rate": 0.2948717948717949
+            },
+            "arithmetic": {
+              "gained": 14,
+              "lost": 34,
+              "net": -20,
+              "recovery_rate": 0.16470588235294117,
+              "loss_rate": 0.21794871794871795
+            },
+            "null": {
+              "gained": 6,
+              "lost": 32,
+              "net": -26,
+              "recovery_rate": 0.07058823529411765,
+              "loss_rate": 0.20512820512820512
+            }
+          },
+          {
+            "gap_group": 1,
+            "n": 391,
+            "raw_hits": 262,
+            "raw_misses": 129,
+            "geometric": {
+              "gained": 17,
+              "lost": 34,
+              "net": -17,
+              "recovery_rate": 0.13178294573643412,
+              "loss_rate": 0.1297709923664122
+            },
+            "arithmetic": {
+              "gained": 29,
+              "lost": 52,
+              "net": -23,
+              "recovery_rate": 0.2248062015503876,
+              "loss_rate": 0.1984732824427481
+            },
+            "null": {
+              "gained": 27,
+              "lost": 34,
+              "net": -7,
+              "recovery_rate": 0.20930232558139536,
+              "loss_rate": 0.1297709923664122
+            }
+          },
+          {
+            "gap_group": 2,
+            "n": 310,
+            "raw_hits": 210,
+            "raw_misses": 100,
+            "geometric": {
+              "gained": 43,
+              "lost": 10,
+              "net": 33,
+              "recovery_rate": 0.43,
+              "loss_rate": 0.047619047619047616
+            },
+            "arithmetic": {
+              "gained": 26,
+              "lost": 26,
+              "net": 0,
+              "recovery_rate": 0.26,
+              "loss_rate": 0.12380952380952381
+            },
+            "null": {
+              "gained": 25,
+              "lost": 12,
+              "net": 13,
+              "recovery_rate": 0.25,
+              "loss_rate": 0.05714285714285714
+            }
+          }
+        ]
+      }
+    },
+    "sports": {
+      "histories": 128,
+      "items": 18357,
+      "selected": {
+        "geometric": "geometric:1.0",
+        "arithmetic": "arithmetic:1.5",
+        "null": "null:1.0"
+      },
+      "gap_tercile_thresholds": [
+        0.9109516181166992,
+        1.3376342018156375
+      ],
+      "paired": {
+        "all": {
+          "raw_to_geometric": {
+            "n": 5000,
+            "lost": 40,
+            "gained": 41,
+            "delta_pp": 0.02,
+            "ci95_pp": [
+              -0.32,
+              0.38
+            ]
+          },
+          "raw_to_arithmetic": {
+            "n": 5000,
+            "lost": 40,
+            "gained": 49,
+            "delta_pp": 0.18,
+            "ci95_pp": [
+              -0.18,
+              0.5599999999999999
+            ]
+          },
+          "geometric_to_arithmetic": {
+            "n": 5000,
+            "lost": 14,
+            "gained": 22,
+            "delta_pp": 0.16,
+            "ci95_pp": [
+              -0.08,
+              0.4
+            ]
+          },
+          "geometric_to_null": {
+            "n": 5000,
+            "lost": 9,
+            "gained": 17,
+            "delta_pp": 0.16,
+            "ci95_pp": [
+              -0.04,
+              0.36
+            ]
+          }
+        },
+        "tail": {
+          "raw_to_geometric": {
+            "n": 2838,
+            "lost": 2,
+            "gained": 9,
+            "delta_pp": 0.24665257223396758,
+            "ci95_pp": [
+              0.035236081747709654,
+              0.49330514446793516
+            ]
+          },
+          "raw_to_arithmetic": {
+            "n": 2838,
+            "lost": 2,
+            "gained": 10,
+            "delta_pp": 0.28188865398167723,
+            "ci95_pp": [
+              0.035236081747709654,
+              0.5285412262156448
+            ]
+          },
+          "geometric_to_arithmetic": {
+            "n": 2838,
+            "lost": 0,
+            "gained": 1,
+            "delta_pp": 0.035236081747709654,
+            "ci95_pp": [
+              0.0,
+              0.10570824524312897
+            ]
+          },
+          "geometric_to_null": {
+            "n": 2838,
+            "lost": 0,
+            "gained": 4,
+            "delta_pp": 0.14094432699083861,
+            "ci95_pp": [
+              0.035236081747709654,
+              0.28188865398167723
+            ]
+          }
+        }
+      },
+      "adjusted": {
+        "all": {
+          "gap_valid": {
+            "n": 393,
+            "item_clusters": 260,
+            "coefficient_pp_per_catalog_sd": -6.831571794619327,
+            "ci95_pp": [
+              -10.280923006933488,
+              -3.3822205823051683
+            ]
+          },
+          "gap_test": {
+            "n": 309,
+            "item_clusters": 223,
+            "coefficient_pp_per_catalog_sd": -5.728899132097598,
+            "ci95_pp": [
+              -8.871389557183534,
+              -2.586408707011662
+            ]
+          },
+          "validation_to_test_mse_reduction": {
+            "mean": 0.004089511001363307,
+            "ci95": [
+              -0.001973366825019078,
+              0.010152388827745691
+            ],
+            "baseline_mse": 0.11559661085949771,
+            "augmented_mse": 0.11150709985813442
+          },
+          "concentration_valid": {
+            "n": 393,
+            "item_clusters": 260,
+            "coefficient_pp_per_catalog_sd": -5.585441396516322,
+            "ci95_pp": [
+              -9.974824944125213,
+              -1.1960578489074316
+            ]
+          },
+          "concentration_test": {
+            "n": 309,
+            "item_clusters": 223,
+            "coefficient_pp_per_catalog_sd": -4.9742489293160315,
+            "ci95_pp": [
+              -9.625142403584231,
+              -0.3233554550478336
+            ]
+          }
+        },
+        "tail": {
+          "gap_valid": {
+            "n": 41,
+            "item_clusters": 34,
+            "coefficient_pp_per_catalog_sd": -6.301843464944692,
+            "ci95_pp": [
+              -14.309266981370024,
+              1.70558005148064
+            ]
+          },
+          "gap_test": {
+            "n": 34,
+            "item_clusters": 33,
+            "coefficient_pp_per_catalog_sd": -2.028002327457565,
+            "ci95_pp": [
+              -6.093692235907604,
+              2.037687580992474
+            ]
+          },
+          "validation_to_test_mse_reduction": {
+            "mean": 0.007985704310176495,
+            "ci95": [
+              -0.028848610791192813,
+              0.0448200194115458
+            ],
+            "baseline_mse": 0.09676789355438575,
+            "augmented_mse": 0.08878218924420926
+          },
+          "concentration_valid": {
+            "n": 41,
+            "item_clusters": 34,
+            "coefficient_pp_per_catalog_sd": -8.064655470615333,
+            "ci95_pp": [
+              -19.587897659938953,
+              3.4585867187082844
+            ]
+          },
+          "concentration_test": {
+            "n": 34,
+            "item_clusters": 33,
+            "coefficient_pp_per_catalog_sd": -3.856213263696495,
+            "ci95_pp": [
+              -10.714901383808968,
+              3.002474856415978
+            ]
+          }
+        },
+        "head": {
+          "gap_valid": {
+            "n": 352,
+            "item_clusters": 226,
+            "coefficient_pp_per_catalog_sd": -7.466396052041567,
+            "ci95_pp": [
+              -11.540638740548435,
+              -3.392153363534701
+            ]
+          },
+          "gap_test": {
+            "n": 275,
+            "item_clusters": 190,
+            "coefficient_pp_per_catalog_sd": -7.475382689089064,
+            "ci95_pp": [
+              -11.223583092162693,
+              -3.727182286015433
+            ]
+          },
+          "validation_to_test_mse_reduction": {
+            "mean": 0.0059497408078796115,
+            "ci95": [
+              -0.001123852892316324,
+              0.013023334508075548
+            ],
+            "baseline_mse": 0.12597917159861466,
+            "augmented_mse": 0.12002943079073507
+          },
+          "concentration_valid": {
+            "n": 352,
+            "item_clusters": 226,
+            "coefficient_pp_per_catalog_sd": -5.582066168689711,
+            "ci95_pp": [
+              -10.499263419519803,
+              -0.66486891785962
+            ]
+          },
+          "concentration_test": {
+            "n": 275,
+            "item_clusters": 190,
+            "coefficient_pp_per_catalog_sd": -6.104341972068526,
+            "ci95_pp": [
+              -11.208784163668998,
+              -0.9998997804680533
+            ]
+          }
+        }
+      },
+      "grouped": {
+        "all": [
+          {
+            "gap_group": 0,
+            "n": 45,
+            "raw_hits": 18,
+            "raw_misses": 27,
+            "geometric": {
+              "gained": 6,
+              "lost": 6,
+              "net": 0,
+              "recovery_rate": 0.2222222222222222,
+              "loss_rate": 0.3333333333333333
+            },
+            "arithmetic": {
+              "gained": 11,
+              "lost": 8,
+              "net": 3,
+              "recovery_rate": 0.4074074074074074,
+              "loss_rate": 0.4444444444444444
+            },
+            "null": {
+              "gained": 9,
+              "lost": 10,
+              "net": -1,
+              "recovery_rate": 0.3333333333333333,
+              "loss_rate": 0.5555555555555556
+            }
+          },
+          {
+            "gap_group": 1,
+            "n": 97,
+            "raw_hits": 41,
+            "raw_misses": 56,
+            "geometric": {
+              "gained": 5,
+              "lost": 15,
+              "net": -10,
+              "recovery_rate": 0.08928571428571429,
+              "loss_rate": 0.36585365853658536
+            },
+            "arithmetic": {
+              "gained": 11,
+              "lost": 12,
+              "net": -1,
+              "recovery_rate": 0.19642857142857142,
+              "loss_rate": 0.2926829268292683
+            },
+            "null": {
+              "gained": 9,
+              "lost": 15,
+              "net": -6,
+              "recovery_rate": 0.16071428571428573,
+              "loss_rate": 0.36585365853658536
+            }
+          },
+          {
+            "gap_group": 2,
+            "n": 167,
+            "raw_hits": 75,
+            "raw_misses": 92,
+            "geometric": {
+              "gained": 30,
+              "lost": 19,
+              "net": 11,
+              "recovery_rate": 0.32608695652173914,
+              "loss_rate": 0.25333333333333335
+            },
+            "arithmetic": {
+              "gained": 27,
+              "lost": 20,
+              "net": 7,
+              "recovery_rate": 0.29347826086956524,
+              "loss_rate": 0.26666666666666666
+            },
+            "null": {
+              "gained": 33,
+              "lost": 17,
+              "net": 16,
+              "recovery_rate": 0.358695652173913,
+              "loss_rate": 0.22666666666666666
+            }
+          }
+        ],
+        "tail": [
+          {
+            "gap_group": 0,
+            "n": 4,
+            "raw_hits": 0,
+            "raw_misses": 4,
+            "geometric": {
+              "gained": 2,
+              "lost": 0,
+              "net": 2,
+              "recovery_rate": 0.5,
+              "loss_rate": null
+            },
+            "arithmetic": {
+              "gained": 3,
+              "lost": 0,
+              "net": 3,
+              "recovery_rate": 0.75,
+              "loss_rate": null
+            },
+            "null": {
+              "gained": 3,
+              "lost": 0,
+              "net": 3,
+              "recovery_rate": 0.75,
+              "loss_rate": null
+            }
+          },
+          {
+            "gap_group": 1,
+            "n": 12,
+            "raw_hits": 7,
+            "raw_misses": 5,
+            "geometric": {
+              "gained": 1,
+              "lost": 2,
+              "net": -1,
+              "recovery_rate": 0.2,
+              "loss_rate": 0.2857142857142857
+            },
+            "arithmetic": {
+              "gained": 1,
+              "lost": 2,
+              "net": -1,
+              "recovery_rate": 0.2,
+              "loss_rate": 0.2857142857142857
+            },
+            "null": {
+              "gained": 1,
+              "lost": 1,
+              "net": 0,
+              "recovery_rate": 0.2,
+              "loss_rate": 0.14285714285714285
+            }
+          },
+          {
+            "gap_group": 2,
+            "n": 18,
+            "raw_hits": 3,
+            "raw_misses": 15,
+            "geometric": {
+              "gained": 6,
+              "lost": 0,
+              "net": 6,
+              "recovery_rate": 0.4,
+              "loss_rate": 0.0
+            },
+            "arithmetic": {
+              "gained": 6,
+              "lost": 0,
+              "net": 6,
+              "recovery_rate": 0.4,
+              "loss_rate": 0.0
+            },
+            "null": {
+              "gained": 8,
+              "lost": 0,
+              "net": 8,
+              "recovery_rate": 0.5333333333333333,
+              "loss_rate": 0.0
+            }
+          }
+        ],
+        "head": [
+          {
+            "gap_group": 0,
+            "n": 41,
+            "raw_hits": 18,
+            "raw_misses": 23,
+            "geometric": {
+              "gained": 4,
+              "lost": 6,
+              "net": -2,
+              "recovery_rate": 0.17391304347826086,
+              "loss_rate": 0.3333333333333333
+            },
+            "arithmetic": {
+              "gained": 8,
+              "lost": 8,
+              "net": 0,
+              "recovery_rate": 0.34782608695652173,
+              "loss_rate": 0.4444444444444444
+            },
+            "null": {
+              "gained": 6,
+              "lost": 10,
+              "net": -4,
+              "recovery_rate": 0.2608695652173913,
+              "loss_rate": 0.5555555555555556
+            }
+          },
+          {
+            "gap_group": 1,
+            "n": 85,
+            "raw_hits": 34,
+            "raw_misses": 51,
+            "geometric": {
+              "gained": 4,
+              "lost": 13,
+              "net": -9,
+              "recovery_rate": 0.0784313725490196,
+              "loss_rate": 0.38235294117647056
+            },
+            "arithmetic": {
+              "gained": 10,
+              "lost": 10,
+              "net": 0,
+              "recovery_rate": 0.19607843137254902,
+              "loss_rate": 0.29411764705882354
+            },
+            "null": {
+              "gained": 8,
+              "lost": 14,
+              "net": -6,
+              "recovery_rate": 0.1568627450980392,
+              "loss_rate": 0.4117647058823529
+            }
+          },
+          {
+            "gap_group": 2,
+            "n": 149,
+            "raw_hits": 72,
+            "raw_misses": 77,
+            "geometric": {
+              "gained": 24,
+              "lost": 19,
+              "net": 5,
+              "recovery_rate": 0.3116883116883117,
+              "loss_rate": 0.2638888888888889
+            },
+            "arithmetic": {
+              "gained": 21,
+              "lost": 20,
+              "net": 1,
+              "recovery_rate": 0.2727272727272727,
+              "loss_rate": 0.2777777777777778
+            },
+            "null": {
+              "gained": 25,
+              "lost": 17,
+              "net": 8,
+              "recovery_rate": 0.3246753246753247,
+              "loss_rate": 0.2361111111111111
+            }
+          }
+        ]
+      }
+    },
+    "toys": {
+      "histories": 128,
+      "items": 11924,
+      "selected": {
+        "geometric": "geometric:1.5",
+        "arithmetic": "arithmetic:1.5",
+        "null": "null:1.0"
+      },
+      "gap_tercile_thresholds": [
+        1.3810832626644256,
+        1.9416034030556943
+      ],
+      "paired": {
+        "all": {
+          "raw_to_geometric": {
+            "n": 5000,
+            "lost": 81,
+            "gained": 71,
+            "delta_pp": -0.2,
+            "ci95_pp": [
+              -0.7000000000000001,
+              0.27999999999999997
+            ]
+          },
+          "raw_to_arithmetic": {
+            "n": 5000,
+            "lost": 72,
+            "gained": 65,
+            "delta_pp": -0.13999999999999999,
+            "ci95_pp": [
+              -0.62,
+              0.33999999999999997
+            ]
+          },
+          "geometric_to_arithmetic": {
+            "n": 5000,
+            "lost": 39,
+            "gained": 42,
+            "delta_pp": 0.06,
+            "ci95_pp": [
+              -0.3,
+              0.42
+            ]
+          },
+          "geometric_to_null": {
+            "n": 5000,
+            "lost": 21,
+            "gained": 43,
+            "delta_pp": 0.44,
+            "ci95_pp": [
+              0.13999999999999999,
+              0.76
+            ]
+          }
+        },
+        "tail": {
+          "raw_to_geometric": {
+            "n": 3135,
+            "lost": 16,
+            "gained": 41,
+            "delta_pp": 0.7974481658692184,
+            "ci95_pp": [
+              0.3508771929824561,
+              1.2759170653907497
+            ]
+          },
+          "raw_to_arithmetic": {
+            "n": 3135,
+            "lost": 12,
+            "gained": 39,
+            "delta_pp": 0.8612440191387559,
+            "ci95_pp": [
+              0.4146730462519936,
+              1.3086124401913906
+            ]
+          },
+          "geometric_to_arithmetic": {
+            "n": 3135,
+            "lost": 10,
+            "gained": 12,
+            "delta_pp": 0.06379585326953748,
+            "ci95_pp": [
+              -0.22328548644338117,
+              0.3508771929824561
+            ]
+          },
+          "geometric_to_null": {
+            "n": 3135,
+            "lost": 9,
+            "gained": 13,
+            "delta_pp": 0.12759170653907495,
+            "ci95_pp": [
+              -0.1594896331738437,
+              0.4146730462519936
+            ]
+          }
+        }
+      },
+      "adjusted": {
+        "all": {
+          "gap_valid": {
+            "n": 534,
+            "item_clusters": 422,
+            "coefficient_pp_per_catalog_sd": -5.992148174256417,
+            "ci95_pp": [
+              -8.344079146274975,
+              -3.6402172022378583
+            ]
+          },
+          "gap_test": {
+            "n": 415,
+            "item_clusters": 313,
+            "coefficient_pp_per_catalog_sd": -6.5737574577614435,
+            "ci95_pp": [
+              -9.415701119326275,
+              -3.731813796196612
+            ]
+          },
+          "validation_to_test_mse_reduction": {
+            "mean": 0.011425119684552234,
+            "ci95": [
+              0.000637249633509222,
+              0.022212989735595247
+            ],
+            "baseline_mse": 0.1944647945832502,
+            "augmented_mse": 0.18303967489869793
+          },
+          "concentration_valid": {
+            "n": 534,
+            "item_clusters": 422,
+            "coefficient_pp_per_catalog_sd": -6.157207193214437,
+            "ci95_pp": [
+              -9.351726772813459,
+              -2.962687613615414
+            ]
+          },
+          "concentration_test": {
+            "n": 415,
+            "item_clusters": 313,
+            "coefficient_pp_per_catalog_sd": -6.465568277458845,
+            "ci95_pp": [
+              -11.498009055218214,
+              -1.4331274996994763
+            ]
+          }
+        },
+        "tail": {
+          "gap_valid": {
+            "n": 185,
+            "item_clusters": 165,
+            "coefficient_pp_per_catalog_sd": -4.676679634388957,
+            "ci95_pp": [
+              -7.755829973457266,
+              -1.5975292953206492
+            ]
+          },
+          "gap_test": {
+            "n": 146,
+            "item_clusters": 120,
+            "coefficient_pp_per_catalog_sd": -4.052930926812078,
+            "ci95_pp": [
+              -7.246799077273036,
+              -0.8590627763511188
+            ]
+          },
+          "validation_to_test_mse_reduction": {
+            "mean": 0.004000587097893145,
+            "ci95": [
+              -0.012373947822058369,
+              0.02037512201784466
+            ],
+            "baseline_mse": 0.14695148777325773,
+            "augmented_mse": 0.1429509006753646
+          },
+          "concentration_valid": {
+            "n": 185,
+            "item_clusters": 165,
+            "coefficient_pp_per_catalog_sd": -4.864009377786449,
+            "ci95_pp": [
+              -9.547546465398002,
+              -0.1804722901748962
+            ]
+          },
+          "concentration_test": {
+            "n": 146,
+            "item_clusters": 120,
+            "coefficient_pp_per_catalog_sd": -1.4949704098525258,
+            "ci95_pp": [
+              -8.180964992171976,
+              5.191024172466926
+            ]
+          }
+        },
+        "head": {
+          "gap_valid": {
+            "n": 349,
+            "item_clusters": 257,
+            "coefficient_pp_per_catalog_sd": -9.51438521241666,
+            "ci95_pp": [
+              -12.651389004104551,
+              -6.377381420728769
+            ]
+          },
+          "gap_test": {
+            "n": 269,
+            "item_clusters": 193,
+            "coefficient_pp_per_catalog_sd": -14.203314591173404,
+            "ci95_pp": [
+              -19.31741065011679,
+              -9.089218532230017
+            ]
+          },
+          "validation_to_test_mse_reduction": {
+            "mean": 0.023204282673839168,
+            "ci95": [
+              0.00719481490398351,
+              0.03921375044369482
+            ],
+            "baseline_mse": 0.21991795109786183,
+            "augmented_mse": 0.1967136684240227
+          },
+          "concentration_valid": {
+            "n": 349,
+            "item_clusters": 257,
+            "coefficient_pp_per_catalog_sd": -7.083028301342983,
+            "ci95_pp": [
+              -11.788170339444083,
+              -2.3778862632418845
+            ]
+          },
+          "concentration_test": {
+            "n": 269,
+            "item_clusters": 193,
+            "coefficient_pp_per_catalog_sd": -11.348502647633802,
+            "ci95_pp": [
+              -19.189806537703088,
+              -3.5071987575645167
+            ]
+          }
+        }
+      },
+      "grouped": {
+        "all": [
+          {
+            "gap_group": 0,
+            "n": 64,
+            "raw_hits": 38,
+            "raw_misses": 26,
+            "geometric": {
+              "gained": 6,
+              "lost": 19,
+              "net": -13,
+              "recovery_rate": 0.23076923076923078,
+              "loss_rate": 0.5
+            },
+            "arithmetic": {
+              "gained": 9,
+              "lost": 14,
+              "net": -5,
+              "recovery_rate": 0.34615384615384615,
+              "loss_rate": 0.3684210526315789
+            },
+            "null": {
+              "gained": 5,
+              "lost": 13,
+              "net": -8,
+              "recovery_rate": 0.19230769230769232,
+              "loss_rate": 0.34210526315789475
+            }
+          },
+          {
+            "gap_group": 1,
+            "n": 80,
+            "raw_hits": 49,
+            "raw_misses": 31,
+            "geometric": {
+              "gained": 8,
+              "lost": 16,
+              "net": -8,
+              "recovery_rate": 0.25806451612903225,
+              "loss_rate": 0.32653061224489793
+            },
+            "arithmetic": {
+              "gained": 12,
+              "lost": 14,
+              "net": -2,
+              "recovery_rate": 0.3870967741935484,
+              "loss_rate": 0.2857142857142857
+            },
+            "null": {
+              "gained": 10,
+              "lost": 9,
+              "net": 1,
+              "recovery_rate": 0.3225806451612903,
+              "loss_rate": 0.1836734693877551
+            }
+          },
+          {
+            "gap_group": 2,
+            "n": 271,
+            "raw_hits": 167,
+            "raw_misses": 104,
+            "geometric": {
+              "gained": 57,
+              "lost": 46,
+              "net": 11,
+              "recovery_rate": 0.5480769230769231,
+              "loss_rate": 0.2754491017964072
+            },
+            "arithmetic": {
+              "gained": 44,
+              "lost": 44,
+              "net": 0,
+              "recovery_rate": 0.4230769230769231,
+              "loss_rate": 0.2634730538922156
+            },
+            "null": {
+              "gained": 52,
+              "lost": 33,
+              "net": 19,
+              "recovery_rate": 0.5,
+              "loss_rate": 0.19760479041916168
+            }
+          }
+        ],
+        "tail": [
+          {
+            "gap_group": 0,
+            "n": 24,
+            "raw_hits": 12,
+            "raw_misses": 12,
+            "geometric": {
+              "gained": 3,
+              "lost": 2,
+              "net": 1,
+              "recovery_rate": 0.25,
+              "loss_rate": 0.16666666666666666
+            },
+            "arithmetic": {
+              "gained": 4,
+              "lost": 2,
+              "net": 2,
+              "recovery_rate": 0.3333333333333333,
+              "loss_rate": 0.16666666666666666
+            },
+            "null": {
+              "gained": 3,
+              "lost": 1,
+              "net": 2,
+              "recovery_rate": 0.25,
+              "loss_rate": 0.08333333333333333
+            }
+          },
+          {
+            "gap_group": 1,
+            "n": 34,
+            "raw_hits": 17,
+            "raw_misses": 17,
+            "geometric": {
+              "gained": 4,
+              "lost": 2,
+              "net": 2,
+              "recovery_rate": 0.23529411764705882,
+              "loss_rate": 0.11764705882352941
+            },
+            "arithmetic": {
+              "gained": 5,
+              "lost": 3,
+              "net": 2,
+              "recovery_rate": 0.29411764705882354,
+              "loss_rate": 0.17647058823529413
+            },
+            "null": {
+              "gained": 4,
+              "lost": 1,
+              "net": 3,
+              "recovery_rate": 0.23529411764705882,
+              "loss_rate": 0.058823529411764705
+            }
+          },
+          {
+            "gap_group": 2,
+            "n": 88,
+            "raw_hits": 47,
+            "raw_misses": 41,
+            "geometric": {
+              "gained": 34,
+              "lost": 12,
+              "net": 22,
+              "recovery_rate": 0.8292682926829268,
+              "loss_rate": 0.2553191489361702
+            },
+            "arithmetic": {
+              "gained": 30,
+              "lost": 7,
+              "net": 23,
+              "recovery_rate": 0.7317073170731707,
+              "loss_rate": 0.14893617021276595
+            },
+            "null": {
+              "gained": 31,
+              "lost": 7,
+              "net": 24,
+              "recovery_rate": 0.7560975609756098,
+              "loss_rate": 0.14893617021276595
+            }
+          }
+        ],
+        "head": [
+          {
+            "gap_group": 0,
+            "n": 40,
+            "raw_hits": 26,
+            "raw_misses": 14,
+            "geometric": {
+              "gained": 3,
+              "lost": 17,
+              "net": -14,
+              "recovery_rate": 0.21428571428571427,
+              "loss_rate": 0.6538461538461539
+            },
+            "arithmetic": {
+              "gained": 5,
+              "lost": 12,
+              "net": -7,
+              "recovery_rate": 0.35714285714285715,
+              "loss_rate": 0.46153846153846156
+            },
+            "null": {
+              "gained": 2,
+              "lost": 12,
+              "net": -10,
+              "recovery_rate": 0.14285714285714285,
+              "loss_rate": 0.46153846153846156
+            }
+          },
+          {
+            "gap_group": 1,
+            "n": 46,
+            "raw_hits": 32,
+            "raw_misses": 14,
+            "geometric": {
+              "gained": 4,
+              "lost": 14,
+              "net": -10,
+              "recovery_rate": 0.2857142857142857,
+              "loss_rate": 0.4375
+            },
+            "arithmetic": {
+              "gained": 7,
+              "lost": 11,
+              "net": -4,
+              "recovery_rate": 0.5,
+              "loss_rate": 0.34375
+            },
+            "null": {
+              "gained": 6,
+              "lost": 8,
+              "net": -2,
+              "recovery_rate": 0.42857142857142855,
+              "loss_rate": 0.25
+            }
+          },
+          {
+            "gap_group": 2,
+            "n": 183,
+            "raw_hits": 120,
+            "raw_misses": 63,
+            "geometric": {
+              "gained": 23,
+              "lost": 34,
+              "net": -11,
+              "recovery_rate": 0.36507936507936506,
+              "loss_rate": 0.2833333333333333
+            },
+            "arithmetic": {
+              "gained": 14,
+              "lost": 37,
+              "net": -23,
+              "recovery_rate": 0.2222222222222222,
+              "loss_rate": 0.30833333333333335
+            },
+            "null": {
+              "gained": 21,
+              "lost": 26,
+              "net": -5,
+              "recovery_rate": 0.3333333333333333,
+              "loss_rate": 0.21666666666666667
+            }
+          }
+        ]
+      }
+    }
+  }
+}
