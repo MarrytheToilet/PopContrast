@@ -11,6 +11,15 @@ BG = '#FDFCFE'
 GRID = '#EDE9F1'
 GOLD = '#E8B04B'
 
+# Retain Figure 1's palette, with larger type at the actual ACM print size.
+COLUMN_WIDTH = 3.335
+TEXT_WIDTH = 6.978
+REFERENCE_SCALE = COLUMN_WIDTH / (3008 / 300)
+REFERENCE_LABEL = 7.5
+REFERENCE_TITLE = 8.0
+REFERENCE_TICK = 6.5
+REFERENCE_LEGEND = 6.5
+
 def apply(plt, size=8):
     plt.rcParams.update({
         'figure.facecolor': BG, 'axes.facecolor': BG, 'savefig.facecolor': BG,
@@ -25,4 +34,28 @@ def apply(plt, size=8):
         'ytick.labelsize': size-.5, 'legend.fontsize': size-.5,
         'pdf.fonttype': 42, 'ps.fonttype': 42, 'savefig.dpi': 300,
         'lines.solid_capstyle': 'round',
+    })
+
+
+def apply_reference(plt):
+    """Use the original palette with typography specified in printed points."""
+    apply(plt, REFERENCE_LABEL)
+    plt.rcParams.update({
+        'axes.titlesize': REFERENCE_TITLE,
+        'axes.labelsize': REFERENCE_LABEL,
+        'xtick.labelsize': REFERENCE_TICK,
+        'ytick.labelsize': REFERENCE_TICK,
+        'legend.fontsize': REFERENCE_LEGEND,
+        'axes.linewidth': 1.1 * REFERENCE_SCALE,
+        'grid.linewidth': REFERENCE_SCALE,
+        'axes.titlepad': 3,
+        'xtick.major.size': 2,
+        'ytick.major.size': 2,
+        'xtick.major.pad': 2,
+        'ytick.major.pad': 2,
+        'legend.frameon': False,
+        'legend.handlelength': 1.3,
+        'legend.handletextpad': .4,
+        'legend.columnspacing': .9,
+        'hatch.linewidth': .35,
     })

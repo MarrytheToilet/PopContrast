@@ -1,6 +1,6 @@
-"""Build publication tables/figures from frozen experiment records; never select on test.
+"""Build publication tables from frozen experiment records; never select on test.
 
-Run from any directory with Python, numpy, and matplotlib. Source hashes are
+Run from any directory with Python and numpy. Source hashes are
 written beside the manuscript so every displayed result can be traced.
 """
 import csv
@@ -8,20 +8,14 @@ import hashlib
 import json
 from pathlib import Path
 
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
 import numpy as np
-from .style import apply as apply_style, PINK, BLUE, INK, MUTE, GOLD, PINK_SOFT, BLUE_SOFT
 from .sources import source_path
 
 ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__import__("os").environ.get("POPCONTRAST_PUBLICATION_DIR", ROOT / "results"))
 BASE = ROOT / 'results/benchmark'
 OUT = HERE / 'tables'
-FIG = HERE / 'figures/www2027'
 OUT.mkdir(exist_ok=True, parents=True)
-FIG.mkdir(parents=True, exist_ok=True)
 SOURCES = {}
 
 def read(path):
@@ -53,6 +47,22 @@ def beta(row):
     return row['method'].split(':')[-1] if row['method'] != 'raw' else '0'
 
 records = read(BASE / 'completed_results.json')
+# Preserve the measured offline-cost evidence quoted in the manuscript body.
+read(BASE / 'runs/lcrec_qwen3b_beauty_s1_compact/evaluation_fp32/offline_cost.json')
+support = read(BASE / 'history_support_analysis/results.json')
+support_rows = [support['results'][ds]['adjusted']['all']['gap_test']
+                for ds in ['clothing', 'ml1m', 'sports', 'toys']]
+support_coefficients = ', '.join(
+    f"${r['coefficient_pp_per_catalog_sd']:.2f}$ [{r['ci95_pp'][0]:.2f}, {r['ci95_pp'][1]:.2f}]"
+    for r in support_rows)
+support_note = (
+    r'We regress arithmetic-minus-geometric hits on the reference gap (one catalog SD), '
+    r'fixing 128-history banks and validation strengths. Reachable targets: '
+    r'233/1138/309/415 on Clothing, MovieLens, Sports, and Toys. Controls are log training count and its square, '
+    r'rank groups (1, 2--5, 6--10, 11--15, 16--20, above 20), and the score margin over rank 10. '
+    r'OLS slopes (points; exploratory item-clustered 95\% intervals): '
+    + support_coefficients + r'. These associations identify neither harmful bias nor a deployment rule.')
+write('history_support_note', [support_note])
 preferred = read(BASE / 'summary_sources.json')['preferred_runs']
 idx = {(r['run'], r['rule']): r for r in records}
 data_names = dict(beauty='Beauty', clothing='Clothing', sports='Sports', toys='Toys',
@@ -71,12 +81,48 @@ main_runs = [
     ('SmolLM2-360M', 'lcrec_smollm360m_clothing_s1/evaluation_fp32'),
     ('SmolLM2-360M', 'lcrec_smollm360m_games2023_s1/evaluation'),
 ]
+table_metrics=['R10','N10','tailR10','cov10','entropy','gini']
+def metric_text(row, key):
+    return pct(row[key]) if key not in ['entropy','gini'] else f'{row[key]:.3f}'
+
+# Retain every generative benchmark setting. Books remains a separately scoped
+# one-epoch scale probe in the complete-results table.
+generative_runs=[(model,run) for model,run in main_runs if run!='books2023_s1_l5/evaluation']
 lines=[]
-for model, run in main_runs:
-    r, b = idx[run, 'budget_5pct'], idx[run, 'raw']
-    ci = r['tail_ci95'] or [0,0]
-    lines.append(' & '.join([model, data_names[r['dataset']], str(r['sid_length']), beta(r),
-                   change(b,r,'R10'),change(b,r,'tailR10'),change(b,r,'cov10'),interval(ci)]) + r' \\')
+generative_display=[]
+for pos,(model,run) in enumerate(generative_runs):
+    if pos == 0 or (model != 'TIGER' and generative_runs[pos-1][0] == 'TIGER'):
+        heading = r'\crossdatasetstudy' if model == 'TIGER' else r'\llmextension'
+        lines.append(r'\multicolumn{12}{@{}l}{\textit{' + heading + r'}} \\')
+    r,b=idx[run,'budget_5pct'],idx[run,'raw']
+    group_starts=pos==0 or generative_runs[pos-1][0]!=model
+    group_ends=pos==len(generative_runs)-1 or generative_runs[pos+1][0]!=model
+    group_size=sum(other_model==model for other_model,_ in generative_runs)
+    for rule,row in [('raw',b),('budget_5pct',r)]:
+        corrected=rule!='raw'
+        model_cell=rf'\multirow{{{2*group_size}}}{{*}}{{{model}}}' if not corrected and group_starts else ''
+        dataset_cell=rf'\multirow{{2}}{{*}}{{{data_names[r["dataset"]]}}}' if not corrected else ''
+        length_cell=rf'\multirow{{2}}{{*}}{{{r["sid_length"]}}}' if not corrected else ''
+        cells=[model_cell,dataset_cell,length_cell,r'+ \method{}' if corrected else 'Raw',beta(row)]
+        for key in table_metrics:
+            value=metric_text(row,key)
+            other=metric_text(b if corrected else r,key)
+            if (float(value)<=float(other) if key=='gini' else float(value)>=float(other)):
+                value=rf'\textbf{{{value}}}'
+            if corrected and key in ['R10','tailR10','cov10'] and b[key]>0:
+                gain=100*(row[key]/b[key]-1)
+                macro='dg' if gain>0 else 'dn'
+                gain_text='0' if gain==0 else f'{gain:+.1f}' if abs(gain)<1 else f'{gain:+.0f}'
+                value+=rf'\{macro}{{{gain_text}\%}}'
+            cells.append(value)
+        cells += [interval(r['tail_ci95']) if corrected else '--']
+        if corrected and r['R10']>=b['R10']:
+            cells=cells[:3]+[r'\cellcolor{RowGlow}'+cell for cell in cells[3:]]
+        lines.append(' & '.join(cells)+r' \\')
+        generative_display.append(dict(run=run,rule=rule))
+    if pos<len(generative_runs)-1:
+        lines.append(r'\arrayrulecolor{RuleSoft}\midrule\arrayrulecolor{black}'
+                     if group_ends else r'\addlinespace[1pt]')
 write('generative', lines)
 
 
@@ -88,16 +134,130 @@ write('datasets',lines)
 
 fair=csvread(BASE/'matched_baseline_comparisons.csv')
 fair_index={(r['run'],r['family'],r['rule']):r for r in fair}
-families=[('raw','Raw'),('geometric','Geometric (PopContrast)'),('arithmetic','Arithmetic'),
+families=[('raw','Raw'),('geometric','PopContrast'),('arithmetic','Arithmetic'),
           ('null','Null context'),('logcount','Item frequency'),('mmr','MMR'),('fusion','SASRec fusion')]
-lines=[]
+full_lines=[]
+baseline_values={}
 for fam,label in families:
-    cells=[label]
+    full_cells=[label]
+    baseline_values[fam]=[]
     for run in ['fair_baselines_beauty_seed0','fair_baselines_sports_seed1','fair_baselines_toys_seed1']:
         r=fair_index[run,fam,'budget_5pct']
-        cells += [pct(float(r[k])) for k in ['R10','tailR10','cov10']]
+        metrics=read(BASE/'runs'/run/'test_metrics.json')[r['method']]
+        assert all(abs(metrics[k]-float(r[k]))<1e-12 for k in ['R10','tailR10','cov10'])
+        values=[metric_text(metrics,key) for key in table_metrics]
+        baseline_values[fam].extend(values)
+        full_cells += values
+    full_lines.append(' & '.join(full_cells)+r' \\')
+baseline_order=['raw','mmr','fusion','logcount','null','arithmetic','geometric']
+labels=dict(families)
+labels.update({'raw':r'Raw~\cite{rajput2023tiger}',
+               'mmr':r'MMR~\cite{carbonell1998mmr}',
+               'fusion':r'SASRec fusion~\cite{kang2018sasrec}',
+               'logcount':r'Item frequency~\cite{menon2021logit}',
+               'arithmetic':r'\method{}-A (Ours)',
+               'geometric':r'\method{}-G (Ours)'})
+lines=[]
+for fam in baseline_order:
+    cells=[labels[fam]]
+    for column,value in enumerate(baseline_values[fam]):
+        candidates=[float(baseline_values[other][column]) for other in baseline_order]
+        ranks=sorted(set(candidates),reverse=table_metrics[column%6]!='gini')
+        formatted=value
+        if float(value)==ranks[0]:
+            formatted=rf'\textbf{{{value}}}'
+        elif len(ranks)>1 and float(value)==ranks[1]:
+            formatted=rf'\underline{{{value}}}'
+        if fam=='geometric' and column%6==2:
+            run=['fair_baselines_beauty_seed0','fair_baselines_sports_seed1','fair_baselines_toys_seed1'][column//6]
+            raw=float(fair_index[run,'raw','budget_5pct']['tailR10'])
+            corrected=float(fair_index[run,'geometric','budget_5pct']['tailR10'])
+            gain=100*(corrected/raw-1)
+            formatted+=rf'\dg{{{gain:+.0f}\%}}'
+        cells.append(formatted)
+    if fam=='arithmetic':
+        lines.append(r'\arrayrulecolor{RuleSoft}\midrule\arrayrulecolor{black}')
+    if fam in ['arithmetic','geometric']:
+        cells=[r'\cellcolor{RowGlow}'+cell for cell in cells]
     lines.append(' & '.join(cells)+r' \\')
 write('baselines',lines)
+write('baselines_full',full_lines)
+
+# Trace the candidate-recovery counts used in the main-text interpretation.
+candidate_recovery=[]
+for run in ['lcrec_qwen3b_beauty_s1_compact/evaluation_fp32', 'ml1m_s1_l4/evaluation']:
+    audit=read(BASE/'runs'/run/'candidate_relevance_audit.json')['partitions']['test']
+    raw,corrected=idx[run,'raw'],idx[run,'budget_5pct']
+    raw_hits=audit['methods']['raw']['tail_hits']
+    corrected_hits=audit['methods'][corrected['method']]['tail_hits']
+    assert audit['users']==raw['n_users']==corrected['n_users']==5000
+    assert abs(raw_hits/audit['tail_users']-raw['tailR10'])<1e-12
+    assert abs(corrected_hits/audit['tail_users']-corrected['tailR10'])<1e-12
+    candidate_recovery.append(dict(run=run,method=corrected['method'],
+        tail_users=audit['tail_users'],reachable_tail_targets=audit['tail_targets_available'],
+        raw_tail_hits=raw_hits,corrected_tail_hits=corrected_hits))
+
+lines=[]
+for label, point in zip(['Qwen3B / Beauty', 'TIGER / ML-1M'], candidate_recovery):
+    available = point['reachable_tail_targets']
+    raw_hits, corrected_hits = point['raw_tail_hits'], point['corrected_tail_hits']
+    recovery = (rf'{100*raw_hits/available:.1f}$\to$'
+                rf'\textcolor{{GainInk}}{{{100*corrected_hits/available:.1f}}}')
+    cells = [label, str(available), str(raw_hits),
+             rf'\cellcolor{{RowGlow}}\textbf{{{corrected_hits}}}', recovery]
+    lines.append(' & '.join(cells)+r' \\')
+write('candidate_recovery', lines)
+
+# Search complementarity: parameters were frozen before the disjoint confirmation cohort.
+isd_rows = []
+isd_full_rows = []
+for dataset in ['beauty', 'toys']:
+    folder = BASE / 'isd_confirmation' / dataset
+    result = read(folder / 'test_results.json')
+    protocol = read(folder / 'protocol.json')
+    selection = read(folder / 'selection.json')
+    pilot_selection = read(BASE / 'isd_probe' / dataset / 'selection.json')
+    read(BASE / 'isd_probe' / dataset / 'test_results.json')
+    assert result['selected'] == selection['selected'] == pilot_selection['selected']
+    assert protocol['n_test'] == 7000 and protocol['test_offset'] == 3000
+    assert protocol['beam'] == 20
+    arms = [('raw', 'TIGER'),
+            (result['selected']['popcontrast'], r'+\method{}-G'),
+            ('isd', 'ISD'),
+            (result['selected']['isd_popcontrast'], r'ISD +\method{}-G')]
+    for j, (arm, label) in enumerate(arms):
+        row = result['metrics'][arm]
+        cells = [rf'\multirow{{4}}{{*}}{{{data_names[dataset]}}}' if j == 0 else '', label]
+        for key in ['R10', 'tailR10', 'cov10']:
+            value = pct(row[key])
+            if float(value) == max(float(pct(result['metrics'][a][key])) for a, _ in arms):
+                value = rf'\textbf{{{value}}}'
+            cells.append(value)
+        if j == 3:
+            # Keep the dataset group white; highlight only the combined method.
+            cells = cells[:1] + [r'\cellcolor{RowGlow}' + c for c in cells[1:]]
+        isd_rows.append(' & '.join(cells) + r' \\')
+    if dataset == 'beauty':
+        isd_rows.append(r'\arrayrulecolor{RuleSoft}\midrule\arrayrulecolor{black}')
+    for arm, row in result['metrics'].items():
+        isd_full_rows.append(' & '.join([data_names[dataset], arm.replace('_', r'\_'),
+                            pct(row['R10']), pct(row['tailR10']), pct(row['cov10']),
+                            str(row['tail_hits']), interval(row['paired_tail']['ci95'])]) + r' \\')
+write('isd_complementarity', isd_rows)
+write('isd_all_arms', isd_full_rows)
+
+history_sensitivity=[]
+for dataset in ['beauty','clothing','ml1m','sports','toys']:
+    results=read(BASE/'estimator_resampling'/dataset/'results.json')
+    read(BASE/'estimator_resampling'/dataset/'config.json')
+    for M in [16,32,64]:
+        draws=[d for d in results['draws'] if d['M']==M]
+        assert len(draws)==20
+        sd={family:float(np.std([d['selected_test'][family]['budget_5pct']['test']['tailR10']
+                                for d in draws],ddof=1))
+            for family in ['geometric','arithmetic']}
+        assert sd['geometric']<sd['arithmetic'], (dataset,M)
+        history_sensitivity.append(dict(dataset=dataset,M=M,draws=20,tail_recall_sample_sd=sd))
 
 lines=[]
 for model,run in main_runs[-4:]:
@@ -114,7 +274,9 @@ lines=[]
 for ds in ['beauty','clothing']:
     runs=[f'{ds}_s0_l3/evaluation', f'{ds}_s1_l3_fast/evaluation', f'{ds}_s2_l3/evaluation']
     for rule,label in [('budget_5pct','Validation budget'),('fixed_beta_0.75',r'Fixed $\beta=0.75$')]:
-        diffs=np.array([[idx[run,rule][k]-idx[run,'raw'][k] for k in ['R10','tailR10','cov10']] for run in runs])*100
+        metrics=['R10','N10','tailR10','cov10','entropy','gini']
+        diffs=np.array([[idx[run,rule][k]-idx[run,'raw'][k] for k in metrics] for run in runs])
+        diffs[:,:4]*=100
         cells=[data_names[ds],label]+[rf'{v:+.3f}$\pm${sd:.3f}' for v,sd in zip(diffs.mean(0),diffs.std(0,ddof=1))]
         lines.append(' & '.join(cells)+r' \\')
 write('seeds',lines)
@@ -149,33 +311,7 @@ for r in full:
        f"{int(r['gained_tail_hits']):d} / {int(r['lost_tail_hits']):d}",pct(float(r['tail_delta']),3),interval(json.loads(r['tail_ci95']))])+r' \\')
 write('full_cohort',lines)
 
-apply_style(plt,9)
-colors=[PINK,'#B65C88','#E7A3BB',BLUE,MUTE,'#315F8D']
-markers=['o','D','^','s','x','v']
-line_styles=['-','--','-.','--',':','-.']
-fig,axs=plt.subplots(1,3,figsize=(7.0,2.55))
-for ax,(name,run) in zip(axs,[('Beauty','fair_baselines_beauty_seed0'),('Sports','fair_baselines_sports_seed1'),('Toys','fair_baselines_toys_seed1')]):
-    folder=BASE/'runs'/run
-    met=read(folder/'test_metrics.json');sel=read(folder/'validation_selection.json')
-    for (fam,label),color,marker,ls in zip(families[1:],colors,markers,line_styles):
-        keys=['raw']+[k for k in met if k.startswith(fam+':')]
-        # Connect in strength order: the path can double back in test accuracy.
-        keys=['raw']+sorted(keys[1:],key=lambda k:float(k.split(':')[1]))
-        ax.plot([100*met[k]['R10'] for k in keys],[100*met[k]['cov10'] for k in keys],
-                color=color,marker=marker,linestyle=ls,markersize=2.8,
-                lw=1.3 if fam=='geometric' else 1.,
-                label='PopContrast' if fam=='geometric' else label)
-        k=sel[fam]['budget_5pct'];ax.scatter(100*met[k]['R10'],100*met[k]['cov10'],s=27,
-                facecolor=color,edgecolor=INK,lw=.6,zorder=5)
-    ax.scatter(100*met['raw']['R10'],100*met['raw']['cov10'],marker='*',s=65,color=GOLD,edgecolor='white',lw=.5,zorder=6,label='Raw')
-    ax.set_title(name,fontweight='bold',fontsize=10)
-    ax.set_xlabel('Overall Recall@10 (%)')
-    ax.grid(alpha=.9)
-axs[0].set_ylabel('Coverage@10 (%)')
-fig.legend(*axs[0].get_legend_handles_labels(),loc='lower center',ncol=4,fontsize=8,frameon=False)
-fig.tight_layout(rect=(0,.18,1,1),pad=.6)
-fig.savefig(FIG/'matched_tradeoffs.pdf',bbox_inches='tight')
-fig.savefig(FIG/'matched_tradeoffs.png',dpi=180,bbox_inches='tight');plt.close(fig)
+reference_variants=read(BASE/'reference_variant_analysis.json')
 
-(HERE/'asset_sources.json').write_text(json.dumps({'sources':SOURCES,'selection':'All strengths selected using recorded validation rules; test values only displayed.','primary_runs':preferred},indent=2)+'\n')
-print(f'Generated {len(list(OUT.glob("*.tex")))} tables and the matched-baseline figure from {len(SOURCES)} hashed sources.')
+(HERE/'asset_sources.json').write_text(json.dumps({'sources':SOURCES,'selection':'All strengths selected using recorded validation rules; test values only displayed.','primary_runs':preferred,'candidate_recovery':candidate_recovery,'history_sensitivity':history_sensitivity,'reference_variant_mechanism':reference_variants['matched_bank_mechanism'],'table_presentation':{'metrics':table_metrics,'generative_rows':generative_display,'baseline_order':baseline_order,'style_reference':'legacy_table.tex (Table 2): RowGlow, GainInk, RuleSoft, dg/dn','generative_highlight':'corrected rows with overall-recall point estimate at least raw','baseline_highlight':'Both final rows are ours: arithmetic and geometric; color identifies framework instances, not significance','bold':'best displayed value per raw/corrected pair in Table 3 and per dataset metric in Table 4, including displayed ties','underline':'second distinct displayed value per dataset metric in Table 4, including ties; lower Gini is better','baseline_labels':labels}},indent=2)+'\n')
+print(f'Generated {len(list(OUT.glob("*.tex")))} tables from {len(SOURCES)} hashed sources.')

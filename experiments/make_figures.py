@@ -17,7 +17,7 @@ from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
 from matplotlib import font_manager
 from pathlib import Path
 
-from popcontrast import RESULTS_DIR as RES
+RES = os.environ.get('POPCONTRAST_RESULTS', str(Path(__file__).resolve().parents[1] / 'results'))
 FIG = os.path.join(RES, "figures")
 PLOT_DATA = Path(__file__).resolve().parents[1] / "assets/plot_data"
 os.makedirs(FIG, exist_ok=True)
@@ -28,7 +28,7 @@ BLUE   = "#5B93C9"; BLUE_SOFT = "#C6DCF0"; BLUE_GLOW = "#E7F0FA"
 INK    = "#39323F"; MUTE = "#8A8494"; BG = "#FDFCFE"; GRID = "#EDE9F1"
 GOLD   = "#E8B04B"
 
-plt.rcParams.update({
+STYLE = {
     "figure.facecolor": BG, "axes.facecolor": BG, "savefig.facecolor": BG,
     "axes.edgecolor": "#D9D3E0", "axes.linewidth": 1.1,
     "axes.grid": True, "grid.color": GRID, "grid.linewidth": 1.0,
@@ -38,7 +38,8 @@ plt.rcParams.update({
     "axes.labelsize": 14.5, "xtick.labelsize": 12.5, "ytick.labelsize": 12.5,
     "legend.fontsize": 12.5, "lines.linewidth": 2.8,
     "font.family": "DejaVu Sans", "figure.dpi": 300, "savefig.dpi": 300,
-})
+}
+plt.rcParams.update(STYLE)
 
 
 # Paper figures use the three main splits; Clothing is an appendix replication.
@@ -64,7 +65,7 @@ def _series(panel, prior_key, metric):
 
 
 
-def fig2_diversification(panels):
+def fig2_diversification(panels, return_figure=False):
     splits = list(panels)
     fig, axes = plt.subplots(1, len(splits), figsize=(5.4*len(splits), 4.6), squeeze=False)
     for ax, sp in zip(axes[0], splits):
@@ -82,12 +83,12 @@ def fig2_diversification(panels):
         ax2.set_ylabel("recommendation entropy", color=BLUE)
         ax2.tick_params(axis="y", colors=BLUE)
         ax.set_xlabel("β  (debiasing strength)")
+        ax.set_xticks([0,1,2],['0','1','2'])
         ax.set_ylabel("Coverage@10", color=PINK)
         ax.tick_params(axis="y", colors=PINK)
-        ax.set_title(sp.capitalize(), color=INK)
-    fig.suptitle("Genuine diversification: coverage and entropy both rise with β",
-                 fontsize=15, fontweight="bold", y=1.03)
     fig.tight_layout()
+    if return_figure:
+        return fig
     fig.savefig(os.path.join(FIG, "fig2_diversification.png"), bbox_inches="tight")
     plt.close(fig)
 
@@ -151,7 +152,7 @@ def _lorenz(counts):
     return np.concatenate([[0], xs]), np.concatenate([[0], c])
 
 
-def fig3_lorenz(fd):
+def fig3_lorenz(fd, return_figure=False):
     """Item-exposure Lorenz curves: baseline vs debiased. Closer to diagonal = fairer."""
     splits = list(fd)
     fig, axes = plt.subplots(1, len(splits), figsize=(4.6*len(splits), 4.5), squeeze=False)
@@ -165,16 +166,15 @@ def fig3_lorenz(fd):
         ax.set_xlim(0, 1); ax.set_ylim(0, 1)
         ax.set_xlabel("items (least → most exposed)")
         ax.set_ylabel("cumulative recommendation share")
-        ax.set_title(sp.capitalize(), color=INK)
     axes[0][0].legend(loc="upper left", frameon=False, fontsize=10.5)
-    fig.suptitle("Exposure fairness (Lorenz): debiasing pulls the curve toward the diagonal",
-                 fontsize=15, fontweight="bold", y=1.02)
     fig.tight_layout()
+    if return_figure:
+        return fig
     fig.savefig(os.path.join(FIG, "fig3_exposure_lorenz.png"), bbox_inches="tight")
     plt.close(fig)
 
 
-def fig4_marginal_pop(fd):
+def fig4_marginal_pop(fd, return_figure=False):
     """Marginal vs popularity hexbin, compact 1x3 for a single column."""
     from scipy.stats import spearmanr
     from matplotlib.colors import LinearSegmentedColormap
@@ -197,8 +197,9 @@ def fig4_marginal_pop(fd):
             ax.set_xlabel("log item popularity")
             if k_ax == 0:
                 ax.set_ylabel("marginal score")
-            ax.set_title(sp.capitalize(), color=INK)
         fig.tight_layout()
+        if return_figure:
+            return fig
         fig.savefig(os.path.join(FIG, "fig4_marginal_vs_popularity.png"), bbox_inches="tight")
         plt.close(fig)
 
@@ -207,7 +208,7 @@ def fig4_marginal_pop(fd):
 
 
 
-def fig8_rankshift(path=None):
+def fig8_rankshift(path=None, return_figure=False):
     path = path or (Path(RES) / "rankshift_beauty.npz" if (Path(RES) / "rankshift_beauty.npz").exists() else PLOT_DATA / "rankshift_beauty.npz")
     """Mechanism view: per-item mean rank change under PopContrast (β=0.75) vs
     popularity. Positive Δrank = demoted. Shows the correction acts as a smooth,
@@ -237,14 +238,15 @@ def fig8_rankshift(path=None):
                 bbox=dict(boxstyle="round,pad=0.25", fc="white", ec="none", alpha=0.8))
     ax.set_xlabel("log item popularity")
     ax.set_ylabel("mean rank change  (+ = demoted)")
-    ax.set_title("Rank shift vs. popularity (Beauty)", color=INK)
     ax.legend(loc="lower right", frameon=True, framealpha=0.85, edgecolor="none", fontsize=11)
     fig.tight_layout()
+    if return_figure:
+        return fig
     fig.savefig(os.path.join(FIG, "fig8_rankshift_mechanism.png"), bbox_inches="tight")
     plt.close(fig)
 
 
-def fig9b_quintile_heatmap(path=os.path.join(RES, "enrich_analysis.json")):
+def fig9b_quintile_heatmap(path=os.path.join(RES, "enrich_analysis.json"), return_figure=False):
     """Diverging heatmap of %-change Recall@10 per (quintile x beta), 1x3 single-column."""
     if not os.path.exists(path):
         return
@@ -267,17 +269,21 @@ def fig9b_quintile_heatmap(path=os.path.join(RES, "enrich_analysis.json")):
                     if base[q] and base[q] > 0:
                         grid[q, j] = 100 * (cur[q] - base[q]) / base[q]
                     elif cur[q] and cur[q] > 0:
-                        grid[q, j] = 200.0; fromzero[q, j] = True
+                        fromzero[q, j] = True
             norm = TwoSlopeNorm(vmin=-200, vcenter=0, vmax=200)
             ax.imshow(grid, cmap=cmap, norm=norm, aspect="auto")
             for q in range(5):
                 for j in range(len(betas)):
                     v = grid[q, j]
-                    if np.isnan(v): txt, col = "-", MUTE
-                    elif fromzero[q, j]: txt, col = "0→>0", "white"
+                    if fromzero[q, j]:
+                        from matplotlib.patches import Rectangle
+                        ax.add_patch(Rectangle((j-.5,q-.5),1,1,facecolor=PINK_SOFT,
+                                               edgecolor=BG,linewidth=.4))
+                        txt,col="0→+",INK
+                    elif np.isnan(v): txt, col = "-", MUTE
                     else:
-                        txt = f"{min(v,200):+.0f}%"
-                        col = "white" if abs(min(v, 200)) > 120 else INK
+                        txt = f"{v:+.0f}"
+                        col = "white" if abs(v) > 120 else INK
                     ax.text(j, q, txt, ha="center", va="center", fontsize=13,
                             color=col, fontweight="bold")
             ax.set_xticks(range(len(betas)))
@@ -288,10 +294,11 @@ def fig9b_quintile_heatmap(path=os.path.join(RES, "enrich_analysis.json")):
                 ax.set_ylabel("popularity quintile", fontsize=17)
             else:
                 ax.set_yticks(range(5)); ax.set_yticklabels([])
-            ax.set_title(sp.capitalize(), color=INK)
             ax.grid(False)
             for spine in ax.spines.values(): spine.set_visible(False)
         fig.tight_layout()
+        if return_figure:
+            return fig
         fig.savefig(os.path.join(FIG, "fig9_quintile_heatmap.png"), bbox_inches="tight")
         plt.close(fig)
 
@@ -300,9 +307,9 @@ def fig9b_quintile_heatmap(path=os.path.join(RES, "enrich_analysis.json")):
 
 
 
-def fig10_exposure_stream():
+def fig10_exposure_stream(path=None, return_figure=False):
     """Exposure shares by training-popularity quintile from frozen counts."""
-    data = json.loads((Path(RES) / 'exposure_shares.json').read_text())
+    data = json.loads(Path(path or Path(RES) / 'exposure_shares.json').read_text())
     splits = [s for s in FIG_SPLITS if s in data]
     with plt.rc_context({'font.size': 15, 'axes.labelsize': 15,
                          'axes.titlesize': 18, 'xtick.labelsize': 13,
@@ -322,10 +329,12 @@ def fig10_exposure_stream():
                 ax.text(beta[-1] * .96, y, f'q{q}', ha='right', va='center',
                         color='white' if q == 5 else INK, fontsize=10, fontweight='bold')
             ax.set(xlim=(beta[0], beta[-1]), ylim=(0, 1), xlabel=r'$\beta$')
-            ax.set_title(split.capitalize())
+            ax.set_xticks([beta[0],1,beta[-1]],['0','1','2'])
             ax.grid(visible=False)
         np.atleast_1d(axes)[0].set_ylabel('Top-10 exposure share')
         fig.tight_layout(pad=.6)
+        if return_figure:
+            return fig
         fig.savefig(Path(FIG) / 'fig10_exposure_stream.png', bbox_inches='tight')
         plt.close(fig)
 

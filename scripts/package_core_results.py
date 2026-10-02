@@ -63,7 +63,7 @@ python -m experiments.figures.build_tables
 python -m experiments.figures.publication
 ```
 
-Figures are written to `results/figures/` and `results/figures/www2027/`;
+Figures are written to `results/figures/`;
 tables are written to `results/tables/`. The original pink/blue style, fonts,
 framework illustration, and aggregate inputs are included. The manuscript ZIP
 under `manuscript/` has its own build instructions and needs a LaTeX installation.

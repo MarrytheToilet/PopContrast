@@ -6,6 +6,7 @@ summaries:
 figures:
 	python -m experiments.make_figures
 	python -m experiments.figures.build_tables
+	python -m experiments.figures.estimator_stability --output-dir results/tables
 	python -m experiments.figures.publication
 
 check:

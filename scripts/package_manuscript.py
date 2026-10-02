@@ -21,10 +21,13 @@ def sha(path):
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--output',type=Path,default=ROOT/'reports/www2027')
+    ap.add_argument('--existing-assets',action='store_true',
+                    help='Compile current assets without regenerating files in the working manuscript.')
     args = ap.parse_args()
     if not (PAPER/'main.tex').is_file():
         ap.error('This optional command requires the local paper/main.tex source.')
-    subprocess.run(['make','assets','pdf','check'],cwd=PAPER,check=True)
+    targets=['pdf','check'] if args.existing_assets else ['assets','pdf','check']
+    subprocess.run(['make',*targets],cwd=PAPER,check=True)
     output=args.output;output.mkdir(parents=True,exist_ok=True)
     files={};seen=set()
     def visit(path):
@@ -40,14 +43,21 @@ def main():
         files[name]=PAPER/name
     for name in ['references.bib','acmart.cls','ACM-Reference-Format.bst','Makefile','README.md','build_assets.py','redraw_figures.py','validate_manuscript.py','requirements-figures.txt','asset_sources.json','figure_sources.json','reference_checks.json']:
         files[name]=PAPER/name
-    reference=json.loads((PAPER/'reference_checks.json').read_text())
-    for name in reference['original_images']:files[name]=PAPER/name
+    files['template_provenance.json']=PAPER/'template_provenance.json'
+    for path in (PAPER/'template_source').iterdir():
+        if path.is_file():files[str(path.relative_to(PAPER))]=path
     for path in (ROOT/'experiments/figures').glob('*.py'):files[str(path.relative_to(ROOT))]=path
-    for path in (ROOT/'assets/fonts').iterdir():files[str(path.relative_to(ROOT))]=path
-    files['assets/framework.png']=ROOT/'assets/framework.png'
+    files['experiments/make_figures.py']=ROOT/'experiments/make_figures.py'
+    files['experiments/benchmark/analyze_history_support.py']=ROOT/'experiments/benchmark/analyze_history_support.py'
+    for path in (ROOT/'assets/diagrams').iterdir():
+        if path.is_file():files[str(path.relative_to(ROOT))]=path
+    files['tables/baselines_full.tex']=PAPER/'tables/baselines_full.tex'
+    files['tables/isd_all_arms.tex']=PAPER/'tables/isd_all_arms.tex'
+    files['tables/estimator_stability_sources.json']=PAPER/'tables/estimator_stability_sources.json'
     sources=set(json.loads((PAPER/'asset_sources.json').read_text())['sources'])|set(json.loads((PAPER/'figure_sources.json').read_text())['sources'])
     for name in sources:
         if name.startswith('results/'):files['plot_data/'+name]=ROOT/name
+        elif name.startswith('assets/plot_data/'):files[name]=ROOT/name
     files['VALIDATION.json']=ROOT/'reports/www2027/VALIDATION.json'
     archive=output/'PopContrast_WWW2027_updated_source.zip'
     with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:
@@ -61,16 +71,18 @@ def main():
         with zipfile.ZipFile(archive) as z:z.extractall(work)
         subprocess.run(['make','assets','pdf'],cwd=work,check=True)
         original=fitz.open(pdf);rebuilt=fitz.open(work/'main.pdf')
-        assert len(original)==len(rebuilt)==12
+        assert len(original)==len(rebuilt)
         assert [p.get_text() for p in original]==[p.get_text() for p in rebuilt]
         assert all(p.get_pixmap(alpha=False).samples==q.get_pixmap(alpha=False).samples for p,q in zip(original,rebuilt))
-        for name in ['pareto_single_column','model_seed_evidence','framework_refined','matched_tradeoffs']:
-            assert (PAPER/f'figures/www2027/{name}.png').read_bytes()==(work/f'figures/www2027/{name}.png').read_bytes(),name
+        for name in json.loads((PAPER/'figure_sources.json').read_text())['outputs']:
+            assert (PAPER/f'figures/{name}.png').read_bytes()==(work/f'figures/{name}.png').read_bytes(),name
         assert not any(word in (work/'main.log').read_text() for word in ['Warning','Overfull','undefined references'])
+    validation=json.loads((ROOT/'reports/www2027/VALIDATION.json').read_text())
     report=dict(status='passed',standalone_compile=True,standalone_redraw=True,
-                all_twelve_pages_render_identically=True,source_archive=archive.name,
+                all_pages_render_identically=True,source_archive=archive.name,
                 source_files=len(files),source_archive_sha256=sha(archive),pdf_sha256=sha(pdf),
-                main_pages=8,total_pages=12,rendered_figures=10,rendered_tables=12)
+                main_pages=validation['main_pages'],total_pages=validation['total_pages'],
+                rendered_figures=validation['rendered_figures'],rendered_tables=validation['rendered_tables'])
     (output/'SOURCE_PACKAGE_CHECK.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report,indent=2))
 
