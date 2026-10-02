@@ -1,4 +1,4 @@
-"""Foundational data utilities shared by Plan A (PopSteer) and Plan B (PopContrast).
+"""Dataset and semantic-ID utilities for PopContrast and its diagnostics.
 
 Everything here reuses genrec's `AmazonSeqDataset` so we stay byte-for-byte aligned
 with whatever the trained TIGER checkpoint saw. Three things live here:
@@ -27,7 +27,7 @@ from genrec.data.amazon import AmazonSeqDataset
 
 
 # Defaults that match config/tiger/amazon/tiger.gin + rqvae.gin
-DEFAULT_ENCODER = "/home/hanyu/models/sentence-t5-xl"
+DEFAULT_ENCODER = os.environ.get("PC_ENCODER", "sentence-transformers/sentence-t5-xl")
 DEFAULT_RQVAE_PATH = "out/tiger/amazon/{split}/rqvae/checkpoint_epoch_4999.pt"
 CODEBOOK_SIZE = 256
 SEM_ID_DIM = 3            # number of RQ-VAE codebooks (before disambiguation)

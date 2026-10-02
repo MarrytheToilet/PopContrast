@@ -1,19 +1,10 @@
-"""Minimal validation = Plan A vs Plan B decision gate (IDEA.md §7).
+"""Probe popularity information and evaluate decoder representation interventions.
 
-Three questions, in order:
-  1. PROBE      Is popularity linearly decodable from the decoder residual stream?
-                Report AUC per (layer, step). CONFOUND CONTROL: the honest signal is
-                at decode STEP 0 — before any of the target item's own SID tokens are
-                emitted, the state only reflects the history-conditioned *prediction*,
-                so high AUC there = the model's popularity prior, not identity leakage.
-                Later steps condition on the item's own tokens (leakier). We also split
-                probe train/test by USER so it can't memorize item-specific positions.
-  2. DIRECTION  v_pop = mean(H_head) - mean(H_tail) per (layer, step), unit-normalized (CAA).
-  3. INJECTION  Sweep alpha; does tail Recall@10 rise monotonically while head Recall@10
-                does not collapse? (ranked by exact scores under pop_steer_hooks.)
-
-VERDICT: step-0 probe AUC >= 0.70 at some layer AND tail recall monotone-up in alpha
-with head not collapsing  ->  Plan A (PopSteer). Otherwise  ->  Plan B (PopContrast).
+User-disjoint probes measure decodability at each decoder layer and position.
+Step zero precedes target-token input; later positions also condition on target
+prefixes. Contrastive head/tail directions are tested through a strength sweep
+with exact item scoring. The summary reports the measured probe and head/tail
+criteria for these interventions; it does not identify a unique cause of bias.
 """
 
 from __future__ import annotations
@@ -138,23 +129,23 @@ def main():
         rows.append((a, res))
         print(f"      alpha={a:>4}: {res.line(10)}  [head_users={res.n_head_users} tail_users={res.n_tail_users}]")
 
-    # verdict
+    # Descriptive intervention criteria
     tail10 = [r.tail[10]["recall"] for _, r in rows]
     head10 = [r.head[10]["recall"] for _, r in rows]
     base_head = head10[0]
     tail_up = all(tail10[i + 1] >= tail10[i] - 1e-4 for i in range(len(tail10) - 1)) and tail10[-1] > tail10[0]
     head_ok = min(head10) >= 0.9 * base_head  # head recall drops <10%
     probe_ok = (not np.isnan(best_auc0)) and best_auc0 >= 0.70
-    print("\n===== VERDICT =====")
+    print("\n===== INTERVENTION SUMMARY =====")
     print(f"  probe step-0 AUC>=0.70 : {probe_ok}  (best {best_auc0:.3f} @L{best_layer})")
     print(f"  tail Recall@10 monotone-up : {tail_up}  ({tail10[0]:.4f} -> {tail10[-1]:.4f})")
     print(f"  head Recall@10 preserved   : {head_ok}  ({base_head:.4f} -> min {min(head10):.4f})")
     if probe_ok and tail_up and head_ok:
-        print("  => PLAN A (PopSteer) has signal. Proceed with representation steering.")
+        print("  => The tested intervention meets the probe and retrieval criteria.")
     elif tail_up and head_ok:
-        print("  => Injection works but probe weak. Plan A viable; strengthen probe/confound analysis.")
+        print("  => Retrieval criteria are met, but the step-0 probe criterion is not.")
     else:
-        print("  => Weak/failed signal. Fall back to PLAN B (PopContrast, logits self-contrast).")
+        print("  => The tested intervention does not meet all retrieval criteria.")
 
 
 if __name__ == "__main__":

@@ -79,3 +79,8 @@ htmlcov/
 
 # Compact per-user analysis archive is synchronized separately from source code
 /results/core_analysis/
+
+# Local literature verification and manuscript-planning helpers
+/scripts/audit_publication_sources.py
+/experiments/benchmark/assess_evidence.py
+/experiments/benchmark/organize_evidence.py

@@ -1,0 +1,7 @@
+# Tested CPU environment for regenerating stored summaries, tables, and figures.
+# Python 3.10. No model weights, CUDA, torch, or genrec required for this workflow.
+numpy==1.26.4
+scipy==1.14.1
+matplotlib==3.9.2
+Pillow==11.3.0
+PyMuPDF==1.28.0
