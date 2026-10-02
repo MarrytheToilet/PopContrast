@@ -1,15 +1,17 @@
-.PHONY: summaries figures check test
+.PHONY: summaries figures check analysis-inputs test
 
-summaries:
+analysis-inputs:
+	python scripts/check_results.py --check-inputs
+
+summaries: analysis-inputs
 	python -m experiments.benchmark.summarize
 
-figures:
-	python -m experiments.make_figures
+figures: analysis-inputs
 	python -m experiments.figures.build_tables
 	python -m experiments.figures.estimator_stability --output-dir results/tables
 	python -m experiments.figures.publication
 
-check:
+check: analysis-inputs
 	python scripts/check_results.py
 
 # CPU checks for scoring, ties, samplers, and model/cache equivalence.

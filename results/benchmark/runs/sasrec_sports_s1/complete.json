@@ -1,7 +1,0 @@
-{
-  "best_valid": 0.0576,
-  "epochs": 14,
-  "finished_unix": 1790596509.6599693,
-  "checkpoint_sha256": "3924c5ed2c439c2baa0bc93aa5b3b9c59d1bcb324ee5362aaeaa22ee70440e00",
-  "marginal_sha256": "642b8fae415edf30dab9b7b536cc15be66f53357675cc2443958062ee13cafbf"
-}

@@ -1,5 +1,6 @@
 """Verify published summaries, selected strengths, source hashes, and plot inputs."""
 import hashlib
+import argparse
 import json
 from pathlib import Path
 import sys
@@ -10,7 +11,23 @@ from experiments.benchmark.settings import PRIMARY_RUNS
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--check-inputs', action='store_true',
+                        help='Check that the separately retained analysis inputs are present.')
+    args = parser.parse_args()
     base = ROOT/'results/benchmark'
+    required = [base/'runs'/run/name for run in PRIMARY_RUNS
+                for name in ['test_metrics.json', 'validation_selection.json', 'config.json', 'complete.json']]
+    required += [ROOT/'assets/plot_data'/name for name in
+                 ['figdata_beauty.npz', 'figdata_sports.npz', 'figdata_toys.npz', 'rankshift_beauty.npz']]
+    missing = [str(path.relative_to(ROOT)) for path in required if not path.is_file()]
+    if missing:
+        parser.exit(1, 'Analysis inputs are stored separately from Git. Restore results/ and '
+                    'assets/plot_data/ from your local analysis archive before this command.\n'
+                    f'Missing {len(missing)} required files; first: {missing[0]}\n')
+    if args.check_inputs:
+        print('Local analysis inputs found.')
+        return
     rows = json.loads((base/'completed_results.json').read_text())
     assert len(rows)==5*len(PRIMARY_RUNS)==165
     assert set(r['run'] for r in rows)==set(PRIMARY_RUNS)

@@ -1,6 +1,0 @@
-{
-  "items": 1024,
-  "max_abs_error": 4.76837158203125e-06,
-  "reference": "original full teacher-forced scoring",
-  "chunk_size": 512
-}

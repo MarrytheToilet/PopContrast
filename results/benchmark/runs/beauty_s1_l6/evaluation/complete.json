@@ -1,6 +1,0 @@
-{
-  "completed_unix": 1790594483.2119322,
-  "checkpoint_sha256": "5eb3e39fe2ade8670a380e1fd878ffc4f24d994969cca768f1e0519e17794700",
-  "n_test": 5000,
-  "n_valid": 5000
-}

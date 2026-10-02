@@ -5,7 +5,13 @@
 /models/
 /checkpoints/
 /runs/
-/results/benchmark/raw/
+/results/
+/assets/plot_data/
+/outputs/
+/tmp/
+/wandb/
+/lightning_logs/
+/tensorboard/
 
 # Recomputable tensors, checkpoints, and prediction caches
 *.pt
@@ -19,9 +25,6 @@
 # Runtime state and generated reports
 /logs/
 /reports/
-/results/tables/
-/results/asset_sources.json
-/results/figure_sources.json
 *.log
 *.tmp
 *.pid
@@ -32,9 +35,12 @@
 /IDEA.md
 /.claude/
 /.codex/
+/.agents/
+/.aws/
 
 # Python environments, caches, and package output
 .venv/
+.venv-*/
 venv/
 __pycache__/
 *.py[cod]
@@ -43,6 +49,7 @@ __pycache__/
 .ruff_cache/
 .mypy_cache/
 .ipynb_checkpoints/
+.cache/
 /build/
 /dist/
 .coverage
@@ -56,6 +63,12 @@ htmlcov/
 *.fls
 *.fdb_latexmk
 *.synctex.gz
+*.toc
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
 *.zip
 *.tar
 *.tar.gz
@@ -71,14 +84,8 @@ htmlcov/
 .vscode/
 .idea/
 
-# Small, aggregate numerical inputs needed to redraw the diagnostic figures
-!/assets/plot_data/*.npz
-
-# Exported vector figures are regenerated; README previews remain tracked
-/results/figures/**/*.pdf
-
-# Compact per-user analysis archive is synchronized separately from source code
-/results/core_analysis/
+# Generated files belong under results/ or outputs/. Only curated source
+# artwork and README previews are kept under assets/.
 
 # Local literature verification and manuscript-planning helpers
 /scripts/audit_publication_sources.py

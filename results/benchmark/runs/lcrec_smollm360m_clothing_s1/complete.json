@@ -1,7 +1,0 @@
-{
-  "best_valid_R10": 0.031,
-  "steps": 15054,
-  "finished_unix": 1790588805.508519,
-  "completion_reason": "epoch_budget",
-  "next_step": "freeze best adapter; estimate marginal; matched corrected beam evaluation"
-}

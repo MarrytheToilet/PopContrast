@@ -1,8 +1,8 @@
 # To Each Their Own: Item-Specific Score References for Long-Tail Discovery in Generative Recommendation
 
-This repository contains **PopContrast**, its evaluation code, and the compact result records used in the paper.
+This repository contains **PopContrast**, its training and evaluation code, experiment configurations, and figure builders. Experimental outputs and plotting arrays are retained separately from the source repository.
 
-[Anonymous code and results](https://anonymous.4open.science/r/PopContrast/)
+[Anonymous code](https://anonymous.4open.science/r/PopContrast/)
 
 Generative recommenders can retrieve relevant long-tail candidates without placing them in the final recommendation list. PopContrast compares each complete candidate score with an item-specific reference estimated from the same model across training histories. It improves final ranking without retraining the recommender or adding an auxiliary model. Experiments examine recovery within fixed candidates, additional gains after item-supported decoding (ISD), and the accuracy, exposure, and estimation costs of different references.
 
@@ -12,9 +12,14 @@ The ranking illustration is schematic. The evidence box reports Top-10 results o
 
 ## Start here
 
-**To inspect the reported results:** use the CPU workflow below. The repository includes aggregate figure inputs and compact evaluation records; model weights and full datasets are not required.
+**To run experiments:** follow [training and evaluation](#training-and-evaluation). The 33 recorded recipes are included in `configs/benchmark.json`; listing and inspecting them requires only Python.
 
-**To repeat training or inference:** follow [training and evaluation](#training-and-evaluation) and the [benchmark instructions](experiments/benchmark/README.md). These workflows require the corresponding datasets, model dependencies, and checkpoints.
+```bash
+python -m experiments.benchmark.run --list
+python -m experiments.benchmark.run --run beauty_s1_l3_fast/evaluation --stage train --print-command
+```
+
+**To rebuild paper figures from existing results:** restore the separately retained analysis archive's `results/` and `assets/plot_data/` directories at the repository root, then use the CPU workflow below. These inputs are not included in a Git clone. Model weights and full datasets are not needed for this workflow.
 
 ```bash
 python -m venv .venv
@@ -25,7 +30,7 @@ make figures
 make check
 ```
 
-The commands regenerate summaries under `results/benchmark/`, table snippets under `results/tables/`, and all ten paper figures under `results/figures/`. `make check` compares 1,155 metric values across 33 recorded settings, verifies validation-selected strengths and paired intervals, and checks source hashes. This workflow reuses recorded experiments; it does not train models or select new settings on test results.
+With the complete analysis inputs restored, the commands regenerate summaries under `results/benchmark/`, table snippets under `results/tables/`, and all ten paper figures under `results/figures/`. `make check` compares 1,155 metric values across 33 recorded settings, verifies validation-selected strengths and paired intervals, and checks source hashes. These local outputs are ignored by Git.
 
 ## Method
 
@@ -53,7 +58,7 @@ Matched width-20 retrieval measures how many already-retrieved relevant tail tar
 | Qwen2.5-3B / Beauty | 124 | 65 | **88** |
 | TIGER / MovieLens-1M | 196 | 103 | **143** |
 
-On Qwen2.5-3B–Beauty, tail recall increases **35.4%** and coverage **27.9%**, with an overall-recall change of **−0.12 percentage points**. The corresponding per-user candidate audits are stored with each run in `results/benchmark/runs/`.
+On Qwen2.5-3B–Beauty, tail recall increases **35.4%** and coverage **27.9%**, with an overall-recall change of **−0.12 percentage points**. The corresponding per-user candidate audits are retained in the separate analysis archive under `results/benchmark/runs/`.
 
 Correction also improves retrieval after the statistics-based ISD adaptation expands search support:
 
@@ -62,17 +67,17 @@ Correction also improves retrieval after the statistics-based ISD adaptation exp
 | Beauty | 205 | **231** | +0.65 [0.35, 0.97] |
 | Toys | 368 | **392** | +0.55 [0.28, 0.85] |
 
-Each ISD comparison uses 7,000 confirmation users disjoint from the preliminary test cohort, a shared width-20 search setting, and strengths fixed from validation. The adaptation and complete comparison arms are documented in the [ISD instructions](experiments/benchmark/README.md#search-complementarity-with-isd); compact records are in `results/benchmark/isd_confirmation/`.
+Each ISD comparison uses 7,000 confirmation users disjoint from the preliminary test cohort, a shared width-20 search setting, and strengths fixed from validation. The adaptation and complete comparison arms are documented in the [ISD instructions](experiments/benchmark/README.md#search-complementarity-with-isd); the local analysis archive stores compact records under `results/benchmark/isd_confirmation/`.
 
-<p align="center"><img src="results/figures/model_seed_evidence.png" width="94%" alt="All four LLM configurations and three matched TIGER training seeds on Beauty and Clothing"/></p>
+<p align="center"><img src="assets/readme/model_seed_evidence.png" width="94%" alt="All four LLM configurations and three matched TIGER training seeds on Beauty and Clothing"/></p>
 
 The main generative evaluation covers six TIGER datasets and four adapted LLM configurations. Beauty and Clothing each have three matched TIGER training seeds. The complete 33-setting inventory additionally includes conventional scorers and the one-epoch Books scale probe; it is not a full model-by-dataset grid. User-bootstrap intervals, variation across training seeds, and repeated reference sampling are reported separately.
 
 Full-catalog sweeps characterize the tradeoff when every item can be ranked. They include descriptive operating points with simultaneous overall-recall, tail-recall, and coverage gains. The beam comparisons use separately recorded validation choices.
 
-<p align="center"><img src="results/figures/pareto_single_column.png" width="68%" alt="Full-catalog accuracy–coverage paths on Beauty, Sports, and Toys"/></p>
+<p align="center"><img src="assets/readme/pareto_single_column.png" width="68%" alt="Full-catalog accuracy–coverage paths on Beauty, Sports, and Toys"/></p>
 
-The stored comparisons retain geometric, arithmetic, null-context, frequency, MMR, and SASRec-fusion results, including unchanged and weaker outcomes. See [figure and table generation](experiments/figures/README.md) for the mapping from result records to plots.
+The separate analysis archive retains geometric, arithmetic, null-context, frequency, MMR, and SASRec-fusion comparisons, including unchanged and weaker outcomes. See [figure and table generation](experiments/figures/README.md) for the mapping from result records to plots.
 
 ## Repository map
 
@@ -82,12 +87,11 @@ The stored comparisons retain geometric, arithmetic, null-context, frequency, MM
 | `experiments/` | Full-catalog evaluation and diagnostic experiments |
 | `experiments/benchmark/` | Recorded training recipes, matched beam evaluation, reference comparisons, and ISD |
 | `experiments/figures/` | Shared plotting style and paper table/figure builders |
-| `results/benchmark/runs/` | Per-setting configurations, validation choices, test metrics, and numerical audits |
-| `results/benchmark/isd_confirmation/` | Independent ISD confirmation results and fixed selections |
-| `assets/plot_data/` | Aggregate inputs for the diagnostic plots |
+| `configs/benchmark.json` | Training and evaluation recipes for the 33 primary settings |
+| `assets/` | PR illustration, source diagram, and two curated README previews |
 | `scripts/check_results.py` | Verification of stored primary metrics and provenance |
 
-Datasets, checkpoints, full score matrices, per-user prediction caches, local manuscript sources, and development reports are excluded from Git. They are needed only for the corresponding fresh evaluation or cache-level audits. Aggregate results alone cannot reproduce a new training run.
+`results/`, `assets/plot_data/`, datasets, checkpoints, prediction caches, local manuscript sources, and development reports are excluded from Git. Analysis commands use these local inputs when available. `scripts/package_core_results.py` packages retained numerical results separately for offline analysis; it does not add them to Git.
 
 ## Training and evaluation
 

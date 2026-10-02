@@ -1,9 +1,0 @@
-{
-  "partition": "valid",
-  "selected": {
-    "popcontrast": "popcontrast:1.5",
-    "isd_search_popcontrast": "isd_search_popcontrast:1.5",
-    "isd_popcontrast": "isd_popcontrast:2.0"
-  },
-  "protocol_sha256": "2a5c8b248e97fead8701bb7232a87a744761239a9dab2c45a824082fce372bc4"
-}

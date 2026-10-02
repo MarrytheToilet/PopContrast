@@ -2,8 +2,7 @@
 
 `popcontrast_overview.pdf` is the author's revised vector artwork for manuscript
 Figure 2, supplied on 2026-10-01. `popcontrast_overview.png` is its supplied
-preview. The PDF is the fixed LaTeX build input. The historical imagegen edit
-prompt records the earlier layout; it does not regenerate this revised artwork.
+preview. The PDF is the fixed LaTeX build input.
 
 The shared publication builder copies both files byte for byte. LaTeX scales
 the PDF to the full two-column width, preserving its vector lettering and
@@ -20,4 +19,4 @@ the 95% retention constraint is measured on validation, not a test guarantee.
 
 English and Chinese captions and accessibility descriptions live with their
 respective manuscript sources. Superseded imagegen drafts have been removed;
-this directory holds the production artwork and its final edit prompt.
+this directory holds only the production artwork and this description.

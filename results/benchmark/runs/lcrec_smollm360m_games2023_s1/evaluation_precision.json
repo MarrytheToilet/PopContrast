@@ -1,7 +1,0 @@
-{
-  "precision": "fp32",
-  "decision_unix": 1790589797.0932553,
-  "reason": "BF16 score-path error above 0.3; FP32 validation-only audit max beam/cache below 2e-5",
-  "audit": "runs/smollm_clothing_score_audit.json",
-  "test_labels_used": false
-}

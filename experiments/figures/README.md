@@ -1,6 +1,6 @@
 # Paper figures and tables
 
-All plots are rebuilt from the stored experimental records and aggregate arrays. The analysis environment needs no GPU, model checkpoint, or private manuscript:
+All plots are rebuilt from local experimental records and aggregate arrays. Restore `results/` and `assets/plot_data/` from the separately retained analysis archive first; both directories are ignored and absent from a Git clone. The analysis environment needs no GPU, model checkpoint, or private manuscript:
 
 ```bash
 pip install -r requirements-analysis.txt
@@ -34,7 +34,7 @@ python -m experiments.figures.publication
 
 Each stem has PNG and PDF outputs. Figure 2 copies the supplied artwork in `assets/diagrams/` byte for byte; rebuilding does not invoke image generation. The README teaser `assets/pr.png` is a separate schematic illustration, with its prompts in `assets/pr.prompt.txt`.
 
-The six original diagnostic renderers are shared with `experiments/make_figures.py`. Their aggregate NPZ inputs are under `assets/plot_data/`. Model/seed plots and matched-baseline trajectories use `results/benchmark/` records. Plotting preserves every recorded sweep point in parameter order and does not select a test-derived frontier or smooth results.
+The six original diagnostic renderers are shared with `experiments/make_figures.py`. Their local aggregate NPZ inputs are under `assets/plot_data/`. Model/seed plots and matched-baseline trajectories use local `results/benchmark/` records. Plotting preserves every recorded sweep point in parameter order and does not select a test-derived frontier or smooth results. Only two curated README previews are versioned under `assets/readme/`; the generated figure directory is ignored.
 
 ## Tables and provenance
 

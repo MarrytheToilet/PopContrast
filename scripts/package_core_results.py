@@ -24,10 +24,17 @@ def main():
     if not (compact / "manifest.json").exists():
         parser.error("Export and synchronize results/core_analysis first.")
     args.output.mkdir(parents=True, exist_ok=True)
-    tracked = subprocess.check_output(["git", "ls-files", "-z"], cwd=ROOT).decode().split("\0")
-    files = {name: ROOT / name for name in tracked if name and (
-        name.startswith("results/") and Path(name).suffix in {".json", ".csv", ".png"}
-        or name.startswith("assets/"))}
+    # Analysis inputs are intentionally ignored by Git. Package them explicitly
+    # from the local archive instead of relying on the Git index.
+    files = {}
+    for path in (ROOT / "results").rglob("*"):
+        relative = path.relative_to(ROOT)
+        if (path.is_file() and path.suffix in {".json", ".csv", ".png"}
+                and "raw" not in relative.parts and "core_analysis" not in relative.parts):
+            files[str(relative)] = path
+    for path in (ROOT / "assets").rglob("*"):
+        if path.is_file() and path.suffix in {".npz", ".png", ".pdf", ".md", ".txt"}:
+            files[str(path.relative_to(ROOT))] = path
     code = ["experiments/__init__.py", "experiments/make_figures.py",
             "experiments/benchmark/__init__.py", "experiments/benchmark/settings.py",
             "experiments/benchmark/summarize.py", "popcontrast/__init__.py",
@@ -58,13 +65,13 @@ python -m pip install -r requirements.txt
 python scripts/core_results.py verify results/core_analysis
 python scripts/check_results.py
 python -m experiments.benchmark.summarize
-python -m experiments.make_figures
 python -m experiments.figures.build_tables
+python -m experiments.figures.estimator_stability --output-dir results/tables
 python -m experiments.figures.publication
 ```
 
 Figures are written to `results/figures/`;
-tables are written to `results/tables/`. The original pink/blue style, fonts,
+tables are written to `results/tables/`. The original pink/blue style,
 framework illustration, and aggregate inputs are included. The manuscript ZIP
 under `manuscript/` has its own build instructions and needs a LaTeX installation.
 
@@ -119,7 +126,7 @@ available; only the retained expanded benchmark runs have compact predictions.
             destination.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(source, destination)
         (work / "README.md").write_text(readme)
-        (work / "requirements.txt").write_text("numpy\nscipy\nmatplotlib\n")
+        (work / "requirements.txt").write_text((ROOT / "requirements-analysis.txt").read_text())
         pngs = [name for name in files if name.startswith("results/figures/") and name.endswith(".png")]
         for name in pngs:
             (work / name).unlink()
@@ -127,8 +134,8 @@ available; only the retained expanded benchmark runs have compact predictions.
                    "--report", "ANALYSIS_VERIFICATION.json"],
                   [sys.executable, "scripts/check_results.py"],
                   [sys.executable, "-m", "experiments.benchmark.summarize"],
-                  [sys.executable, "-m", "experiments.make_figures"],
                   [sys.executable, "-m", "experiments.figures.build_tables"],
+                  [sys.executable, "-m", "experiments.figures.estimator_stability", "--output-dir", "results/tables"],
                   [sys.executable, "-m", "experiments.figures.publication"]]
         for command in checks:
             subprocess.run(command, cwd=work, check=True)

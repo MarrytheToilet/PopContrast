@@ -1,0 +1,847 @@
+{
+  "lcrec_qwen1p5b_beauty_s1_compact/evaluation": {
+    "output_name": "lcrec_qwen1p5b_beauty_s1_compact",
+    "training": {
+      "base_model": "models/Qwen2.5-1.5B",
+      "split": "beauty",
+      "seed": 1,
+      "sid_length": 3,
+      "epochs": 6,
+      "batch_size": 64,
+      "accumulation": 1,
+      "eval_n": 1000,
+      "eval_batch_size": 8,
+      "length_grouping": true,
+      "checkpoint_steps": 250,
+      "prompt_format": "compact",
+      "validate_steps": 1000,
+      "patience": 6
+    },
+    "evaluation": {
+      "marginal_m": 32,
+      "chunk_size": 16,
+      "batch_size": 8,
+      "beam": 20,
+      "n_valid": 5000,
+      "n_test": 5000
+    },
+    "training_budget_epochs": 4
+  },
+  "lcrec_qwen3b_beauty_s1_compact/evaluation_fp32": {
+    "output_name": "lcrec_qwen3b_beauty_s1_compact",
+    "training": {
+      "base_model": "models/Qwen2.5-3B-Instruct",
+      "split": "beauty",
+      "seed": 1,
+      "sid_length": 3,
+      "epochs": 6,
+      "batch_size": 64,
+      "accumulation": 1,
+      "eval_n": 1000,
+      "eval_batch_size": 8,
+      "length_grouping": true,
+      "checkpoint_steps": 250,
+      "prompt_format": "compact",
+      "validate_steps": 1000,
+      "patience": 6
+    },
+    "evaluation": {
+      "marginal_m": 32,
+      "chunk_size": 16,
+      "batch_size": 2,
+      "beam": 20,
+      "n_valid": 5000,
+      "n_test": 5000
+    },
+    "training_budget_epochs": null
+  },
+  "lcrec_smollm360m_clothing_s1/evaluation_fp32": {
+    "output_name": "lcrec_smollm360m_clothing_s1",
+    "training": {
+      "base_model": "models/SmolLM2-360M",
+      "split": "clothing",
+      "seed": 1,
+      "sid_length": 3,
+      "epochs": 6,
+      "batch_size": 64,
+      "accumulation": 1,
+      "eval_n": 1000,
+      "eval_batch_size": 16,
+      "length_grouping": true,
+      "checkpoint_steps": 250,
+      "prompt_format": "compact",
+      "validate_steps": 0,
+      "patience": 6
+    },
+    "evaluation": {
+      "marginal_m": 32,
+      "chunk_size": 32,
+      "batch_size": 8,
+      "beam": 20,
+      "n_valid": 5000,
+      "n_test": 5000
+    },
+    "training_budget_epochs": null
+  },
+  "lcrec_smollm360m_games2023_s1/evaluation": {
+    "output_name": "lcrec_smollm360m_games2023_s1",
+    "training": {
+      "base_model": "models/SmolLM2-360M",
+      "split": "games2023",
+      "seed": 1,
+      "sid_length": 4,
+      "epochs": 3,
+      "batch_size": 64,
+      "accumulation": 1,
+      "eval_n": 1000,
+      "eval_batch_size": 16,
+      "length_grouping": true,
+      "checkpoint_steps": 250,
+      "prompt_format": "compact",
+      "validate_steps": 0,
+      "patience": 6
+    },
+    "evaluation": {
+      "marginal_m": 32,
+      "chunk_size": 32,
+      "batch_size": 8,
+      "beam": 20,
+      "n_valid": 5000,
+      "n_test": 5000
+    },
+    "training_budget_epochs": null
+  },
+  "beauty_s0_l3/evaluation": {
+    "output_name": "beauty_s0_l3",
+    "training": {
+      "split": "beauty",
+      "seed": 0,
+      "sid_length": 3,
+      "epochs": 200,
+      "batch_size": 256,
+      "accumulation": 1,
+      "eval_batch_size": 96,
+      "length_grouping": true,
+      "patience": 10,
+      "valid_limit": 0
+    },
+    "evaluation": {
+      "marginal_m": 128,
+      "chunk_size": 256,
+      "beam": 20,
+      "n_valid": 5000,
+      "n_test": 5000,
+      "split": "beauty",
+      "sid_length": 3,
+      "eval_batch_size": 8,
+      "exact_n": 64,
+      "cached_catalog_scoring": false,
+      "bound_betas": [
+        0.75,
+        1.5
+      ],
+      "legacy_prior": false
+    },
+    "training_budget_epochs": null
+  },
+  "beauty_s1_l3/evaluation": {
+    "output_name": "beauty_s1_l3",
+    "training": {
+      "split": "beauty",
+      "seed": 1,
+      "sid_length": 3,
+      "epochs": 200,
+      "batch_size": 256,
+      "eval_batch_size": 96,
+      "patience": 10,
+      "valid_limit": 0
+    },
+    "evaluation": {
+      "marginal_m": 128,
+      "chunk_size": 256,
+      "beam": 20,
+      "n_valid": 5000,
+      "n_test": 5000,
+      "split": "beauty",
+      "sid_length": 3,
+      "exact_n": 64,
+      "bound_betas": [
+        0.75,
+        1.5
+      ],
+      "legacy_prior": false
+    },
+    "training_budget_epochs": null
+  },
+  "beauty_s1_l3_fast/evaluation": {
+    "output_name": "beauty_s1_l3_fast",
+    "training": {
+      "split": "beauty",
+      "seed": 1,
+      "sid_length": 3,
+      "epochs": 200,
+      "batch_size": 256,
+      "accumulation": 1,
+      "eval_batch_size": 96,
+      "length_grouping": true,
+      "patience": 10,
+      "valid_limit": 0,
+      "snapshot_epochs": [
+        20
+      ],
+      "group_effective_batches": false
+    },
+    "evaluation": {
+      "marginal_m": 128,
+      "chunk_size": 256,
+      "beam": 20,
+      "n_valid": 5000,
+      "n_test": 5000,
+      "split": "beauty",
+      "sid_length": 3,
+      "eval_batch_size": 8,
+      "exact_n": 64,
+      "cached_catalog_scoring": false,
+      "bound_betas": [
+        0.75,
+        1.5
+      ],
+      "legacy_prior": false
+    },
+    "training_budget_epochs": null
+  },
+  "beauty_s1_l4/evaluation": {
+    "output_name": "beauty_s1_l4",
+    "training": {
+      "split": "beauty",
+      "seed": 1,
+      "sid_length": 4,
+      "epochs": 60,
+      "batch_size": 256,
+      "accumulation": 1,
+      "eval_batch_size": 96,
+      "length_grouping": true,
+      "patience": 10,
+      "valid_limit": 0,
+      "snapshot_epochs": [
+        20
+      ],
+      "group_effective_batches": false
+    },
+    "evaluation": {
+      "marginal_m": 128,
+      "chunk_size": 256,
+      "beam": 20,
+      "n_valid": 5000,
+      "n_test": 5000,
+      "split": "beauty",
+      "sid_length": 4,
+      "eval_batch_size": 8,
+      "exact_n": 64,
+      "cached_catalog_scoring": false,
+      "bound_betas": [
+        0.75,
+        1.5
+      ],
+      "legacy_prior": false
+    },
+    "training_budget_epochs": null
+  },
+  "beauty_s1_l6/evaluation": {
+    "output_name": "beauty_s1_l6",
+    "training": {
+      "split": "beauty",
+      "seed": 1,
+      "sid_length": 6,
+      "epochs": 20,
+      "batch_size": 64,
+      "accumulation": 4,
+      "eval_batch_size": 32,
+      "length_grouping": true,
+      "patience": 10,
+      "valid_limit": 0,
+      "snapshot_epochs": [],
+      "group_effective_batches": true
+    },
+    "evaluation": {
+      "marginal_m": 128,
+      "chunk_size": 256,
+      "beam": 20,
+      "n_valid": 5000,
+      "n_test": 5000,
+      "split": "beauty",
+      "sid_length": 6,
+      "eval_batch_size": 8,
+      "exact_n": 64,
+      "cached_catalog_scoring": false,
+      "bound_betas": [
+        0.75,
+        1.5
+      ],
+      "legacy_prior": false
+    },
+    "training_budget_epochs": null
+  },
+  "beauty_s2_l3/evaluation": {
+    "output_name": "beauty_s2_l3",
+    "training": {
+      "split": "beauty",
+      "seed": 2,
+      "sid_length": 3,
+      "epochs": 200,
+      "batch_size": 256,
+      "accumulation": 1,
+      "eval_batch_size": 96,
+      "length_grouping": true,
+      "patience": 10,
+      "valid_limit": 0,
+      "snapshot_epochs": [],
+      "group_effective_batches": false
+    },
+    "evaluation": {
+      "marginal_m": 128,
+      "chunk_size": 256,
+      "beam": 20,
+      "n_valid": 5000,
+      "n_test": 5000,
+      "split": "beauty",
+      "sid_length": 3,
+      "eval_batch_size": 8,
+      "exact_n": 64,
+      "cached_catalog_scoring": false,
+      "bound_betas": [
+        0.75,
+        1.5
+      ],
+      "legacy_prior": false
+    },
+    "training_budget_epochs": null
+  },
+  "legacy_beauty_full": {
+    "output_name": "legacy_beauty_full",
+    "training": {
+      "split": "beauty",
+      "sid_length": 3
+    },
+    "evaluation": {
+      "marginal_m": 512,
+      "chunk_size": 128,
+      "beam": 20,
+      "n_valid": 5000,
+      "n_test": 5000,
+      "split": "beauty",
+      "sid_length": 3,
+      "exact_n": 64,
+      "bound_betas": [
+        0.75,
+        1.5
+      ],
+      "legacy_prior": true
+    }
+  },
+  "books2023_s1_l5/evaluation": {
+    "output_name": "books2023_s1_l5",
+    "training": {
+      "split": "books2023",
+      "seed": 1,
+      "sid_length": 5,
+      "epochs": 2,
+      "batch_size": 64,
+      "accumulation": 4,
+      "eval_batch_size": 32,
+      "length_grouping": true,
+      "patience": 10,
+      "valid_limit": 5000,
+      "snapshot_epochs": [],
+      "group_effective_batches": false
+    },
+    "evaluation": {
+      "marginal_m": 32,
+      "chunk_size": 512,
+      "beam": 20,
+      "n_valid": 5000,
+      "n_test": 5000,
+      "split": "books2023",
+      "sid_length": 5,
+      "eval_batch_size": 8,
+      "exact_n": 16,
+      "cached_catalog_scoring": true,
+      "bound_betas": [
+        0.75,
+        1.5
+      ],
+      "legacy_prior": false
+    },
+    "training_budget_epochs": 1
+  },
+  "clothing_s0_l3/evaluation": {
+    "output_name": "clothing_s0_l3",
+    "training": {
+      "split": "clothing",
+      "seed": 0,
+      "sid_length": 3,
+      "epochs": 200,
+      "batch_size": 256,
+      "accumulation": 1,
+      "eval_batch_size": 96,
+      "length_grouping": true,
+      "patience": 10,
+      "valid_limit": 0,
+      "snapshot_epochs": [],
+      "group_effective_batches": false
+    },
+    "evaluation": {
+      "marginal_m": 128,
+      "chunk_size": 256,
+      "beam": 20,
+      "n_valid": 5000,
+      "n_test": 5000,
+      "split": "clothing",
+      "sid_length": 3,
+      "eval_batch_size": 8,
+      "exact_n": 64,
+      "cached_catalog_scoring": false,
+      "bound_betas": [
+        0.75,
+        1.5
+      ],
+      "legacy_prior": false
+    },
+    "training_budget_epochs": null
+  },
+  "clothing_s1_l3/evaluation": {
+    "output_name": "clothing_s1_l3",
+    "training": {
+      "split": "clothing",
+      "seed": 1,
+      "sid_length": 3,
+      "epochs": 200,
+      "batch_size": 256,
+      "eval_batch_size": 96,
+      "patience": 10,
+      "valid_limit": 0
+    },
+    "evaluation": {
+      "marginal_m": 128,
+      "chunk_size": 256,
+      "beam": 20,
+      "n_valid": 5000,
+      "n_test": 5000,
+      "split": "clothing",
+      "sid_length": 3,
+      "eval_batch_size": 8,
+      "exact_n": 64,
+      "bound_betas": [
+        0.75,
+        1.5
+      ],
+      "legacy_prior": false
+    },
+    "training_budget_epochs": null
+  },
+  "clothing_s1_l3_fast/evaluation": {
+    "output_name": "clothing_s1_l3_fast",
+    "training": {
+      "split": "clothing",
+      "seed": 1,
+      "sid_length": 3,
+      "epochs": 200,
+      "batch_size": 256,
+      "accumulation": 1,
+      "eval_batch_size": 96,
+      "length_grouping": true,
+      "patience": 10,
+      "valid_limit": 0,
+      "snapshot_epochs": [],
+      "group_effective_batches": false
+    },
+    "evaluation": {
+      "marginal_m": 128,
+      "chunk_size": 256,
+      "beam": 20,
+      "n_valid": 5000,
+      "n_test": 5000,
+      "split": "clothing",
+      "sid_length": 3,
+      "eval_batch_size": 8,
+      "exact_n": 64,
+      "cached_catalog_scoring": false,
+      "bound_betas": [
+        0.75,
+        1.5
+      ],
+      "legacy_prior": false
+    },
+    "training_budget_epochs": null
+  },
+  "clothing_s2_l3/evaluation": {
+    "output_name": "clothing_s2_l3",
+    "training": {
+      "split": "clothing",
+      "seed": 2,
+      "sid_length": 3,
+      "epochs": 200,
+      "batch_size": 256,
+      "accumulation": 1,
+      "eval_batch_size": 96,
+      "length_grouping": true,
+      "patience": 10,
+      "valid_limit": 0,
+      "snapshot_epochs": [],
+      "group_effective_batches": false
+    },
+    "evaluation": {
+      "marginal_m": 128,
+      "chunk_size": 256,
+      "beam": 20,
+      "n_valid": 5000,
+      "n_test": 5000,
+      "split": "clothing",
+      "sid_length": 3,
+      "eval_batch_size": 8,
+      "exact_n": 64,
+      "cached_catalog_scoring": false,
+      "bound_betas": [
+        0.75,
+        1.5
+      ],
+      "legacy_prior": false
+    },
+    "training_budget_epochs": null
+  },
+  "games2023_s1_l4/evaluation": {
+    "output_name": "games2023_s1_l4",
+    "training": {
+      "split": "games2023",
+      "seed": 1,
+      "sid_length": 4,
+      "epochs": 200,
+      "batch_size": 128,
+      "accumulation": 2,
+      "eval_batch_size": 64,
+      "length_grouping": true,
+      "patience": 10,
+      "valid_limit": 5000
+    },
+    "evaluation": {
+      "marginal_m": 128,
+      "chunk_size": 256,
+      "beam": 20,
+      "n_valid": 5000,
+      "n_test": 5000,
+      "split": "games2023",
+      "sid_length": 4,
+      "eval_batch_size": 8,
+      "exact_n": 64,
+      "cached_catalog_scoring": false,
+      "bound_betas": [
+        0.75,
+        1.5
+      ],
+      "legacy_prior": false
+    },
+    "training_budget_epochs": 20
+  },
+  "ml1m_s1_l4/evaluation": {
+    "output_name": "ml1m_s1_l4",
+    "training": {
+      "split": "ml1m",
+      "seed": 1,
+      "sid_length": 4,
+      "epochs": 200,
+      "batch_size": 128,
+      "accumulation": 2,
+      "eval_batch_size": 64,
+      "length_grouping": true,
+      "patience": 10,
+      "valid_limit": 5000
+    },
+    "evaluation": {
+      "marginal_m": 128,
+      "chunk_size": 256,
+      "beam": 20,
+      "n_valid": 5000,
+      "n_test": 5000,
+      "split": "ml1m",
+      "sid_length": 4,
+      "eval_batch_size": 8,
+      "exact_n": 64,
+      "bound_betas": [
+        0.75,
+        1.5
+      ],
+      "legacy_prior": false
+    },
+    "training_budget_epochs": 8
+  },
+  "sports_s1_l3/evaluation": {
+    "output_name": "sports_s1_l3",
+    "training": {
+      "split": "sports",
+      "seed": 1,
+      "sid_length": 3,
+      "epochs": 200,
+      "batch_size": 256,
+      "eval_batch_size": 96,
+      "length_grouping": true,
+      "patience": 10,
+      "valid_limit": 0
+    },
+    "evaluation": {
+      "marginal_m": 128,
+      "chunk_size": 256,
+      "beam": 20,
+      "n_valid": 5000,
+      "n_test": 5000,
+      "split": "sports",
+      "sid_length": 3,
+      "eval_batch_size": 8,
+      "exact_n": 64,
+      "bound_betas": [
+        0.75,
+        1.5
+      ],
+      "legacy_prior": false
+    },
+    "training_budget_epochs": null
+  },
+  "toys_s1_l3/evaluation": {
+    "output_name": "toys_s1_l3",
+    "training": {
+      "split": "toys",
+      "seed": 1,
+      "sid_length": 3,
+      "epochs": 200,
+      "batch_size": 256,
+      "eval_batch_size": 96,
+      "length_grouping": true,
+      "patience": 10,
+      "valid_limit": 0
+    },
+    "evaluation": {
+      "marginal_m": 128,
+      "chunk_size": 256,
+      "beam": 20,
+      "n_valid": 5000,
+      "n_test": 5000,
+      "split": "toys",
+      "sid_length": 3,
+      "eval_batch_size": 8,
+      "exact_n": 64,
+      "bound_betas": [
+        0.75,
+        1.5
+      ],
+      "legacy_prior": false
+    },
+    "training_budget_epochs": null
+  },
+  "hstu_beauty_s1": {
+    "output_name": "hstu_beauty_s1",
+    "training": {
+      "split": "beauty",
+      "seed": 1,
+      "epochs": 100,
+      "batch_size": 256,
+      "patience": 10,
+      "model": "hstu"
+    },
+    "evaluation": {
+      "batch_size": 256,
+      "split": "beauty"
+    },
+    "training_budget_epochs": null
+  },
+  "hstu_clothing_s1": {
+    "output_name": "hstu_clothing_s1",
+    "training": {
+      "split": "clothing",
+      "seed": 1,
+      "epochs": 100,
+      "batch_size": 256,
+      "patience": 10,
+      "model": "hstu"
+    },
+    "evaluation": {
+      "batch_size": 256,
+      "split": "clothing"
+    },
+    "training_budget_epochs": null
+  },
+  "hstu_games2023_s1": {
+    "output_name": "hstu_games2023_s1",
+    "training": {
+      "split": "games2023",
+      "seed": 1,
+      "epochs": 20,
+      "batch_size": 256,
+      "patience": 10,
+      "model": "hstu"
+    },
+    "evaluation": {
+      "batch_size": 256,
+      "split": "games2023"
+    },
+    "training_budget_epochs": null
+  },
+  "hstu_ml1m_s1": {
+    "output_name": "hstu_ml1m_s1",
+    "training": {
+      "split": "ml1m",
+      "seed": 1,
+      "epochs": 100,
+      "batch_size": 256,
+      "patience": 10,
+      "model": "hstu"
+    },
+    "evaluation": {
+      "batch_size": 256,
+      "split": "ml1m"
+    },
+    "training_budget_epochs": null
+  },
+  "hstu_sports_s1": {
+    "output_name": "hstu_sports_s1",
+    "training": {
+      "split": "sports",
+      "seed": 1,
+      "epochs": 100,
+      "batch_size": 256,
+      "patience": 10,
+      "model": "hstu"
+    },
+    "evaluation": {
+      "batch_size": 256,
+      "split": "sports"
+    },
+    "training_budget_epochs": null
+  },
+  "hstu_toys_s1": {
+    "output_name": "hstu_toys_s1",
+    "training": {
+      "split": "toys",
+      "seed": 1,
+      "epochs": 100,
+      "batch_size": 256,
+      "patience": 10,
+      "model": "hstu"
+    },
+    "evaluation": {
+      "batch_size": 256,
+      "split": "toys"
+    },
+    "training_budget_epochs": null
+  },
+  "sasrec_arts2023_s1": {
+    "output_name": "sasrec_arts2023_s1",
+    "training": {
+      "split": "arts2023",
+      "seed": 1,
+      "epochs": 20,
+      "batch_size": 256,
+      "patience": 10,
+      "model": "sasrec"
+    },
+    "evaluation": {
+      "batch_size": 256,
+      "split": "arts2023"
+    },
+    "training_budget_epochs": null
+  },
+  "sasrec_beauty_s1": {
+    "output_name": "sasrec_beauty_s1",
+    "training": {
+      "split": "beauty",
+      "seed": 1,
+      "epochs": 100,
+      "batch_size": 256,
+      "patience": 10,
+      "model": "sasrec"
+    },
+    "evaluation": {
+      "batch_size": 256,
+      "split": "beauty"
+    },
+    "training_budget_epochs": null
+  },
+  "sasrec_clothing_s1": {
+    "output_name": "sasrec_clothing_s1",
+    "training": {
+      "split": "clothing",
+      "seed": 1,
+      "epochs": 100,
+      "batch_size": 256,
+      "patience": 10,
+      "model": "sasrec"
+    },
+    "evaluation": {
+      "batch_size": 256,
+      "split": "clothing"
+    },
+    "training_budget_epochs": null
+  },
+  "sasrec_games2023_s1": {
+    "output_name": "sasrec_games2023_s1",
+    "training": {
+      "split": "games2023",
+      "seed": 1,
+      "epochs": 20,
+      "batch_size": 256,
+      "patience": 10,
+      "model": "sasrec"
+    },
+    "evaluation": {
+      "batch_size": 256,
+      "split": "games2023"
+    },
+    "training_budget_epochs": null
+  },
+  "sasrec_ml1m_s1": {
+    "output_name": "sasrec_ml1m_s1",
+    "training": {
+      "split": "ml1m",
+      "seed": 1,
+      "epochs": 20,
+      "batch_size": 256,
+      "patience": 10,
+      "model": "sasrec"
+    },
+    "evaluation": {
+      "batch_size": 256,
+      "split": "ml1m"
+    },
+    "training_budget_epochs": null
+  },
+  "sasrec_sports_s1": {
+    "output_name": "sasrec_sports_s1",
+    "training": {
+      "split": "sports",
+      "seed": 1,
+      "epochs": 100,
+      "batch_size": 256,
+      "patience": 10,
+      "model": "sasrec"
+    },
+    "evaluation": {
+      "batch_size": 256,
+      "split": "sports"
+    },
+    "training_budget_epochs": null
+  },
+  "sasrec_toys_s1": {
+    "output_name": "sasrec_toys_s1",
+    "training": {
+      "split": "toys",
+      "seed": 1,
+      "epochs": 100,
+      "batch_size": 256,
+      "patience": 10,
+      "model": "sasrec"
+    },
+    "evaluation": {
+      "batch_size": 256,
+      "split": "toys"
+    },
+    "training_budget_epochs": null
+  }
+}

@@ -1,12 +1,12 @@
 # Matched recommendation benchmark
 
-All commands run from the repository root. New models and large prediction caches are written under ignored `runs/`; compact frozen records live under `results/benchmark/runs/`. The primary inventory is defined in `settings.py` and includes every reported checkpoint, including weak or unchanged outcomes.
+All commands run from the repository root. Training and evaluation recipes are versioned in `configs/benchmark.json`. New models and prediction caches go under ignored `runs/`; retained result records live locally under ignored `results/benchmark/runs/`. The primary inventory is defined in `settings.py` and includes every reported checkpoint, including weak or unchanged outcomes.
 
 ## Data and model settings
 
 Beauty, Sports, Toys, and Clothing preserve the original item mapping, RQ-VAE IDs, and chronological validation/test split. `export_data.py` checks exported targets and head/tail labels against the original score caches. `prepare_extended.py` builds MovieLens-1M and Amazon Reviews 2023 Games, Arts, and Books using the documented training-only encoding pipeline.
 
-`run.py --list` lists the 33 primary settings. `run.py --run <setting> --stage train --print-command` reconstructs the configuration from its recorded training metadata. The three matched seeds use the same length-grouping protocol; separate padded controls remain identified. Three-, four-, five-, and six-token IDs preserve their recorded encoding definitions. The diagnostic checkpoint's training seed is unrecorded and is not invented by the runner.
+`run.py --list` lists the 33 primary settings. `run.py --run <setting> --stage train --print-command` reads `configs/benchmark.json` without requiring any result files. The three matched seeds use the same length-grouping protocol; separate padded controls remain identified. Three-, four-, five-, and six-token IDs preserve their recorded encoding definitions. The diagnostic checkpoint's training seed is unrecorded and is not invented by the runner.
 
 Training budgets, checkpoint selection, adapter configurations, dataset hashes, and frozen evaluation strengths remain with each run. Qwen1.5B completes four epochs with a six-epoch scheduler horizon; `--stop-after-epochs` preserves that distinction. Evaluation explicitly uses FP32 for all four reported LLM settings, with repetition/no-repeat penalties disabled and complete-SID scores checked against direct teacher forcing.
 
@@ -50,7 +50,7 @@ python -m experiments.benchmark.benchmark --split beauty \
 
 `audit_result_integrity.py` independently reconstructs recommendation metrics from saved per-user top-10 arrays. `audit_selected_estimators.py` compares frozen estimator selections and user segments. `audit_candidate_relevance.py` separates candidate availability from ranking within candidates. `audit_width_results.py` checks shared users, item identities, metrics, and inclusion/overlap relationships. `diagnose_prior_coupling.py` and `audit_classical_prior.py` quantify the retained model references.
 
-The underlying prediction arrays and checkpoints are regenerable runtime artifacts and are ignored. The repository includes compact metric/configuration records, including all nine finite-history-bank sensitivity studies, all three full Clothing cohorts, longer-ID controls, and the measured latency study.
+Prediction arrays, checkpoints, and experimental outputs are ignored. The separately retained local analysis archive includes all nine finite-history-bank sensitivity studies, all three full Clothing cohorts, longer-ID controls, and the measured latency study. Restore that archive before running result-only analysis commands.
 
 `python -m experiments.benchmark.compare_reference_variants` summarizes the
 geometric and arithmetic estimator variants without retraining or selecting on
@@ -64,6 +64,8 @@ describe derivatives with respect to log-scores, not user relevance or statistic
 effective sample sizes.
 
 ## Summaries and figures
+
+These commands require the separately retained `results/` and `assets/plot_data/` inputs; they are not bundled with the code repository.
 
 ```bash
 python -m experiments.benchmark.summarize
