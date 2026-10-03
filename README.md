@@ -1,10 +1,10 @@
 # To Each Their Own: Item-Specific Score References for Long-Tail Discovery in Generative Recommendation
 
-This repository contains **PopContrast**, its training and evaluation code, experiment configurations, and figure builders. Experimental outputs and plotting arrays are retained separately from the source repository.
+This repository contains **PopContrast (Popularity Contrast)**, its training and evaluation code, experiment configurations, and figure builders. Experimental outputs and plotting arrays are retained separately from the source repository.
 
 [Anonymous code](https://anonymous.4open.science/r/PopContrast/)
 
-Generative recommenders can retrieve relevant long-tail candidates without placing them in the final recommendation list. PopContrast compares each complete candidate score with an item-specific reference estimated from the same model across training histories. It improves final ranking without retraining the recommender or adding an auxiliary model. Experiments examine recovery within fixed candidates, additional gains after item-supported decoding (ISD), and the accuracy, exposure, and estimation costs of different references.
+Generative recommenders can retrieve relevant long-tail candidates without placing them in the final recommendation list. The name combines *Popularity* and *Contrast*: PopContrast compares each complete candidate score with its own cross-history reference, which captures model preferences associated with popularity. It improves final ranking without retraining the recommender or adding an auxiliary model. Experiments examine recovery within fixed candidates, additional gains after item-supported decoding (ISD), and the accuracy, exposure, and estimation costs of different references.
 
 <p align="center"><img src="assets/pr.png" width="100%" alt="PopContrast teaser: a relevant tail item already in the candidate pool enters the final list after item-reference correction"/></p>
 
